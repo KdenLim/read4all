@@ -9,9 +9,8 @@ index.html
 styles.css
 script.js
 assets/
-  favicon.svg
+  favicon.png
   read4all-hero.jpg
-  read4all-hero.png
 ```
 
 ## Local Preview
@@ -37,6 +36,10 @@ After deployment, update the placeholder links in `index.html`:
 - `https://example.com/whatsapp-group`
 - `https://instagram.com/read4all`
 - Library/resource placeholders if the campaign has official links
+
+## Image Credit
+
+Hero image: [Pexels photo 29171842](https://www.pexels.com/photo/close-up-of-soft-focus-books-on-bed-29171842/).
 
 ## Legal Content Note
 
