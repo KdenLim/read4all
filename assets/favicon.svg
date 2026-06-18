@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Read4All book mark">
+  <rect width="64" height="64" rx="12" fill="#10243f"/>
+  <path d="M17 16h15c5 0 9 4 9 9v24c0-5-4-9-9-9H17V16Z" fill="#fffaf2"/>
+  <path d="M47 16h-6v31l3-3 3 3V16Z" fill="#c76e38"/>
+  <path d="M22 25h10M22 32h13" stroke="#5a7d62" stroke-width="4" stroke-linecap="round"/>
+</svg>
