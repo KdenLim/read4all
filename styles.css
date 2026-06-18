@@ -117,36 +117,12 @@ a {
 }
 
 .brand-mark {
-  position: relative;
-  width: 32px;
-  height: 32px;
-  border-radius: 7px;
-  background: var(--ink);
-  box-shadow: inset -10px 0 0 var(--green), inset -15px 0 0 rgba(255, 255, 255, 0.12);
-}
-
-.brand-mark::before,
-.brand-mark::after {
-  content: "";
-  position: absolute;
-  background: var(--paper);
-}
-
-.brand-mark::before {
-  width: 12px;
-  height: 3px;
-  left: 7px;
-  top: 9px;
-  border-radius: 10px;
-  box-shadow: 0 7px 0 var(--paper);
-}
-
-.brand-mark::after {
-  width: 4px;
-  height: 17px;
-  right: 7px;
-  top: 7px;
-  border-radius: 3px;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 9px;
+  background: var(--paper) url("assets/favicon.png") center / 150% no-repeat;
+  box-shadow: 0 8px 18px rgba(16, 36, 63, 0.14);
 }
 
 .nav-links {
@@ -231,7 +207,7 @@ a {
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(360px, 1.18fr);
-  gap: 44px;
+  gap: 44px 84px;
   align-items: center;
 }
 
@@ -266,6 +242,8 @@ h3 {
 h1 {
   font-size: 7rem;
   font-weight: 900;
+  overflow-wrap: normal;
+  white-space: nowrap;
 }
 
 h2 {
@@ -342,7 +320,7 @@ p {
 
 .hero-media {
   margin: 0;
-  border-radius: var(--radius);
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow);
   border: 1px solid rgba(255, 255, 255, 0.76);
@@ -351,7 +329,7 @@ p {
 .hero-media img {
   width: 100%;
   height: auto;
-  aspect-ratio: 1717 / 916;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
 }
 
@@ -720,17 +698,6 @@ p {
   color: var(--white);
 }
 
-.footer .brand-mark {
-  background: var(--white);
-  box-shadow: inset -10px 0 0 var(--orange), inset -15px 0 0 rgba(16, 36, 63, 0.12);
-}
-
-.footer .brand-mark::before,
-.footer .brand-mark::after {
-  background: var(--ink);
-  box-shadow: 0 7px 0 var(--ink);
-}
-
 .footer-links {
   display: grid;
   gap: 10px;
@@ -772,7 +739,7 @@ p {
   }
 
   h1 {
-    font-size: 5.6rem;
+    font-size: 5.2rem;
   }
 
   h2 {
@@ -781,6 +748,10 @@ p {
 
   .hero-copy {
     max-width: 760px;
+  }
+
+  .hero-grid {
+    gap: 44px;
   }
 
   .card-grid,
@@ -850,7 +821,7 @@ p {
   }
 
   h1 {
-    font-size: 4.6rem;
+    font-size: 4.2rem;
   }
 
   h2 {
@@ -902,7 +873,7 @@ p {
 
 @media (max-width: 430px) {
   h1 {
-    font-size: 3.35rem;
+    font-size: 3.05rem;
   }
 
   h2 {
@@ -915,7 +886,7 @@ p {
 
   .hero-media img {
     aspect-ratio: 4 / 3;
-    object-position: 63% center;
+    object-position: center;
   }
 }
 
