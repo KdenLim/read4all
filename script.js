@@ -1,8 +1,14 @@
+document.documentElement.classList.add("js");
+
 const header = document.querySelector("[data-header]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const navMenu = document.querySelector("[data-nav-menu]");
-const navLinks = Array.from(document.querySelectorAll(".nav-links a[href^='#']"));
-const sections = navLinks
+const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+const samePageNavLinks = navLinks.filter((link) => {
+  const href = link.getAttribute("href");
+  return href && href.startsWith("#");
+});
+const sections = samePageNavLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
 
@@ -18,9 +24,7 @@ navToggle.addEventListener("click", () => {
   setMenuState(!isOpen);
 });
 
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => setMenuState(false));
-});
+navLinks.forEach((link) => link.addEventListener("click", () => setMenuState(false)));
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
@@ -35,21 +39,30 @@ function updateHeader() {
 updateHeader();
 window.addEventListener("scroll", updateHeader, { passive: true });
 
-const activeSectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
+const currentPage = location.pathname.split("/").pop() || "index.html";
 
-      navLinks.forEach((link) => {
-        const isMatch = link.getAttribute("href") === `#${entry.target.id}`;
-        link.classList.toggle("is-active", isMatch);
+navLinks.forEach((link) => {
+  const linkPage = new URL(link.href).pathname.split("/").pop() || "index.html";
+  link.classList.toggle("is-active", linkPage === currentPage);
+});
+
+if (sections.length > 0 && "IntersectionObserver" in window) {
+  const activeSectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        samePageNavLinks.forEach((link) => {
+          const isMatch = link.getAttribute("href") === `#${entry.target.id}`;
+          link.classList.toggle("is-active", isMatch);
+        });
       });
-    });
-  },
-  { rootMargin: "-45% 0px -50% 0px", threshold: 0.01 },
-);
+    },
+    { rootMargin: "-45% 0px -50% 0px", threshold: 0.01 },
+  );
 
-sections.forEach((section) => activeSectionObserver.observe(section));
+  sections.forEach((section) => activeSectionObserver.observe(section));
+}
 
 const revealTargets = document.querySelectorAll(".reveal");
 
