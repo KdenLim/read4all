@@ -586,7 +586,8 @@ p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.resource-card a {
+.resource-card a,
+.book-link {
   display: inline-flex;
   margin-top: 18px;
   color: var(--ink);
@@ -869,19 +870,7 @@ p {
   }
 }
 
-@media (max-width: 760px) {
-  :root {
-    --header-height: 68px;
-  }
-
-  .container {
-    width: min(calc(100% - 28px), var(--max-width));
-  }
-
-  .section {
-    padding: 68px 0;
-  }
-
+@media (max-width: 960px) {
   .nav-toggle {
     display: block;
   }
@@ -915,6 +904,20 @@ p {
 
   .nav-links .nav-cta {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --header-height: 68px;
+  }
+
+  .container {
+    width: min(calc(100% - 28px), var(--max-width));
+  }
+
+  .section {
+    padding: 68px 0;
   }
 
   .hero {
