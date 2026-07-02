@@ -41,7 +41,7 @@ This project uses plain HTML, CSS, and JavaScript with no backend.
 
 After deployment, update the placeholder links in `index.html`:
 
-- `https://chat.whatsapp.com/DTxmfgSkMmkGFmCxwy85Nw?mode=gi_t`
+- `https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma`
 - `https://www.instagram.com/read4all__`
 - Library/resource placeholders if the campaign has official links
 
