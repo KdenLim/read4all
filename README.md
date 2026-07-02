@@ -6,6 +6,14 @@ Static campaign website for **Read4All**, a student-led digital book club campai
 
 ```text
 index.html
+about.html
+sdg.html
+books.html
+resources.html
+activities.html
+community.html
+instagram.html
+guidelines.html
 styles.css
 script.js
 assets/
