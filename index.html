@@ -19,10 +19,20 @@
     <meta property="og:image" content="assets/read4all-hero.jpg" />
 
     <link rel="icon" href="assets/favicon.png" type="image/png" />
-    <link rel="preload" href="assets/read4all-hero.jpg" as="image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="home-page">
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <header class="site-header" data-header>
@@ -58,65 +68,67 @@
     </header>
 
     <main id="main">
-      <section class="hero section-band" id="top" aria-labelledby="hero-title">
-        <div class="hero-grid container">
-          <div class="hero-copy reveal">
-            <p class="eyebrow">Student-led digital book club campaign</p>
+      <section class="home-orbit section-band" id="top" aria-labelledby="hero-title">
+        <div class="home-shell container">
+          <div class="home-copy reveal">
+            <img class="home-logo" src="assets/favicon.png" alt="Read4All logo" width="96" height="96" />
             <h1 id="hero-title">Read4All</h1>
-            <p class="tagline">Read more. Learn more. Grow together.</p>
-            <p class="hero-description">
-              Choose where you want to start: legal reading resources, book recommendations, weekly activities, or the
-              community spaces that keep the campaign moving.
-            </p>
+            <p class="tagline">A reading community for curious students.</p>
           </div>
 
-          <div class="hero-menu reveal" aria-label="Main page menu">
-            <a class="menu-card menu-card-featured" href="resources.html">
-              <span>
-                <strong>Reading Resources</strong>
-                <small>Legal libraries, ebooks, catalogues, and reading guides.</small>
+          <div class="orbit-stage reveal" data-orbit-stage aria-label="Read4All main navigation">
+            <img class="book-backdrop" src="assets/book_image.png" alt="" aria-hidden="true" width="980" height="980" />
+            <div class="orbit-halo" aria-hidden="true"></div>
+
+            <a
+              class="community-core"
+              href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Join our WhatsApp community"
+            >
+              <span class="core-icon" aria-hidden="true">
+                <i class="fa-brands fa-whatsapp"></i>
               </span>
-            </a>
-            <a class="menu-card" href="books.html">
-              <span>
-                <strong>Book Recommendations</strong>
-                <small>Student-friendly titles to begin discussions.</small>
-              </span>
-            </a>
-            <a class="menu-card" href="activities.html">
-              <span>
-                <strong>Weekly Activities</strong>
-                <small>Challenges, polls, quizzes, quotes, and summaries.</small>
-              </span>
-            </a>
-            <a class="menu-card" href="community.html">
-              <span>
-                <strong>WhatsApp Community</strong>
-                <small>Join discussions, share reflections, and read together.</small>
-              </span>
-            </a>
-            <a class="menu-card" href="instagram.html">
-              <span>
-                <strong>Instagram Campaign</strong>
-                <small>Follow book prompts, reels, quizzes, and updates.</small>
-              </span>
-            </a>
-            <a class="menu-card" href="guidelines.html">
-              <span>
-                <strong>Guidelines</strong>
-                <small>Review the rules for a respectful reading space.</small>
-              </span>
+              <span class="core-label">Join our Community</span>
             </a>
 
-            <figure class="menu-photo">
-              <img
-                src="assets/read4all-hero.jpg"
-                alt="Person holding up a stack of hardbound books against a soft neutral background."
-                width="1200"
-                height="800"
-                fetchpriority="high"
-              />
-            </figure>
+            <div class="orbit-track">
+              <a class="orbit-node orbit-node-resources" href="resources.html" style="--angle: -90deg; --angle-inverse: 90deg;">
+                <span class="orbit-card">
+                  <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                  <strong>Resources</strong>
+                </span>
+              </a>
+
+              <a class="orbit-node orbit-node-explore" href="books.html" style="--angle: -18deg; --angle-inverse: 18deg;">
+                <span class="orbit-card">
+                  <i class="fa-solid fa-compass" aria-hidden="true"></i>
+                  <strong>Explore</strong>
+                </span>
+              </a>
+
+              <a class="orbit-node orbit-node-activities" href="activities.html" style="--angle: 54deg; --angle-inverse: -54deg;">
+                <span class="orbit-card">
+                  <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                  <strong>Activities</strong>
+                </span>
+              </a>
+
+              <a class="orbit-node orbit-node-social" href="instagram.html" style="--angle: 126deg; --angle-inverse: -126deg;">
+                <span class="orbit-card">
+                  <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                  <strong>Social Media</strong>
+                </span>
+              </a>
+
+              <a class="orbit-node orbit-node-guidelines" href="guidelines.html" style="--angle: 198deg; --angle-inverse: -198deg;">
+                <span class="orbit-card">
+                  <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+                  <strong>Guidelines</strong>
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </section>

@@ -13,6 +13,8 @@
   --radius: 8px;
   --max-width: 1160px;
   --header-height: 76px;
+  --font-display: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 * {
@@ -26,8 +28,7 @@ html {
 
 body {
   margin: 0;
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-body);
   color: var(--ink);
   background: var(--paper);
   line-height: 1.6;
@@ -239,9 +240,14 @@ h3 {
   letter-spacing: 0;
 }
 
+h1,
+h2 {
+  font-family: var(--font-display);
+}
+
 h1 {
   font-size: 6rem;
-  font-weight: 900;
+  font-weight: 700;
   overflow-wrap: normal;
   white-space: nowrap;
 }
@@ -399,6 +405,684 @@ p {
   height: auto;
   aspect-ratio: 18 / 5;
   object-fit: cover;
+}
+
+.home-page {
+  min-height: 100dvh;
+  background:
+    linear-gradient(90deg, rgba(16, 36, 63, 0.055) 1px, transparent 1px) 0 0 / 56px 100%,
+    linear-gradient(180deg, rgba(199, 110, 56, 0.08) 1px, transparent 1px) 0 16px / 100% 64px,
+    radial-gradient(ellipse at 50% 42%, rgba(255, 255, 255, 0.82) 0 34%, transparent 64%),
+    linear-gradient(180deg, #fff8ea 0%, #f7ead6 100%);
+}
+
+.home-page .section-band {
+  background: transparent;
+}
+
+.home-orbit {
+  position: relative;
+  min-height: calc(100dvh - var(--header-height));
+  display: grid;
+  align-items: center;
+  padding: 30px 0 54px;
+  overflow: hidden;
+}
+
+.home-orbit::before,
+.home-orbit::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  pointer-events: none;
+}
+
+.home-orbit::before {
+  display: none;
+}
+
+.home-orbit::after {
+  left: -4vw;
+  right: -4vw;
+  bottom: 0;
+  height: 132px;
+  background:
+    linear-gradient(90deg, #315643 0 8%, #f4b400 8% 16%, #1a73e8 16% 25%, #c76e38 25% 34%, #d62976 34% 41%, #10243f 41% 50%, #5a7d62 50% 58%, #f97316 58% 67%, #315643 67% 77%, #f4b400 77% 86%, #1a73e8 86% 100%);
+  clip-path: polygon(0 46%, 100% 24%, 100% 100%, 0 100%);
+  opacity: 0.16;
+}
+
+.home-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.home-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+.home-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 10px;
+  border-radius: 18px;
+  box-shadow: 0 12px 26px rgba(16, 36, 63, 0.12);
+}
+
+.home-copy h1 {
+  font-family: var(--font-display);
+  font-size: 4.15rem;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.home-copy .tagline {
+  margin-top: 8px;
+  font-size: 1.28rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.home-copy .hero-description {
+  margin: 16px auto 0;
+  max-width: 560px;
+  font-size: 1.14rem;
+  font-weight: 600;
+}
+
+.orbit-stage {
+  --orbit-size: 790px;
+  --orbit-radius: 296px;
+  position: relative;
+  width: min(100%, var(--orbit-size));
+  aspect-ratio: 1;
+  isolation: isolate;
+  z-index: 3;
+}
+
+.book-backdrop {
+  position: absolute;
+  left: 50%;
+  top: 57%;
+  z-index: 0;
+  width: min(126%, 880px);
+  max-width: none;
+  height: auto;
+  opacity: 0.70;
+  filter: saturate(1.05) contrast(0.96);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-halo {
+  position: absolute;
+  inset: 8%;
+  z-index: 1;
+  border: 1px solid rgba(49, 86, 67, 0.18);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.92) 0 30%, transparent 31%),
+    radial-gradient(circle, transparent 58%, rgba(255, 255, 255, 0.64) 59%, transparent 60%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.62),
+    0 34px 80px rgba(16, 36, 63, 0.1);
+  pointer-events: none;
+}
+
+.community-core {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  z-index: 3;
+  width: 226px;
+  min-height: 226px;
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  padding: 28px;
+  border-radius: 50%;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 28% 18%, rgba(255, 255, 255, 0.58), transparent 24%),
+    linear-gradient(135deg, #25d366 0%, #00c2ff 28%, #6d28d9 62%, #ff1f6d 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.48),
+    inset 0 -10px 24px rgba(16, 36, 63, 0.2),
+    0 0 0 8px rgba(37, 211, 102, 0.12),
+    0 34px 86px rgba(255, 31, 109, 0.42),
+    0 22px 62px rgba(37, 211, 102, 0.38);
+  text-decoration: none;
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  isolation: isolate;
+  animation: community-wave 3.1s ease-in-out infinite;
+}
+
+.community-core::before,
+.community-core::after {
+  content: "";
+  position: absolute;
+  inset: -13px;
+  z-index: -1;
+  border-radius: 44% 56% 48% 52% / 52% 44% 56% 48%;
+  pointer-events: none;
+  animation: community-color-wave 3.8s ease-in-out infinite;
+}
+
+.community-core::before {
+  --wave-rotation: -10deg;
+  background:
+    linear-gradient(135deg, rgba(37, 211, 102, 0.98), rgba(255, 213, 51, 0.94) 45%, rgba(255, 31, 109, 0.88)),
+    rgba(37, 211, 102, 0.62);
+  transform: rotate(var(--wave-rotation));
+}
+
+.community-core::after {
+  --wave-rotation: 13deg;
+  inset: -24px;
+  background:
+    linear-gradient(135deg, rgba(0, 194, 255, 0.66), rgba(109, 40, 217, 0.54), rgba(255, 31, 109, 0.56)),
+    rgba(255, 255, 255, 0.36);
+  transform: rotate(var(--wave-rotation));
+  animation-duration: 4.6s;
+  animation-direction: reverse;
+}
+
+.community-core:hover,
+.community-core:focus-visible {
+  transform: translate(-50%, -50%) scale(1.075);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.62),
+    inset 0 -10px 24px rgba(16, 36, 63, 0.18),
+    0 0 0 12px rgba(37, 211, 102, 0.22),
+    0 0 34px rgba(37, 211, 102, 0.72),
+    0 0 72px rgba(0, 194, 255, 0.54),
+    0 44px 112px rgba(255, 31, 109, 0.62),
+    0 24px 76px rgba(37, 211, 102, 0.52);
+}
+
+.core-icon {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  color: #25d366;
+  background: var(--white);
+  font-size: 3.65rem;
+  box-shadow:
+    inset 0 0 0 1px rgba(37, 211, 102, 0.22),
+    0 12px 24px rgba(16, 36, 63, 0.22);
+}
+
+.core-label {
+  max-width: 150px;
+  color: var(--white);
+  font-size: 1.08rem;
+  font-weight: 900;
+  line-height: 1.15;
+  text-shadow: 0 2px 10px rgba(16, 36, 63, 0.28);
+}
+
+.orbit-track {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 50%;
+  animation: orbit-spin 30s linear infinite;
+  will-change: transform;
+}
+
+.orbit-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: var(--ink);
+  text-decoration: none;
+  transform: rotate(var(--angle)) translateX(var(--orbit-radius)) rotate(var(--angle-inverse));
+  transition: transform 180ms ease;
+}
+
+.orbit-card {
+  width: 168px;
+  min-height: 168px;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 18px 14px;
+  border: 1px solid var(--node-border, transparent);
+  border-radius: 50%;
+  background: var(--node-bg, var(--green-dark));
+  box-shadow: 0 20px 48px var(--node-shadow, rgba(16, 36, 63, 0.14));
+  transform: translate(-50%, -50%);
+  transition: box-shadow 180ms ease, background-color 180ms ease;
+  animation: orbit-unspin 30s linear infinite;
+  will-change: transform;
+}
+
+.orbit-card i {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  color: var(--node-icon-color, var(--white));
+  background: var(--node-icon-bg, rgba(255, 255, 255, 0.18));
+  font-size: 2.35rem;
+  box-shadow: inset 0 0 0 1px var(--node-icon-line, rgba(255, 255, 255, 0.26));
+}
+
+.orbit-card strong {
+  color: var(--node-text, var(--white));
+  font-size: 0.96rem;
+  line-height: 1.12;
+}
+
+.orbit-node:hover,
+.orbit-node:focus-visible {
+  transform: rotate(var(--angle)) translateX(var(--orbit-radius)) rotate(var(--angle-inverse)) scale(1.055);
+}
+
+.orbit-node:hover .orbit-card,
+.orbit-node:focus-visible .orbit-card {
+  background: var(--node-bg-hover, var(--node-bg, var(--green-dark)));
+  box-shadow: 0 26px 64px var(--node-shadow-hover, var(--node-shadow, rgba(16, 36, 63, 0.2)));
+}
+
+.orbit-node-resources {
+  --node-bg: #c99a2e;
+  --node-bg-hover: #d6a83e;
+  --node-text: #3b2600;
+  --node-icon-color: #3b2600;
+  --node-icon-bg: rgba(255, 255, 255, 0.24);
+  --node-icon-line: rgba(59, 38, 0, 0.16);
+  --node-border: rgba(131, 86, 0, 0.18);
+  --node-shadow: rgba(145, 104, 22, 0.22);
+  --node-shadow-hover: rgba(145, 104, 22, 0.3);
+}
+
+.orbit-node-explore {
+  --node-bg: #496fa8;
+  --node-bg-hover: #557db8;
+  --node-shadow: rgba(73, 111, 168, 0.22);
+  --node-shadow-hover: rgba(73, 111, 168, 0.32);
+}
+
+.orbit-node-activities {
+  --node-bg: #c66d3f;
+  --node-bg-hover: #d47a4d;
+  --node-shadow: rgba(198, 109, 63, 0.22);
+  --node-shadow-hover: rgba(198, 109, 63, 0.32);
+}
+
+.orbit-node-social {
+  --node-bg: #a94f78;
+  --node-bg-hover: #ba5a86;
+  --node-shadow: rgba(169, 79, 120, 0.22);
+  --node-shadow-hover: rgba(169, 79, 120, 0.32);
+}
+
+.orbit-node-social .orbit-card i {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+}
+
+.orbit-node-guidelines {
+  --node-bg: #486b58;
+  --node-bg-hover: #557b66;
+  --node-shadow: rgba(72, 107, 88, 0.24);
+  --node-shadow-hover: rgba(72, 107, 88, 0.34);
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-unspin {
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes community-wave {
+  0%,
+  100% {
+    border-radius: 52% 48% 50% 50% / 46% 52% 48% 54%;
+    filter: saturate(1.05) brightness(1);
+  }
+
+  33% {
+    border-radius: 46% 54% 58% 42% / 54% 42% 58% 46%;
+    filter: saturate(1.22) brightness(1.08);
+  }
+
+  66% {
+    border-radius: 58% 42% 44% 56% / 48% 58% 42% 52%;
+    filter: saturate(1.18) brightness(1.04);
+  }
+}
+
+@keyframes community-color-wave {
+  0%,
+  100% {
+    border-radius: 44% 56% 48% 52% / 52% 44% 56% 48%;
+    opacity: 0.86;
+    transform: rotate(var(--wave-rotation)) scale(0.98);
+  }
+
+  50% {
+    border-radius: 58% 42% 54% 46% / 42% 58% 46% 54%;
+    opacity: 1;
+    transform: rotate(var(--wave-rotation)) scale(1.12);
+  }
+}
+
+.instagram-page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255, 213, 79, 0.46), transparent 28%),
+    radial-gradient(circle at 82% 16%, rgba(214, 41, 118, 0.32), transparent 30%),
+    radial-gradient(circle at 72% 82%, rgba(129, 52, 175, 0.28), transparent 32%),
+    linear-gradient(135deg, #fff7d6 0%, #ffe0ee 42%, #e2f1ff 100%);
+}
+
+.instagram-page .site-header {
+  background: rgba(255, 250, 242, 0.78);
+}
+
+.instagram-hero {
+  position: relative;
+  min-height: calc(100dvh - var(--header-height));
+  display: grid;
+  place-items: center;
+  padding: 54px 18px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.instagram-hero::before,
+.instagram-hero::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.instagram-hero::before {
+  width: min(78vw, 720px);
+  height: min(78vw, 720px);
+  background:
+    radial-gradient(circle at 28% 26%, rgba(255, 255, 255, 0.8), transparent 26%),
+    conic-gradient(from 210deg, rgba(245, 133, 41, 0.48), rgba(254, 218, 119, 0.42), rgba(221, 42, 123, 0.5), rgba(129, 52, 175, 0.42), rgba(81, 91, 212, 0.34), rgba(245, 133, 41, 0.48));
+  opacity: 0.62;
+  filter: blur(4px);
+  animation: instagram-pulse 6s ease-in-out infinite;
+}
+
+.instagram-hero::after {
+  inset: auto -8vw 0 -8vw;
+  height: 112px;
+  background:
+    linear-gradient(90deg, #feda77 0 18%, #f58529 18% 36%, #dd2a7b 36% 58%, #8134af 58% 78%, #515bd4 78% 100%);
+  clip-path: polygon(0 42%, 100% 14%, 100% 100%, 0 100%);
+  opacity: 0.2;
+}
+
+.instagram-showcase {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.instagram-showcase::before,
+.instagram-showcase::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.instagram-showcase::before {
+  background:
+    linear-gradient(90deg, rgba(255, 247, 214, 0.9), transparent 18%, transparent 82%, rgba(226, 241, 255, 0.9)),
+    radial-gradient(circle at 50% 50%, rgba(255, 250, 242, 0.28), transparent 38%);
+}
+
+.instagram-showcase::after {
+  background: rgba(255, 250, 242, 0.12);
+  backdrop-filter: blur(1.5px);
+}
+
+.instagram-track {
+  display: flex;
+  width: max-content;
+  gap: clamp(18px, 2.7vw, 34px);
+  padding: 0 clamp(18px, 4vw, 54px);
+  transform: translateX(0);
+  animation: instagram-drift 48s linear infinite;
+  will-change: transform;
+}
+
+.instagram-post {
+  width: clamp(188px, 19vw, 292px);
+  aspect-ratio: 1;
+  margin: 0;
+  overflow: hidden;
+  border: 8px solid rgba(255, 255, 255, 0.84);
+  border-radius: 28px;
+  background: var(--white);
+  box-shadow:
+    0 22px 50px rgba(16, 36, 63, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.5);
+  transform: rotate(var(--tilt)) translateY(var(--float, 0));
+  animation: instagram-card-float 5.6s ease-in-out infinite;
+}
+
+.instagram-post:nth-child(3n + 1) {
+  --float: -20px;
+}
+
+.instagram-post:nth-child(3n + 2) {
+  --float: 18px;
+  animation-delay: -1.6s;
+}
+
+.instagram-post:nth-child(3n) {
+  --float: -4px;
+  animation-delay: -3.1s;
+}
+
+.instagram-post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.02);
+}
+
+.instagram-center {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  gap: 40px;
+  width: min(100%, 820px);
+  text-align: center;
+}
+
+.instagram-copy {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+}
+
+.instagram-copy h1 {
+  margin: 0;
+  max-width: 760px;
+  color: var(--ink);
+  font-size: clamp(3rem, 5.6vw, 5.2rem);
+  line-height: 1.02;
+  white-space: normal;
+  text-shadow: 0 4px 28px rgba(255, 255, 255, 0.92);
+}
+
+.instagram-description {
+  max-width: 700px;
+  margin: 0;
+  color: #243852;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 800;
+  line-height: 1.35;
+  text-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.76),
+    0 10px 28px rgba(255, 255, 255, 0.82);
+}
+
+.instagram-follow {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 16px;
+  width: clamp(236px, 24vw, 314px);
+  aspect-ratio: 1;
+  padding: 32px;
+  border: 2px solid rgba(255, 255, 255, 0.76);
+  border-radius: 42% 58% 48% 52% / 54% 46% 54% 46%;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 25% 18%, rgba(255, 255, 255, 0.72), transparent 22%),
+    linear-gradient(135deg, #feda77 0%, #f58529 24%, #dd2a7b 54%, #8134af 78%, #515bd4 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -14px 26px rgba(16, 36, 63, 0.18),
+    0 0 0 12px rgba(221, 42, 123, 0.12),
+    0 34px 84px rgba(129, 52, 175, 0.34),
+    0 20px 54px rgba(245, 133, 41, 0.26);
+  text-align: center;
+  text-decoration: none;
+  isolation: isolate;
+  animation: instagram-button-wave 4.2s ease-in-out infinite;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.instagram-follow::before,
+.instagram-follow::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.instagram-follow::before {
+  inset: -18px;
+  background:
+    conic-gradient(from 120deg, rgba(254, 218, 119, 0.76), rgba(221, 42, 123, 0.66), rgba(81, 91, 212, 0.58), rgba(245, 133, 41, 0.74), rgba(254, 218, 119, 0.76));
+  opacity: 0.56;
+  filter: blur(2px);
+  animation: instagram-ring 5s linear infinite;
+}
+
+.instagram-follow::after {
+  inset: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.instagram-follow:hover,
+.instagram-follow:focus-visible {
+  transform: translateY(-4px) scale(1.035);
+  filter: saturate(1.14) brightness(1.04);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.62),
+    inset 0 -14px 26px rgba(16, 36, 63, 0.16),
+    0 0 0 14px rgba(221, 42, 123, 0.18),
+    0 0 42px rgba(221, 42, 123, 0.64),
+    0 0 76px rgba(81, 91, 212, 0.48),
+    0 44px 104px rgba(129, 52, 175, 0.42),
+    0 26px 72px rgba(245, 133, 41, 0.34);
+}
+
+.instagram-follow-icon {
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  color: #dd2a7b;
+  background: rgba(255, 255, 255, 0.96);
+  font-size: 4.4rem;
+  box-shadow:
+    inset 0 0 0 1px rgba(221, 42, 123, 0.18),
+    0 15px 28px rgba(16, 36, 63, 0.2);
+}
+
+.instagram-follow-label {
+  max-width: 210px;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.35vw, 1.76rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: 0;
+  white-space: normal;
+  text-shadow: 0 2px 14px rgba(16, 36, 63, 0.28);
+}
+
+@keyframes instagram-drift {
+  to {
+    transform: translateX(calc(-50% - clamp(9px, 1.35vw, 17px)));
+  }
+}
+
+@keyframes instagram-card-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -16px;
+  }
+}
+
+@keyframes instagram-button-wave {
+  0%,
+  100% {
+    border-radius: 42% 58% 48% 52% / 54% 46% 54% 46%;
+  }
+
+  50% {
+    border-radius: 56% 44% 58% 42% / 44% 58% 42% 56%;
+  }
+}
+
+@keyframes instagram-ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes instagram-pulse {
+  0%,
+  100% {
+    transform: scale(0.96);
+  }
+
+  50% {
+    transform: scale(1.04);
+  }
 }
 
 .page-hero {
@@ -844,8 +1528,27 @@ p {
     max-width: 760px;
   }
 
+  .home-copy h1 {
+    font-size: 3.75rem;
+  }
+
   .hero-grid {
     gap: 44px;
+  }
+
+  .orbit-stage {
+    --orbit-size: 700px;
+    --orbit-radius: 262px;
+  }
+
+  .orbit-card {
+    width: 146px;
+    min-height: 146px;
+  }
+
+  .community-core {
+    width: 204px;
+    min-height: 204px;
   }
 
   .hero-menu {
@@ -936,8 +1639,133 @@ p {
     font-size: 2.85rem;
   }
 
+  .instagram-hero {
+    min-height: calc(100dvh - var(--header-height));
+    padding: 42px 14px;
+  }
+
+  .instagram-track {
+    gap: 16px;
+    padding-inline: 16px;
+    animation-duration: 40s;
+  }
+
+  .instagram-post {
+    width: clamp(154px, 48vw, 210px);
+    border-width: 6px;
+    border-radius: 22px;
+  }
+
+  .instagram-showcase::before {
+    background:
+      linear-gradient(90deg, rgba(255, 247, 214, 0.78), transparent 22%, transparent 78%, rgba(226, 241, 255, 0.78)),
+      radial-gradient(circle at 50% 50%, rgba(255, 250, 242, 0.22), transparent 46%);
+  }
+
+  .instagram-center {
+    gap: 40px;
+  }
+
+  .instagram-copy h1 {
+    font-size: clamp(2.45rem, 12vw, 3.5rem);
+  }
+
+  .instagram-description {
+    max-width: min(100%, 35rem);
+    font-size: 1rem;
+  }
+
+  .instagram-follow {
+    width: min(78vw, 270px);
+    padding: 28px;
+  }
+
+  .instagram-follow-icon {
+    width: 92px;
+    height: 92px;
+    font-size: 3.75rem;
+  }
+
   .tagline {
     font-size: 1.45rem;
+  }
+
+  .home-orbit {
+    align-items: start;
+    padding: 34px 0 58px;
+  }
+
+  .home-copy h1 {
+    font-size: 3.1rem;
+  }
+
+  .home-copy .hero-description {
+    max-width: 31rem;
+  }
+
+  .orbit-stage {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: auto;
+    display: grid;
+    gap: 14px;
+  }
+
+  .orbit-halo {
+    display: none;
+  }
+
+  .book-backdrop {
+    display: none;
+  }
+
+  .community-core,
+  .orbit-track,
+  .orbit-node,
+  .orbit-card {
+    position: static;
+    inset: auto;
+    transform: none;
+    animation: none;
+    will-change: auto;
+  }
+
+  .community-core {
+    position: relative;
+    width: 100%;
+    min-height: 132px;
+    grid-template-columns: auto minmax(0, 1fr);
+    justify-content: center;
+    border-radius: 999px;
+    text-align: left;
+  }
+
+  .core-label {
+    max-width: none;
+  }
+
+  .orbit-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .orbit-card {
+    width: 100%;
+    min-height: 118px;
+    border-radius: 22px;
+  }
+
+  .orbit-node:hover,
+  .orbit-node:focus-visible {
+    transform: translateY(-2px);
+  }
+
+  .orbit-node:hover .orbit-card,
+  .orbit-node:focus-visible .orbit-card,
+  .community-core:hover,
+  .community-core:focus-visible {
+    transform: translateY(-4px) scale(1.025);
   }
 
   .stat-card strong {
@@ -996,8 +1824,43 @@ p {
     font-size: 2.25rem;
   }
 
+  .instagram-follow {
+    width: min(82vw, 242px);
+    gap: 12px;
+  }
+
+  .instagram-center {
+    gap: 22px;
+  }
+
+  .instagram-copy {
+    gap: 10px;
+  }
+
+  .instagram-copy h1 {
+    font-size: 2.35rem;
+  }
+
+  .instagram-description {
+    font-size: 0.95rem;
+  }
+
+  .instagram-follow-icon {
+    width: 82px;
+    height: 82px;
+    font-size: 3.3rem;
+  }
+
   .tagline {
     font-size: 1.25rem;
+  }
+
+  .home-copy h1 {
+    font-size: 2.65rem;
+  }
+
+  .orbit-track {
+    grid-template-columns: 1fr;
   }
 
   .menu-photo img {
@@ -1018,5 +1881,19 @@ p {
   .js .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .orbit-track,
+  .orbit-card,
+  .community-core,
+  .community-core::before,
+  .community-core::after,
+  .core-icon,
+  .instagram-track,
+  .instagram-post,
+  .instagram-follow,
+  .instagram-follow::before,
+  .instagram-hero::before {
+    animation: none !important;
   }
 }
