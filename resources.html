@@ -17,9 +17,15 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/read4all-hero.jpg" />
     <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="resources-page">
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <header class="site-header" data-header>
@@ -55,50 +61,82 @@
     </header>
 
     <main id="main">
-      <section class="page-hero section-band" aria-labelledby="page-title">
-        <div class="container page-hero-copy reveal">
-          <p class="eyebrow">Reading resources</p>
-          <h1 id="page-title">Legal reading pathways only.</h1>
-          <p>
-            Read4All only shares legal, publicly available, or authorized reading materials. We do not host pirated
-            books or copyrighted PDFs.
-          </p>
-        </div>
-      </section>
-
       <section class="section resources-section" aria-labelledby="resources-title">
         <div class="container">
           <div class="section-heading reveal">
-            <p class="eyebrow">Resource list</p>
-            <h2 id="resources-title">Start with trusted places to search, borrow, and preview books.</h2>
+            <p class="eyebrow">Resource finder</p>
+            <h2 id="resources-title">Search the Read4All resource shelf.</h2>
+            <p>
+              Type a topic like classics, science, ESL, coding, Japanese, public domain, or textbooks. The finder will show the best resources for your search query.
+            </p>
           </div>
 
-          <div class="card-grid resource-grid">
-            <article class="resource-card reveal">
-              <h3>Open Library</h3>
-              <p>Borrow and discover books through an open, library-style platform.</p>
-              <a href="https://openlibrary.org/" target="_blank" rel="noreferrer">Visit resource</a>
-            </article>
-            <article class="resource-card reveal">
-              <h3>Project Gutenberg</h3>
-              <p>Explore a large collection of free public-domain ebooks.</p>
-              <a href="https://www.gutenberg.org/" target="_blank" rel="noreferrer">Visit resource</a>
-            </article>
-            <article class="resource-card reveal">
-              <h3>Google Books</h3>
-              <p>Preview books, search topics, and find authorized purchase or library options.</p>
-              <a href="https://books.google.com/" target="_blank" rel="noreferrer">Visit resource</a>
-            </article>
-            <article class="resource-card reveal">
-              <h3>National and university libraries</h3>
-              <p>Use your local or campus library catalogue for licensed ebooks, databases, and journals.</p>
-              <a href="https://example.com/library-resources" target="_blank" rel="noreferrer">Resource placeholder</a>
-            </article>
-            <article class="resource-card reveal">
-              <h3>Educational reading guides</h3>
-              <p>Find study guides, reading strategies, and literacy articles from authorized education sources.</p>
-              <a href="https://example.com/reading-guides" target="_blank" rel="noreferrer">Resource placeholder</a>
-            </article>
+          <div class="resource-finder reveal" data-resource-finder>
+            <div class="resource-search-panel">
+              <label class="resource-search-label" for="resource-search">What are you looking for?</label>
+              <div class="resource-search-row">
+                <input
+                  id="resource-search"
+                  class="resource-search-input"
+                  type="search"
+                  placeholder="Try: kids science, ESL news, public domain classics..."
+                  autocomplete="off"
+                  data-resource-search
+                />
+                <button class="resource-clear" type="button" data-resource-clear>Clear</button>
+              </div>
+
+              <div class="resource-filters" aria-label="Resource filters">
+                <fieldset class="resource-filter-group">
+                  <legend>Best for</legend>
+                  <div class="resource-chip-row" data-filter-group="best">
+                    <button type="button" class="resource-chip" data-filter-value="children">Children</button>
+                    <button type="button" class="resource-chip" data-filter-value="english">English practice</button>
+                    <button type="button" class="resource-chip" data-filter-value="languages">Languages</button>
+                    <button type="button" class="resource-chip" data-filter-value="students">Students</button>
+                    <button type="button" class="resource-chip" data-filter-value="textbooks">Textbooks</button>
+                    <button type="button" class="resource-chip" data-filter-value="classics">Free books</button>
+                    <button type="button" class="resource-chip" data-filter-value="stem">STEM</button>
+                    <button type="button" class="resource-chip" data-filter-value="research">Research</button>
+                  </div>
+                </fieldset>
+
+                <fieldset class="resource-filter-group">
+                  <legend>Level</legend>
+                  <div class="resource-chip-row" data-filter-group="level">
+                    <button type="button" class="resource-chip" data-filter-value="kids">Kids</button>
+                    <button type="button" class="resource-chip" data-filter-value="teens">Teens</button>
+                    <button type="button" class="resource-chip" data-filter-value="adults">Adults</button>
+                    <button type="button" class="resource-chip" data-filter-value="academic">Academic</button>
+                    <button type="button" class="resource-chip" data-filter-value="all ages">All ages</button>
+                  </div>
+                </fieldset>
+
+              </div>
+            </div>
+
+            <div class="resource-results-header">
+              <p class="resource-status" data-resource-status>Loading resources...</p>
+              <button
+                class="resource-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="all-resources"
+                data-resource-toggle
+              >
+                View all resources
+              </button>
+            </div>
+
+            <div class="resource-results-grid" data-resource-results aria-live="polite"></div>
+
+            <div class="resource-all-panel" id="all-resources" hidden data-resource-all-panel>
+              <div class="resource-all-heading">
+                <h3>All available resources</h3>
+                <p data-resource-all-count>Loading list...</p>
+              </div>
+              <div class="resource-all-list" data-resource-all-list></div>
+            </div>
           </div>
         </div>
       </section>
