@@ -11,7 +11,6 @@ sdg.html
 books.html
 resources.html
 activities.html
-community.html
 instagram.html
 guidelines.html
 styles.css

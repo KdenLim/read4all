@@ -1105,8 +1105,7 @@ p {
   font-size: 1.1rem;
 }
 
-.split-layout,
-.community-grid {
+.split-layout {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
   gap: 48px;
@@ -1619,57 +1618,6 @@ p {
   margin-top: 10px;
 }
 
-.community-section {
-  background: linear-gradient(100deg, var(--ink) 0%, #183e3d 100%);
-  color: var(--white);
-}
-
-.community-section .eyebrow {
-  color: var(--orange-soft);
-}
-
-.community-section p {
-  color: rgba(255, 255, 255, 0.78);
-}
-
-.community-section .button {
-  margin-top: 28px;
-  background: var(--white);
-  color: var(--ink);
-}
-
-.check-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.check-list {
-  display: grid;
-  gap: 12px;
-}
-
-.check-list li {
-  position: relative;
-  padding: 16px 18px 16px 44px;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.08);
-  font-weight: 700;
-}
-
-.check-list li::before {
-  content: "";
-  position: absolute;
-  left: 18px;
-  top: 22px;
-  width: 12px;
-  height: 7px;
-  border-left: 3px solid var(--orange-soft);
-  border-bottom: 3px solid var(--orange-soft);
-  transform: rotate(-45deg);
-}
-
 .insta-board {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1961,7 +1909,6 @@ p {
   .hero-grid,
   .split-layout,
   .split-layout.reverse,
-  .community-grid,
   .sdg-panel {
     grid-template-columns: 1fr;
   }
