@@ -17,9 +17,20 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/read4all-hero.jpg" />
     <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="guidelines-page">
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <header class="site-header" data-header>
@@ -55,31 +66,42 @@
     </header>
 
     <main id="main">
-      <section class="page-hero section-band" aria-labelledby="page-title">
-        <div class="container page-hero-copy reveal">
-          <p class="eyebrow">Community guidelines</p>
-          <h1 id="page-title">Keep the space respectful, useful, and inclusive.</h1>
-          <p>
-            These guidelines help protect the reading community and keep all shared materials legal, authorized, and
-            appropriate.
-          </p>
-        </div>
-      </section>
-
-      <section class="section guidelines-section" aria-labelledby="guidelines-title">
-        <div class="container split-layout">
-          <div class="section-copy reveal">
-            <p class="eyebrow">Guidelines</p>
-            <h2 id="guidelines-title">Use the community with care.</h2>
+      <section class="guidelines-board" aria-labelledby="page-title">
+        <div class="container guidelines-board-grid">
+          <div class="guidelines-intro reveal">
+            <p class="eyebrow">Community guidelines</p>
+            <h1 id="page-title">Keep the space respectful, useful, and inclusive.</h1>
+            <p>
+              These guidelines help protect the reading community and keep all shared materials legal, authorized, and
+              appropriate.
+            </p>
           </div>
 
-          <ul class="guideline-list reveal">
-            <li>Be respectful.</li>
-            <li>Share only legal reading resources.</li>
-            <li>Avoid spam.</li>
-            <li>Keep discussions friendly and inclusive.</li>
-            <li>No inappropriate content.</li>
-            <li>Respect different opinions and reading preferences.</li>
+          <ul class="guideline-list reveal" aria-label="Read4All community guidelines">
+            <li>
+              <span class="guideline-icon" aria-hidden="true"><i class="fa-solid fa-heart"></i></span>
+              <span>Be respectful.</span>
+            </li>
+            <li>
+              <span class="guideline-icon" aria-hidden="true"><i class="fa-solid fa-book-open-reader"></i></span>
+              <span>Share only legal reading resources.</span>
+            </li>
+            <li>
+              <span class="guideline-icon" aria-hidden="true"><i class="fa-solid fa-comment-slash"></i></span>
+              <span>Avoid spam.</span>
+            </li>
+            <li>
+              <span class="guideline-icon" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span>
+              <span>Keep discussions friendly and inclusive.</span>
+            </li>
+            <li>
+              <span class="guideline-icon" aria-hidden="true"><i class="fa-solid fa-shield-heart"></i></span>
+              <span>No inappropriate content.</span>
+            </li>
+            <li>
+              <span class="guideline-icon" aria-hidden="true"><i class="fa-solid fa-glasses"></i></span>
+              <span>Respect different opinions and reading preferences.</span>
+            </li>
           </ul>
         </div>
       </section>

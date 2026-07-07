@@ -425,7 +425,7 @@ p {
   min-height: calc(100dvh - var(--header-height));
   display: grid;
   align-items: center;
-  padding: 30px 0 54px;
+  padding: 24px 0 43px;
   overflow: hidden;
 }
 
@@ -445,7 +445,7 @@ p {
   left: -4vw;
   right: -4vw;
   bottom: 0;
-  height: 132px;
+  height: 106px;
   background:
     linear-gradient(90deg, #315643 0 8%, #f4b400 8% 16%, #1a73e8 16% 25%, #c76e38 25% 34%, #d62976 34% 41%, #10243f 41% 50%, #5a7d62 50% 58%, #f97316 58% 67%, #315643 67% 77%, #f4b400 77% 86%, #1a73e8 86% 100%);
   clip-path: polygon(0 46%, 100% 24%, 100% 100%, 0 100%);
@@ -457,7 +457,7 @@ p {
   z-index: 1;
   display: grid;
   justify-items: center;
-  gap: 18px;
+  gap: 14px;
   text-align: center;
 }
 
@@ -468,37 +468,37 @@ p {
 }
 
 .home-logo {
-  width: 72px;
-  height: 72px;
-  margin: 0 auto 10px;
-  border-radius: 18px;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 8px;
+  border-radius: 15px;
   box-shadow: 0 12px 26px rgba(16, 36, 63, 0.12);
 }
 
 .home-copy h1 {
   font-family: var(--font-display);
-  font-size: 4.15rem;
+  font-size: 3.32rem;
   font-weight: 700;
   white-space: normal;
 }
 
 .home-copy .tagline {
-  margin-top: 8px;
-  font-size: 1.28rem;
+  margin-top: 6px;
+  font-size: 1.02rem;
   font-family: var(--font-display);
   font-weight: 700;
 }
 
 .home-copy .hero-description {
-  margin: 16px auto 0;
-  max-width: 560px;
-  font-size: 1.14rem;
+  margin: 13px auto 0;
+  max-width: 448px;
+  font-size: 0.98rem;
   font-weight: 600;
 }
 
 .orbit-stage {
-  --orbit-size: 790px;
-  --orbit-radius: 296px;
+  --orbit-size: 632px;
+  --orbit-radius: 237px;
   position: relative;
   width: min(100%, var(--orbit-size));
   aspect-ratio: 1;
@@ -511,7 +511,7 @@ p {
   left: 50%;
   top: 57%;
   z-index: 0;
-  width: min(126%, 880px);
+  width: min(126%, 704px);
   max-width: none;
   height: auto;
   opacity: 0.70;
@@ -540,12 +540,12 @@ p {
   position: absolute;
   inset: 50% auto auto 50%;
   z-index: 3;
-  width: 226px;
-  min-height: 226px;
+  width: 181px;
+  min-height: 181px;
   display: grid;
   place-items: center;
-  gap: 12px;
-  padding: 28px;
+  gap: 10px;
+  padding: 22px;
   border-radius: 50%;
   color: var(--white);
   background:
@@ -568,7 +568,7 @@ p {
 .community-core::after {
   content: "";
   position: absolute;
-  inset: -13px;
+  inset: -10px;
   z-index: -1;
   border-radius: 44% 56% 48% 52% / 52% 44% 56% 48%;
   pointer-events: none;
@@ -585,7 +585,7 @@ p {
 
 .community-core::after {
   --wave-rotation: 13deg;
-  inset: -24px;
+  inset: -19px;
   background:
     linear-gradient(135deg, rgba(0, 194, 255, 0.66), rgba(109, 40, 217, 0.54), rgba(255, 31, 109, 0.56)),
     rgba(255, 255, 255, 0.36);
@@ -610,21 +610,21 @@ p {
 .core-icon {
   display: grid;
   place-items: center;
-  width: 96px;
-  height: 96px;
+  width: 77px;
+  height: 77px;
   border-radius: 50%;
   color: #25d366;
   background: var(--white);
-  font-size: 3.65rem;
+  font-size: 2.92rem;
   box-shadow:
     inset 0 0 0 1px rgba(37, 211, 102, 0.22),
     0 12px 24px rgba(16, 36, 63, 0.22);
 }
 
 .core-label {
-  max-width: 150px;
+  max-width: 120px;
   color: var(--white);
-  font-size: 1.08rem;
+  font-size: 0.96rem;
   font-weight: 900;
   line-height: 1.15;
   text-shadow: 0 2px 10px rgba(16, 36, 63, 0.28);
@@ -650,12 +650,12 @@ p {
 }
 
 .orbit-card {
-  width: 168px;
-  min-height: 168px;
+  width: 134px;
+  min-height: 134px;
   display: grid;
   place-items: center;
-  gap: 8px;
-  padding: 18px 14px;
+  gap: 6px;
+  padding: 14px 11px;
   border: 1px solid var(--node-border, transparent);
   border-radius: 50%;
   background: var(--node-bg, var(--green-dark));
@@ -669,18 +669,18 @@ p {
 .orbit-card i {
   display: grid;
   place-items: center;
-  width: 72px;
-  height: 72px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   color: var(--node-icon-color, var(--white));
   background: var(--node-icon-bg, rgba(255, 255, 255, 0.18));
-  font-size: 2.35rem;
+  font-size: 1.88rem;
   box-shadow: inset 0 0 0 1px var(--node-icon-line, rgba(255, 255, 255, 0.26));
 }
 
 .orbit-card strong {
   color: var(--node-text, var(--white));
-  font-size: 0.96rem;
+  font-size: 0.86rem;
   line-height: 1.12;
 }
 
@@ -803,7 +803,7 @@ p {
   min-height: calc(100dvh - var(--header-height));
   display: grid;
   place-items: center;
-  padding: 54px 18px;
+  padding: 43px 14px;
   overflow: hidden;
   isolation: isolate;
 }
@@ -818,8 +818,8 @@ p {
 }
 
 .instagram-hero::before {
-  width: min(78vw, 720px);
-  height: min(78vw, 720px);
+  width: min(62vw, 576px);
+  height: min(62vw, 576px);
   background:
     radial-gradient(circle at 28% 26%, rgba(255, 255, 255, 0.8), transparent 26%),
     conic-gradient(from 210deg, rgba(245, 133, 41, 0.48), rgba(254, 218, 119, 0.42), rgba(221, 42, 123, 0.5), rgba(129, 52, 175, 0.42), rgba(81, 91, 212, 0.34), rgba(245, 133, 41, 0.48));
@@ -830,7 +830,7 @@ p {
 
 .instagram-hero::after {
   inset: auto -8vw 0 -8vw;
-  height: 112px;
+  height: 90px;
   background:
     linear-gradient(90deg, #feda77 0 18%, #f58529 18% 36%, #dd2a7b 36% 58%, #8134af 58% 78%, #515bd4 78% 100%);
   clip-path: polygon(0 42%, 100% 14%, 100% 100%, 0 100%);
@@ -870,34 +870,34 @@ p {
 .instagram-track {
   display: flex;
   width: max-content;
-  gap: clamp(18px, 2.7vw, 34px);
-  padding: 0 clamp(18px, 4vw, 54px);
+  gap: clamp(14px, 2.15vw, 27px);
+  padding: 0 clamp(14px, 3.2vw, 43px);
   transform: translateX(0);
   animation: instagram-drift 48s linear infinite;
   will-change: transform;
 }
 
 .instagram-post {
-  width: clamp(188px, 19vw, 292px);
+  width: clamp(150px, 15.2vw, 234px);
   aspect-ratio: 1;
   margin: 0;
   overflow: hidden;
-  border: 8px solid rgba(255, 255, 255, 0.84);
-  border-radius: 28px;
+  border: 6px solid rgba(255, 255, 255, 0.84);
+  border-radius: 22px;
   background: var(--white);
   box-shadow:
-    0 22px 50px rgba(16, 36, 63, 0.2),
+    0 18px 40px rgba(16, 36, 63, 0.2),
     0 0 0 1px rgba(255, 255, 255, 0.5);
   transform: rotate(var(--tilt)) translateY(var(--float, 0));
   animation: instagram-card-float 5.6s ease-in-out infinite;
 }
 
 .instagram-post:nth-child(3n + 1) {
-  --float: -20px;
+  --float: -16px;
 }
 
 .instagram-post:nth-child(3n + 2) {
-  --float: 18px;
+  --float: 14px;
   animation-delay: -1.6s;
 }
 
@@ -918,32 +918,32 @@ p {
   z-index: 3;
   display: grid;
   place-items: center;
-  gap: 40px;
-  width: min(100%, 820px);
+  gap: 32px;
+  width: min(100%, 656px);
   text-align: center;
 }
 
 .instagram-copy {
   display: grid;
   justify-items: center;
-  gap: 14px;
+  gap: 11px;
 }
 
 .instagram-copy h1 {
   margin: 0;
-  max-width: 760px;
+  max-width: 608px;
   color: var(--ink);
-  font-size: clamp(3rem, 5.6vw, 5.2rem);
+  font-size: clamp(2.4rem, 4.5vw, 4.16rem);
   line-height: 1.02;
   white-space: normal;
   text-shadow: 0 4px 28px rgba(255, 255, 255, 0.92);
 }
 
 .instagram-description {
-  max-width: 700px;
+  max-width: 560px;
   margin: 0;
   color: #243852;
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-size: clamp(0.9rem, 1.45vw, 0.96rem);
   font-weight: 800;
   line-height: 1.35;
   text-shadow:
@@ -955,10 +955,10 @@ p {
   position: relative;
   display: grid;
   place-items: center;
-  gap: 16px;
-  width: clamp(236px, 24vw, 314px);
+  gap: 13px;
+  width: clamp(189px, 19.2vw, 251px);
   aspect-ratio: 1;
-  padding: 32px;
+  padding: 26px;
   border: 2px solid rgba(255, 255, 255, 0.76);
   border-radius: 42% 58% 48% 52% / 54% 46% 54% 46%;
   color: var(--white);
@@ -988,7 +988,7 @@ p {
 }
 
 .instagram-follow::before {
-  inset: -18px;
+  inset: -14px;
   background:
     conic-gradient(from 120deg, rgba(254, 218, 119, 0.76), rgba(221, 42, 123, 0.66), rgba(81, 91, 212, 0.58), rgba(245, 133, 41, 0.74), rgba(254, 218, 119, 0.76));
   opacity: 0.56;
@@ -997,7 +997,7 @@ p {
 }
 
 .instagram-follow::after {
-  inset: 12px;
+  inset: 10px;
   border: 1px solid rgba(255, 255, 255, 0.28);
 }
 
@@ -1018,21 +1018,21 @@ p {
 .instagram-follow-icon {
   display: grid;
   place-items: center;
-  width: 108px;
-  height: 108px;
+  width: 86px;
+  height: 86px;
   border-radius: 50%;
   color: #dd2a7b;
   background: rgba(255, 255, 255, 0.96);
-  font-size: 4.4rem;
+  font-size: 3.52rem;
   box-shadow:
     inset 0 0 0 1px rgba(221, 42, 123, 0.18),
     0 15px 28px rgba(16, 36, 63, 0.2);
 }
 
 .instagram-follow-label {
-  max-width: 210px;
+  max-width: 168px;
   font-family: var(--font-display);
-  font-size: clamp(1.3rem, 2.35vw, 1.76rem);
+  font-size: clamp(1.04rem, 1.88vw, 1.41rem);
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: 0;
@@ -1328,8 +1328,7 @@ p {
   color: var(--ink);
 }
 
-.check-list,
-.guideline-list {
+.check-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1340,8 +1339,7 @@ p {
   gap: 12px;
 }
 
-.check-list li,
-.guideline-list li {
+.check-list li {
   position: relative;
   padding: 16px 18px 16px 44px;
   border-radius: var(--radius);
@@ -1350,8 +1348,7 @@ p {
   font-weight: 700;
 }
 
-.check-list li::before,
-.guideline-list li::before {
+.check-list li::before {
   content: "";
   position: absolute;
   left: 18px;
@@ -1419,20 +1416,167 @@ p {
   font-weight: 800;
 }
 
+.guidelines-page {
+  min-height: 100dvh;
+  background:
+    linear-gradient(90deg, rgba(16, 36, 63, 0.055) 1px, transparent 1px) 0 0 / 46px 100%,
+    linear-gradient(180deg, rgba(199, 110, 56, 0.075) 1px, transparent 1px) 0 14px / 100% 53px,
+    radial-gradient(circle at 18% 18%, rgba(243, 198, 162, 0.5), transparent 29%),
+    radial-gradient(circle at 84% 22%, rgba(90, 125, 98, 0.24), transparent 32%),
+    linear-gradient(180deg, #fff8ea 0%, #f7ead6 100%);
+}
+
+.guidelines-page main {
+  display: block;
+}
+
+.guidelines-page .site-header {
+  background: rgba(255, 250, 242, 0.82);
+}
+
+.guidelines-board {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: calc(100dvh - var(--header-height));
+  padding: clamp(14px, 2.4vw, 27px) 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.guidelines-board::after {
+  content: "";
+  position: absolute;
+  left: -4vw;
+  right: -4vw;
+  bottom: 0;
+  z-index: 0;
+  height: 70px;
+  background:
+    linear-gradient(90deg, #315643 0 14%, #c99a2e 14% 29%, #496fa8 29% 43%, #c66d3f 43% 58%, #a94f78 58% 73%, #10243f 73% 100%);
+  clip-path: polygon(0 46%, 100% 20%, 100% 100%, 0 100%);
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.guidelines-board-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(216px, 0.72fr) minmax(0, 1fr);
+  gap: clamp(19px, 3.2vw, 43px);
+  align-items: center;
+}
+
+.guidelines-intro {
+  max-width: 496px;
+}
+
+.guidelines-intro h1 {
+  max-width: 520px;
+  font-size: clamp(2.24rem, 3.85vw, 3.84rem);
+  line-height: 1.02;
+  white-space: normal;
+}
+
+.guidelines-intro p:not(.eyebrow) {
+  margin-top: 14px;
+  max-width: 448px;
+  font-size: clamp(0.88rem, 1vw, 0.96rem);
+  font-weight: 700;
+}
+
 .guideline-list {
-  columns: 2;
-  column-gap: 14px;
+  columns: initial;
+  column-gap: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(8px, 1vw, 11px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .guideline-list li {
-  break-inside: avoid;
-  margin-bottom: 14px;
-  border-color: var(--line);
-  background: var(--white);
+  min-height: clamp(90px, 13vh, 118px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 11px;
+  margin: 0;
+  padding: clamp(11px, 1.3vw, 16px);
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 19px;
+  color: var(--ink);
+  background: var(--guideline-bg, rgba(255, 255, 255, 0.84));
+  box-shadow: 0 14px 34px rgba(16, 36, 63, 0.08);
+  font-size: clamp(0.86rem, 1.1vw, 0.91rem);
+  font-weight: 900;
+  line-height: 1.15;
+  transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
 .guideline-list li::before {
-  border-color: var(--green-dark);
+  content: none;
+}
+
+.guideline-list li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgba(16, 36, 63, 0.13);
+}
+
+.guideline-list li:nth-child(1) {
+  --guideline-bg: #fff2d4;
+}
+
+.guideline-list li:nth-child(2) {
+  --guideline-bg: #edf5e9;
+}
+
+.guideline-list li:nth-child(3) {
+  --guideline-bg: #f7ded0;
+}
+
+.guideline-list li:nth-child(4) {
+  --guideline-bg: #e6effb;
+}
+
+.guideline-list li:nth-child(5) {
+  --guideline-bg: #f9e0eb;
+}
+
+.guideline-list li:nth-child(6) {
+  --guideline-bg: #eef1df;
+}
+
+.guideline-icon {
+  display: grid;
+  place-items: center;
+  width: clamp(34px, 3.5vw, 43px);
+  height: clamp(34px, 3.5vw, 43px);
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--green-dark);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    0 10px 22px rgba(49, 86, 67, 0.2);
+}
+
+.guideline-list li:nth-child(1) .guideline-icon,
+.guideline-list li:nth-child(3) .guideline-icon {
+  background: var(--orange);
+}
+
+.guideline-list li:nth-child(4) .guideline-icon {
+  background: #496fa8;
+}
+
+.guideline-list li:nth-child(5) .guideline-icon {
+  background: #a94f78;
+}
+
+.guideline-icon i {
+  font-size: clamp(0.91rem, 1.45vw, 1.16rem);
 }
 
 .team-grid {
@@ -1529,7 +1673,7 @@ p {
   }
 
   .home-copy h1 {
-    font-size: 3.75rem;
+    font-size: 3rem;
   }
 
   .hero-grid {
@@ -1537,18 +1681,18 @@ p {
   }
 
   .orbit-stage {
-    --orbit-size: 700px;
-    --orbit-radius: 262px;
+    --orbit-size: 560px;
+    --orbit-radius: 210px;
   }
 
   .orbit-card {
-    width: 146px;
-    min-height: 146px;
+    width: 117px;
+    min-height: 117px;
   }
 
   .community-core {
-    width: 204px;
-    min-height: 204px;
+    width: 163px;
+    min-height: 163px;
   }
 
   .hero-menu {
@@ -1557,6 +1701,34 @@ p {
 
   .page-hero h1 {
     font-size: 3.45rem;
+  }
+
+  .guidelines-board-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    align-content: center;
+  }
+
+  .guidelines-intro {
+    max-width: 624px;
+  }
+
+  .guidelines-intro h1 {
+    max-width: 624px;
+    font-size: clamp(1.92rem, 4.8vw, 3.04rem);
+  }
+
+  .guidelines-intro p:not(.eyebrow) {
+    max-width: 544px;
+    margin-top: 11px;
+  }
+
+  .guideline-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .guideline-list li {
+    min-height: 94px;
   }
 
   .card-grid,
@@ -1641,19 +1813,19 @@ p {
 
   .instagram-hero {
     min-height: calc(100dvh - var(--header-height));
-    padding: 42px 14px;
+    padding: 34px 11px;
   }
 
   .instagram-track {
-    gap: 16px;
-    padding-inline: 16px;
+    gap: 13px;
+    padding-inline: 13px;
     animation-duration: 40s;
   }
 
   .instagram-post {
-    width: clamp(154px, 48vw, 210px);
-    border-width: 6px;
-    border-radius: 22px;
+    width: clamp(123px, 38vw, 168px);
+    border-width: 5px;
+    border-radius: 18px;
   }
 
   .instagram-showcase::before {
@@ -1663,27 +1835,27 @@ p {
   }
 
   .instagram-center {
-    gap: 40px;
+    gap: 32px;
   }
 
   .instagram-copy h1 {
-    font-size: clamp(2.45rem, 12vw, 3.5rem);
+    font-size: clamp(1.96rem, 9.6vw, 2.8rem);
   }
 
   .instagram-description {
-    max-width: min(100%, 35rem);
-    font-size: 1rem;
+    max-width: min(100%, 28rem);
+    font-size: 0.9rem;
   }
 
   .instagram-follow {
-    width: min(78vw, 270px);
-    padding: 28px;
+    width: min(62vw, 216px);
+    padding: 22px;
   }
 
   .instagram-follow-icon {
-    width: 92px;
-    height: 92px;
-    font-size: 3.75rem;
+    width: 74px;
+    height: 74px;
+    font-size: 3rem;
   }
 
   .tagline {
@@ -1692,20 +1864,20 @@ p {
 
   .home-orbit {
     align-items: start;
-    padding: 34px 0 58px;
+    padding: 27px 0 46px;
   }
 
   .home-copy h1 {
-    font-size: 3.1rem;
+    font-size: 2.48rem;
   }
 
   .home-copy .hero-description {
-    max-width: 31rem;
+    max-width: 25rem;
   }
 
   .orbit-stage {
     width: 100%;
-    max-width: 420px;
+    max-width: 336px;
     aspect-ratio: auto;
     display: grid;
     gap: 14px;
@@ -1733,7 +1905,7 @@ p {
   .community-core {
     position: relative;
     width: 100%;
-    min-height: 132px;
+    min-height: 106px;
     grid-template-columns: auto minmax(0, 1fr);
     justify-content: center;
     border-radius: 999px;
@@ -1752,8 +1924,8 @@ p {
 
   .orbit-card {
     width: 100%;
-    min-height: 118px;
-    border-radius: 22px;
+    min-height: 94px;
+    border-radius: 18px;
   }
 
   .orbit-node:hover,
@@ -1804,6 +1976,14 @@ p {
 
   .guideline-list {
     columns: 1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .guideline-list li {
+    min-height: 83px;
+    padding: 11px;
+    border-radius: 14px;
   }
 
   .footer-grid {
@@ -1825,12 +2005,12 @@ p {
   }
 
   .instagram-follow {
-    width: min(82vw, 242px);
-    gap: 12px;
+    width: min(66vw, 194px);
+    gap: 10px;
   }
 
   .instagram-center {
-    gap: 22px;
+    gap: 18px;
   }
 
   .instagram-copy {
@@ -1838,17 +2018,17 @@ p {
   }
 
   .instagram-copy h1 {
-    font-size: 2.35rem;
+    font-size: 1.88rem;
   }
 
   .instagram-description {
-    font-size: 0.95rem;
+    font-size: 0.86rem;
   }
 
   .instagram-follow-icon {
-    width: 82px;
-    height: 82px;
-    font-size: 3.3rem;
+    width: 66px;
+    height: 66px;
+    font-size: 2.64rem;
   }
 
   .tagline {
@@ -1856,7 +2036,45 @@ p {
   }
 
   .home-copy h1 {
-    font-size: 2.65rem;
+    font-size: 2.12rem;
+  }
+
+  .guidelines-board {
+    padding: 14px 0 18px;
+  }
+
+  .guidelines-board-grid {
+    gap: 11px;
+  }
+
+  .guidelines-intro h1 {
+    font-size: 1.64rem;
+  }
+
+  .guidelines-intro p:not(.eyebrow) {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .guideline-list {
+    gap: 6px;
+  }
+
+  .guideline-list li {
+    min-height: 75px;
+    gap: 6px;
+    padding: 10px;
+    font-size: 0.79rem;
+  }
+
+  .guideline-icon {
+    width: 29px;
+    height: 29px;
+  }
+
+  .guideline-icon i {
+    font-size: 0.8rem;
   }
 
   .orbit-track {
