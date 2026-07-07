@@ -17,9 +17,20 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/read4all-hero.jpg" />
     <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="about-page">
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <header class="site-header" data-header>
@@ -48,70 +59,145 @@
           <li><a href="books.html">Explore</a></li>
           <li><a href="sdg.html">SDG 4</a></li>
           <li><a href="about.html">About Us</a></li>
-          <li><a class="nav-cta" href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma" target="_blank" rel="noreferrer">Join Community!</a></li>
+          <li><a class="nav-cta" href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma" target="_blank" rel="noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Join Community!</span></a></li>
         </ul>
       </nav>
     </header>
 
     <main id="main">
-      <section class="page-hero section-band" aria-labelledby="page-title">
-        <div class="container page-hero-copy reveal">
-          <p class="eyebrow">About the campaign</p>
-          <h1 id="page-title">A book club built for distracted digital lives.</h1>
-          <p>
-            Read4All helps students read more consistently, discover meaningful books, and discuss ideas with peers in a
-            friendly online community.
-          </p>
+      <section class="about-hero" aria-labelledby="page-title">
+        <div class="container about-hero-grid">
+          <div class="about-hero-copy reveal">
+            <p class="eyebrow">About the campaign</p>
+            <h1 id="page-title">Meet Read4All.</h1>
+            <p>
+              Read4All is a student-led digital book club that brings resources, challenges, social posts, and peer
+              conversations into one friendly reading space.
+            </p>
+            <div class="about-hero-actions" aria-label="About page quick links">
+              <a class="button about-social-button about-whatsapp-button" href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                <span>Join our Community</span>
+              </a>
+              <a class="button about-social-button about-instagram-button" href="https://www.instagram.com/read4all__" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                <span>Follow for Updates</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="about-book-stack reveal" aria-hidden="true">
+            <img src="assets/favicon.png" alt="" width="512" height="512" />
+          </div>
         </div>
       </section>
 
-      <section class="section about-section" aria-labelledby="about-title">
-        <div class="container split-layout">
-          <div class="section-copy reveal">
-            <p class="eyebrow">Why Read4All exists</p>
-            <h2 id="about-title">Reading should feel easier to start and easier to continue.</h2>
+      <section class="section about-map-section" aria-labelledby="about-title">
+        <div class="container about-map-board reveal">
+          <div class="about-map-copy">
+            <p class="eyebrow">How the site works</p>
+            <h2 id="about-title">Find your next step.</h2>
             <p>
-              The campaign exists because many students want to read, but attention is fragmented by digital
-              distractions, resources are scattered across the web, and reading often feels isolated without peer
-              support.
+              Click on the cards to explore our website!
             </p>
           </div>
 
-          <div class="feature-list reveal" aria-label="How Read4All works">
-            <article class="feature-card">
-              <span class="icon-shape" aria-hidden="true"></span>
-              <h3>Website hub</h3>
-              <p>Collects campaign details, legal resources, recommendations, goals, and participation links.</p>
-            </article>
-            <article class="feature-card">
-              <span class="icon-shape icon-shape-green" aria-hidden="true"></span>
-              <h3>WhatsApp community</h3>
-              <p>Creates a low-friction space for discussions, reflections, weekly challenges, and peer motivation.</p>
-            </article>
-            <article class="feature-card">
-              <span class="icon-shape icon-shape-orange" aria-hidden="true"></span>
-              <h3>Instagram awareness</h3>
-              <p>Shares quotes, quizzes, polls, reels, book prompts, and campaign updates for broader reach.</p>
-            </article>
+          <div class="about-link-grid" aria-label="Read4All website map">
+            <a class="about-link-card" href="resources.html">
+              <span><i class="fa-solid fa-folder-open" aria-hidden="true"></i></span>
+              <strong>Resources</strong>
+              <em>Free, public, and authorized reading links.</em>
+            </a>
+            <a class="about-link-card" href="books.html">
+              <span><i class="fa-solid fa-compass" aria-hidden="true"></i></span>
+              <strong>Explore</strong>
+              <em>Recommendations for the next curious reader.</em>
+            </a>
+            <a class="about-link-card" href="activities.html">
+              <span><i class="fa-solid fa-calendar-days" aria-hidden="true"></i></span>
+              <strong>Activities</strong>
+              <em>Challenges, prompts, and club moments.</em>
+            </a>
+            <a class="about-link-card" href="sdg.html">
+              <span><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span>
+              <strong>SDG 4</strong>
+              <em>Quality education through everyday reading.</em>
+            </a>
+            <a class="about-link-card about-link-card-featured" href="instagram.html">
+              <span><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+              <strong>Instagram</strong>
+              <em>Quizzes, updates, reels, polls, and book prompts.</em>
+            </a>
+            <a class="about-link-card about-link-card-community" href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma" target="_blank" rel="noreferrer">
+              <span><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></span>
+              <strong>WhatsApp</strong>
+              <em>Discuss, recommend, ask, and keep each other reading.</em>
+            </a>
           </div>
         </div>
       </section>
 
       <section class="section team-section" aria-labelledby="team-title">
         <div class="container">
-          <div class="section-heading reveal">
+          <div class="about-team-heading reveal">
             <p class="eyebrow">Team and credits</p>
-            <h2 id="team-title">Built by a student campaign team.</h2>
+            <h2 id="team-title">Our team.</h2>
+            <p>
+              Each role keeps a different part of the campaign moving, from the website and analytics to posts,
+              community care, creative direction, and outreach.
+            </p>
           </div>
 
-          <div class="team-grid">
-            <article class="team-card reveal"><h3>Project Manager</h3></article>
-            <article class="team-card reveal"><h3>Content Creator</h3></article>
-            <article class="team-card reveal"><h3>Graphic Designer &amp; Video Editor</h3></article>
-            <article class="team-card reveal"><h3>Social Media Strategist and Community Manager</h3></article>
-            <article class="team-card reveal"><h3>Expert &amp; Influencer Outreach Specialist</h3></article>
-            <article class="team-card reveal"><h3>Website Developer</h3></article>
-            <article class="team-card reveal"><h3>Analytics &amp; Reporting Specialist</h3></article>
+          <div class="team-grid about-team-grid">
+            <article class="team-card about-team-card reveal">
+              <img src="assets/project-manager.png" alt="Project Manager" width="720" height="900" loading="lazy" />
+              <div>
+                <span>Planning</span>
+                <h3>Manager</h3>
+              </div>
+            </article>
+            <article class="team-card about-team-card reveal">
+              <img src="assets/content-creator.png" alt="Content Creator" width="720" height="900" loading="lazy" />
+              <div>
+                <span>Content</span>
+                <h3>Creator</h3>
+              </div>
+            </article>
+            <article class="team-card about-team-card reveal">
+              <img src="assets/graphic-designer.png" alt="Graphic Designer and Video Editor" width="720" height="900" loading="lazy" />
+              <div>
+                <span>Visuals</span>
+                <h3>Designer</h3>
+              </div>
+            </article>
+            <article class="team-card about-team-card reveal">
+              <img src="assets/social-media-strategist.png" alt="Social Media Strategist and Community Manager" width="720" height="900" loading="lazy" />
+              <div>
+                <span>Community</span>
+                <h3>Social Lead</h3>
+              </div>
+            </article>
+            <article class="team-card about-team-card reveal">
+              <img src="assets/outreach-specialist.png" alt="Expert and Influencer Outreach Specialist" width="720" height="900" loading="lazy" />
+              <div>
+                <span>Outreach</span>
+                <h3>Outreach</h3>
+              </div>
+            </article>
+            <article class="team-card about-team-card reveal">
+              <img src="assets/website-developer.png" alt="Website Developer" width="720" height="900" loading="lazy" />
+              <div>
+                <span>Website</span>
+                <h3>Developer</h3>
+              </div>
+            </article>
+            <article class="team-card about-team-card reveal">
+              <img src="assets/analytics-specialist.png" alt="Analytics and Reporting Specialist" width="720" height="900" loading="lazy" />
+              <div>
+                <span>Insights</span>
+                <h3>Analytics</h3>
+              </div>
+            </article>
           </div>
         </div>
       </section>
