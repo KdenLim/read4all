@@ -2865,15 +2865,36 @@ p {
   .community-core {
     position: relative;
     width: 100%;
-    min-height: 106px;
+    min-height: 76px;
     grid-template-columns: auto minmax(0, 1fr);
     justify-content: center;
-    border-radius: 999px;
+    gap: 12px;
+    padding: 18px 24px;
+    border-radius: 18px;
+    background: #25d366;
+    box-shadow: 0 12px 26px rgba(16, 36, 63, 0.18);
     text-align: left;
+  }
+
+  .community-core::before,
+  .community-core::after {
+    display: none;
+  }
+
+  .core-icon {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    color: var(--white);
+    background: transparent;
+    font-size: 1.8rem;
+    box-shadow: none;
   }
 
   .core-label {
     max-width: none;
+    font-size: 1rem;
+    text-shadow: none;
   }
 
   .orbit-track {
