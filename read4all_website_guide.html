@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Read4All - Website Guide</title>
+<meta name="description" content="A guided introduction to the Read4All website: what it is, what every page does, and how to use it on desktop and mobile.">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="styles.css">
+<style>
+  :root{
+    --navy:#10243f;
+    --navy-soft:#1d3a5f;
+    --cream:#fffaf0;
+    --cream-2:#fdf3e0;
+    --green:#3d6b4f;
+    --green-bright:#25d366;
+    --gold:#b98a2e;
+    --plum:#8e4a68;
+    --blue:#5b719c;
+    --ink:#2b2b25;
+    --muted:#6d6a5e;
+    --card:#ffffff;
+    --line:#eadfc8;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(16,36,63,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65}
+  h1,h2,h3{font-family:'Libre Baskerville',Georgia,serif}
+  img{max-width:100%}
+  a{color:var(--green)}
+  .guide-page .brand{color:var(--navy);font-family:'Source Sans 3',system-ui,sans-serif}
+
+  /* ---------- hero ---------- */
+  .guide-page .hero{display:block;background:
+      radial-gradient(1200px 500px at 50% -10%, #ffffff 0%, transparent 60%),
+      linear-gradient(180deg,var(--cream) 0%, var(--cream-2) 100%);
+    text-align:center;padding:64px 20px 48px;border-bottom:1px solid var(--line)}
+  .hero .logo{width:88px;height:88px;margin:0 auto;border-radius:22px;box-shadow:var(--shadow)}
+  .hero h1{font-size:clamp(2.4rem,6vw,3.8rem);color:var(--navy);font-weight:900;margin:14px 0 6px}
+  .mobile-title-break{display:none}
+  .hero .tag{font-size:1.15rem;color:var(--green);font-style:italic}
+  .hero p.lead{max-width:680px;margin:18px auto 0;color:var(--muted);font-size:1.02rem}
+  .badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:800;font-size:.85rem;color:var(--navy);box-shadow:0 3px 10px rgba(16,36,63,.06)}
+  .badge .dot{width:9px;height:9px;border-radius:50%;background:var(--green-bright)}
+  .cta-row{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;border-radius:999px;padding:12px 24px;font-size:.95rem;transition:transform .15s ease, box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,36,63,.18)}
+  .btn.primary{background:var(--navy);color:#fff}
+  .btn.green{background:var(--green);color:#fff}
+  .btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  section.block{padding:56px 0 8px}
+  .kicker{display:inline-block;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--gold);margin-bottom:8px}
+  h2.title{font-size:clamp(1.6rem,3.5vw,2.3rem);color:var(--navy);margin-bottom:10px}
+  p.sub{color:var(--muted);max-width:720px}
+
+  .grid{display:grid;gap:18px;margin-top:26px}
+  .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 4px 14px rgba(16,36,63,.05)}
+  .card h3{color:var(--navy);font-size:1.1rem;margin-bottom:8px}
+  .card p{font-size:.93rem;color:var(--muted)}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--cream-2);color:var(--gold);font-weight:900;font-family:'Libre Baskerville',serif;margin-bottom:10px;border:1px solid var(--line)}
+
+  /* ---------- function sections ---------- */
+  .feature{display:grid;grid-template-columns:1fr;gap:26px;align-items:start;padding:36px 0;border-bottom:1px dashed var(--line)}
+  @media(min-width:960px){
+    .feature{grid-template-columns:5fr 6fr}
+    .feature.flip .txt{order:2}
+    .feature.flip .shot{order:1}
+  }
+  .feature .step-tag{display:inline-block;background:var(--navy);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:4px 10px;margin-bottom:10px}
+  .feature h3{font-size:1.55rem;color:var(--navy);margin-bottom:10px}
+  .feature p{color:var(--muted);font-size:.97rem;margin-bottom:12px}
+  .feature ul{margin:0 0 14px 18px;color:var(--ink);font-size:.93rem}
+  .feature li{margin-bottom:6px}
+
+  /* ---------- live screen frames ---------- */
+  .browser-frame{background:#e9e2d2;border-radius:14px;box-shadow:var(--shadow);overflow:hidden;border:1px solid #ddd3bd}
+  .browser-bar{display:flex;align-items:center;gap:8px;padding:9px 14px;background:#f4eddc;border-bottom:1px solid #e3d9c2}
+  .browser-bar .b-dot{width:11px;height:11px;border-radius:50%}
+  .browser-bar .url{flex:1;background:#fff;border-radius:999px;font-size:.72rem;color:#8a8674;padding:4px 14px;border:1px solid #e6ddc6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .viewport{position:relative;height:420px;background:var(--cream)}
+  .viewport .offline-note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;text-align:center;padding:20px}
+  .viewport iframe{position:relative;z-index:2;width:200%;height:200%;border:0;transform:scale(.5);transform-origin:0 0;background:var(--cream)}
+  .shot .caption{font-size:.78rem;color:var(--muted);text-align:center;margin-top:8px;font-style:italic}
+
+  /* clickable screens: click any preview to jump to that page */
+  .jump{position:absolute;inset:0;z-index:6;display:flex;align-items:flex-end;justify-content:center;text-decoration:none;background:transparent;transition:background .2s ease;cursor:pointer}
+  .jump:hover{background:rgba(16,36,63,.10)}
+  .jump span{opacity:.92;background:var(--navy);color:#fff;font-weight:800;font-size:.8rem;border-radius:999px;padding:8px 18px;margin-bottom:14px;box-shadow:0 6px 16px rgba(16,36,63,.3);transition:transform .2s ease}
+  .jump:hover span{transform:translateY(-3px);opacity:1}
+
+  /* ---------- whatsapp community ---------- */
+  .wa-groups{display:grid;gap:12px;margin:20px 0}
+  .wa-group{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 16px;box-shadow:0 3px 10px rgba(16,36,63,.05);cursor:pointer;transition:border-color .15s ease, transform .15s ease}
+  .wa-group:hover{transform:translateX(4px)}
+  .wa-group.active{border-color:var(--green);background:#f5faf6}
+  .wa-chat-pane{display:none}
+  .wa-chat-pane.active{display:block}
+  .swap-hint{font-size:.82rem;color:var(--muted);font-style:italic;margin-bottom:10px}
+  .wa-group .g-icon{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+  .wa-group h4{font-family:'Source Sans 3',sans-serif;color:var(--navy);font-size:.98rem;margin-bottom:2px}
+  .wa-group p{font-size:.84rem;color:var(--muted);margin:0}
+  .wa-chat{max-width:380px;margin:0 auto;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .wa-header{background:#075e54;color:#fff;display:flex;align-items:center;gap:12px;padding:12px 16px}
+  .wa-header .g-avatar{width:40px;height:40px;border-radius:50%;background:#8fd3c7;display:flex;align-items:center;justify-content:center;font-size:1.15rem}
+  .wa-header h4{font-family:'Source Sans 3',sans-serif;font-size:.98rem;margin:0}
+  .wa-header small{display:block;font-weight:400;font-size:.72rem;color:#c8e6e0}
+  .wa-body{background:#efe7dd;padding:16px 12px;display:flex;flex-direction:column;gap:8px}
+  .wa-date{align-self:center;background:#fff;color:#6d6a5e;font-size:.68rem;font-weight:700;border-radius:8px;padding:3px 10px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .msg{max-width:82%;border-radius:10px;padding:7px 10px 5px;font-size:.82rem;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.1);position:relative}
+  .msg.in{background:#fff;align-self:flex-start;border-top-left-radius:2px}
+  .msg.out{background:#d9fdd3;align-self:flex-end;border-top-right-radius:2px}
+  .msg .who{display:block;font-weight:800;font-size:.74rem;margin-bottom:2px}
+  .msg .time{display:block;text-align:right;font-size:.62rem;color:#8a8674;margin-top:3px}
+  .msg a{color:#0b6b5d;word-break:break-all}
+
+  /* ---------- desktop + mobile section ---------- */
+  .devices{display:flex;gap:34px;align-items:flex-end;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .device-desktop{flex:1 1 560px;max-width:660px}
+  .phone{width:300px;background:#10243f;border-radius:38px;padding:12px 10px;box-shadow:var(--shadow)}
+  .phone .notch{width:110px;height:18px;background:#10243f;border-radius:0 0 14px 14px;position:absolute;left:50%;transform:translateX(-50%);top:12px;z-index:5}
+  .phone-screen{position:relative;border-radius:28px;overflow:hidden;height:560px;background:var(--cream)}
+  .phone-screen iframe{position:relative;z-index:2;width:390px;height:calc(560px * 390 / 280);border:0;transform:scale(calc(280 / 390));transform-origin:0 0;background:var(--cream)}
+  .phone-screen .offline-note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem;text-align:center;padding:16px}
+  .device-label{text-align:center;font-weight:800;color:var(--navy);margin-top:12px}
+  .device-label small{display:block;font-weight:600;color:var(--muted)}
+
+  /* ---------- QR ---------- */
+  .qr-band{background:var(--navy);border-radius:var(--radius);color:#fff;display:flex;gap:30px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:34px;margin:46px 0}
+  .qr-band h3{font-size:1.6rem;margin-bottom:8px}
+  .qr-band p{color:#c9d4e4;max-width:520px;font-size:.95rem}
+  .qr-box{background:#fff;padding:14px;border-radius:14px;line-height:0}
+  #qrcode{width:150px;height:150px}
+  #qrcode img,#qrcode canvas{width:150px!important;height:150px!important}
+  .qr-caption{color:#c9d4e4;font-size:.78rem;text-align:center;margin-top:8px}
+
+  /* ---------- guide navigation ---------- */
+  .guide-nav{padding:30px 0 2px}
+  .guide-nav-inner{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 30px;box-shadow:0 4px 14px rgba(16,36,63,.05)}
+  .guide-nav h2{font-size:1.15rem;color:var(--navy);margin-bottom:10px;text-align:left}
+  .guide-nav-links{display:block}
+  .guide-nav-links a{display:flex;align-items:center;justify-content:flex-start;gap:18px;min-height:0;padding:17px 4px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;color:var(--navy);font-weight:800;text-align:left;text-decoration:none;line-height:1.2;transition:color .15s ease,border-color .15s ease}
+  .guide-nav-links a:last-child{border-bottom:0}
+  .guide-nav-number{display:inline-block;flex:0 0 32px;color:var(--gold);font-family:'Libre Baskerville',Georgia,serif;font-size:.82rem;font-weight:700}
+  .guide-nav-links a:hover{color:var(--green);border-color:var(--green)}
+  .guide-nav-links a:focus-visible{outline:3px solid rgba(61,107,79,.3);outline-offset:2px}
+  .guide-page .footer{background:#10243f;color:#fff}
+  .guide-page .footer .footer-brand{color:#fff}
+  .guide-page .footer p{color:rgba(255,255,255,.75)}
+  .guide-page .footer-links a{color:rgba(255,255,255,.82)}
+  .guide-page .footer-links a:hover{color:#fff}
+  @media(max-width:600px){
+    .mobile-title-break{display:block}
+    .guide-nav{padding-top:20px}
+    .guide-nav-inner{padding:22px 18px}
+    .guide-nav h2{margin-bottom:8px}
+    .guide-nav-links a{gap:16px;padding:15px 2px}
+    .guide-nav-number{flex-basis:30px}
+  }
+</style>
+</head>
+<body class="guide-page">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header" data-header>
+  <nav class="nav container" aria-label="Primary navigation">
+    <a class="brand" href="index.html" aria-label="Read4All home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Read4All</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-menu" data-nav-toggle>
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="primary-menu" data-nav-menu>
+      <li><a href="activities.html">Activities</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="books.html">Explore</a></li>
+      <li><a href="sdg.html">SDG 4</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a class="nav-cta" href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma" target="_blank" rel="noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Join Community!</span></a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- hero -->
+<section class="hero" aria-labelledby="guide-title">
+  <img class="logo" src="https://read4all.pages.dev/assets/favicon.png" alt="Read4All owl logo">
+  <h1 id="guide-title">Welcome to<span class="mobile-title-break" aria-hidden="true"></span> Read4All</h1>
+  <div class="tag">Read more. Learn more. Grow together.</div>
+  <p class="lead">This guide introduces the <strong>Read4All website</strong>, a student-led digital book club
+     campaign supporting <strong>SDG&nbsp;4: Quality Education</strong>, and walks you through every function,
+     with live screen previews of each page.</p>
+  <div class="badges">
+    <span class="badge"><span class="dot"></span> Works on Desktop</span>
+    <span class="badge"><span class="dot"></span> Works on Mobile Phone</span>
+    <span class="badge"><span class="dot"></span> No app install needed; runs in any browser</span>
+  </div>
+  <div class="cta-row">
+    <a class="btn primary" href="https://read4all.pages.dev/" target="_blank" rel="noopener">Visit the Website ↗</a>
+    <a class="btn green" href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma" target="_blank" rel="noopener">Join the WhatsApp Community</a>
+    <a class="btn ghost" href="https://www.instagram.com/read4all__" target="_blank" rel="noopener">Follow on Instagram</a>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <nav class="guide-nav" aria-label="Guide sections">
+    <div class="guide-nav-inner">
+      <h2>Jump to a section</h2>
+      <div class="guide-nav-links">
+        <a href="#about"><span class="guide-nav-number" aria-hidden="true">01</span><span>About Read4All</span></a>
+        <a href="#functions"><span class="guide-nav-number" aria-hidden="true">02</span><span>Website tour</span></a>
+        <a href="#community"><span class="guide-nav-number" aria-hidden="true">03</span><span>Community</span></a>
+        <a href="#devices"><span class="guide-nav-number" aria-hidden="true">04</span><span>Desktop and mobile</span></a>
+        <a href="#join"><span class="guide-nav-number" aria-hidden="true">05</span><span>Try it now</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- about -->
+  <section class="block" id="about">
+    <span class="kicker">What is Read4All?</span>
+    <h2 class="title">A digital book club for curious students.</h2>
+    <p class="sub">Read4All is a social-impact campaign that promotes reading habits, literacy awareness, and
+       lifelong learning. It tackles low reading engagement caused by digital distractions and fragmented
+       resources by bringing everything a reader needs into one warm, easy-to-use platform.</p>
+    <div class="grid cols-3">
+      <div class="card"><div class="num">1</div><h3>The Website</h3>
+        <p>The central hub for campaign info, a resource finder for legal reading materials, book recommendations,
+           weekly activities, and the pathway to join the community.</p></div>
+      <div class="card"><div class="num">2</div><h3>WhatsApp Community</h3>
+        <p>A friendly group for book discussions, reflections, announcements, and peer support. Join it with one
+           tap from any page of the website.</p></div>
+      <div class="card"><div class="num">3</div><h3>Instagram Campaign</h3>
+        <p>@read4all__ shares book recommendations, quotes, quizzes, polls, mini-challenges, and storytelling
+           reels that make literacy fun and visible.</p></div>
+    </div>
+  </section>
+
+  <!-- functions -->
+  <section class="block" id="functions">
+    <span class="kicker">Website tour</span>
+    <h2 class="title">Explore the functions, screen by screen.</h2>
+    <p class="sub">Every preview below is a <strong>live capture of the real website</strong>.
+       <strong>click any screen to jump straight to that page</strong> and try the function yourself.
+       (An internet connection is needed for the previews to load.)</p>
+
+    <!-- 1 Home -->
+    <div class="feature">
+      <div class="txt">
+        <span class="step-tag">Home</span>
+        <h3>The interactive home page</h3>
+        <p>The landing page greets you with the Read4All owl and an open storybook surrounded by floating
+           bubbles. Each bubble is a shortcut to a key function.</p>
+        <ul>
+          <li><strong>Resources</strong>, <strong>Explore</strong>, <strong>Activities</strong>,
+              <strong>Social Media</strong> and <strong>Guidelines</strong> bubbles jump straight to each section.</li>
+          <li>The big <strong>“Join our Community”</strong> bubble opens the WhatsApp group instantly.</li>
+          <li>The top navigation bar stays available on every page.</li>
+        </ul>
+      </div>
+      <div class="shot">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="b-dot" style="background:#f26d5f"></span><span class="b-dot" style="background:#f2b13c"></span><span class="b-dot" style="background:#4fbf67"></span>
+            <span class="url">read4all.pages.dev</span>
+          </div>
+          <div class="viewport">
+            <div class="offline-note">Connect to the internet to load the live preview of read4all.pages.dev</div>
+            <iframe loading="lazy" src="https://read4all.pages.dev/" title="Read4All home page live preview"></iframe>
+            <a class="jump" href="https://read4all.pages.dev/" target="_blank" rel="noopener" aria-label="Open the Home page"><span>Click to open the Home page ↗</span></a>
+          </div>
+        </div>
+        <div class="caption">Live preview: click the screen to jump to this page</div>
+      </div>
+    </div>
+
+    <!-- 2 Resources -->
+    <div class="feature flip">
+      <div class="txt">
+        <span class="step-tag">Resources</span>
+        <h3>Resource Finder: search legal reading materials</h3>
+        <p>The heart of the site: a smart search shelf of <strong>legal, free, and authorized</strong> reading
+           resources such as open libraries, public-domain ebooks, Google Books, and library catalogues.</p>
+        <ul>
+          <li>Type a topic, e.g. <em>classics, science, ESL, coding, Japanese, textbooks</em>.</li>
+          <li>Filter by <strong>Best for</strong> (Children, Students, STEM, Research…) and
+              <strong>Level</strong> (Kids, Teens, Adults, Academic).</li>
+          <li>Every result links to a legitimate source. No pirated PDFs, ever.</li>
+        </ul>
+      </div>
+      <div class="shot">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="b-dot" style="background:#f26d5f"></span><span class="b-dot" style="background:#f2b13c"></span><span class="b-dot" style="background:#4fbf67"></span>
+            <span class="url">read4all.pages.dev/resources.html</span>
+          </div>
+          <div class="viewport">
+            <div class="offline-note">Connect to the internet to load the live preview of the Resource Finder</div>
+            <iframe loading="lazy" src="https://read4all.pages.dev/resources.html" title="Resource Finder live preview"></iframe>
+            <a class="jump" href="https://read4all.pages.dev/resources.html" target="_blank" rel="noopener" aria-label="Open the Resource Finder"><span>Click to open the Resource Finder ↗</span></a>
+          </div>
+        </div>
+        <div class="caption">Search legal reading resources by topic, audience, and level</div>
+      </div>
+    </div>
+
+    <!-- 3 Explore / Books -->
+    <div class="feature">
+      <div class="txt">
+        <span class="step-tag">Explore</span>
+        <h3>Book recommendations</h3>
+        <p>Not sure what to read next? The Explore page curates <strong>public-domain classics</strong> that spark
+           great conversations, each with a short blurb and a direct “Read on Project Gutenberg” link.</p>
+      </div>
+      <div class="shot">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="b-dot" style="background:#f26d5f"></span><span class="b-dot" style="background:#f2b13c"></span><span class="b-dot" style="background:#4fbf67"></span>
+            <span class="url">read4all.pages.dev/books.html</span>
+          </div>
+          <div class="viewport">
+            <div class="offline-note">Connect to the internet to load the live preview of Book Recommendations</div>
+            <iframe loading="lazy" src="https://read4all.pages.dev/books.html" title="Book recommendations live preview"></iframe>
+            <a class="jump" href="https://read4all.pages.dev/books.html" target="_blank" rel="noopener" aria-label="Open Book Recommendations"><span>Click to open Book Recommendations ↗</span></a>
+          </div>
+        </div>
+        <div class="caption">Each card links to a free, legal copy on Project Gutenberg</div>
+      </div>
+    </div>
+
+    <!-- 4 Activities -->
+    <div class="feature flip">
+      <div class="txt">
+        <span class="step-tag">Activities</span>
+        <h3>Weekly activities</h3>
+        <p>Every week of the campaign unlocks a <strong>different literacy theme</strong>, finding your reading motivation, and building a lasting reading habit.</p>
+        <p>Around each theme, the community runs simple, achievable activities:</p>
+      </div>
+      <div class="shot">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="b-dot" style="background:#f26d5f"></span><span class="b-dot" style="background:#f2b13c"></span><span class="b-dot" style="background:#4fbf67"></span>
+            <span class="url">read4all.pages.dev/activities.html</span>
+          </div>
+          <div class="viewport">
+            <div class="offline-note">Connect to the internet to load the live preview of Weekly Activities</div>
+            <iframe loading="lazy" src="https://read4all.pages.dev/activities.html" title="Weekly activities live preview"></iframe>
+            <a class="jump" href="https://read4all.pages.dev/activities.html" target="_blank" rel="noopener" aria-label="Open Weekly Activities"><span>Click to open Weekly Activities ↗</span></a>
+          </div>
+        </div>
+        <div class="caption">Pick a reading rhythm for your week</div>
+      </div>
+    </div>
+
+    <!-- 5 SDG 4 -->
+    <div class="feature">
+      <div class="txt">
+        <span class="step-tag">SDG 4</span>
+        <h3>Our mission: Quality Education</h3>
+        <p>Read4All directly supports <strong>SDG 4: Quality Education</strong> (target 4.6): inclusive,
+           equitable education and lifelong learning for everyone. This page explains how small reading actions
+           add up.</p>
+        <ul>
+          <li><strong>Legal reads:</strong> fair access to free reading materials</li>
+          <li><strong>Book picks:</strong> making the next read less overwhelming</li>
+          <li><strong>Peer support:</strong> a warm space to learn together</li>
+        </ul>
+      </div>
+      <div class="shot">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="b-dot" style="background:#f26d5f"></span><span class="b-dot" style="background:#f2b13c"></span><span class="b-dot" style="background:#4fbf67"></span>
+            <span class="url">read4all.pages.dev/sdg.html</span>
+          </div>
+          <div class="viewport">
+            <div class="offline-note">Connect to the internet to load the live preview of the SDG 4 page</div>
+            <iframe loading="lazy" src="https://read4all.pages.dev/sdg.html" title="SDG 4 page live preview"></iframe>
+            <a class="jump" href="https://read4all.pages.dev/sdg.html" target="_blank" rel="noopener" aria-label="Open the SDG 4 page"><span>Click to open the SDG 4 page ↗</span></a>
+          </div>
+        </div>
+        <div class="caption">Aligned with UN Sustainable Development Goal 4</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- whatsapp community -->
+  <section class="block" id="community">
+    <span class="kicker">Beyond the website</span>
+    <h2 class="title">Inside the WhatsApp community.</h2>
+    <p class="sub">Tapping <strong>“Join Community!”</strong> anywhere on the website brings you into the
+       Read4All WhatsApp community, a friendly space organised into groups, so every kind of reader knows
+       exactly where to go.</p>
+
+    <div class="feature" style="border-bottom:none">
+      <div class="txt">
+        <p class="swap-hint">Click a group to preview its conversation →</p>
+        <div class="wa-groups">
+          <div class="wa-group active" data-chat="chat-general" onclick="showChat(this)">
+            <div class="g-icon" style="background:#e8ecf5">💬</div>
+            <div><h4>General</h4><p>Campaign announcements, updates, and welcoming new members.</p></div>
+          </div>
+          <div class="wa-group" data-chat="chat-books" onclick="showChat(this)">
+            <div class="g-icon" style="background:#e7ecfa">📖</div>
+            <div><h4>Book Sharing Circle</h4><p>Share favourite quotes, recommendations, and legal reading links.</p></div>
+          </div>
+          <div class="wa-group" data-chat="chat-discussion" onclick="showChat(this)">
+            <div class="g-icon" style="background:#e3f2ee">💭</div>
+            <div><h4>Discussion Corner</h4><p>Book and chapter discussions, reflections, and open questions.</p></div>
+          </div>
+          <div class="wa-group" data-chat="chat-challenge" onclick="showChat(this)">
+            <div class="g-icon" style="background:#fdeee0">🎯</div>
+            <div><h4>Challenge Zone</h4><p>Weekly reading challenges, quizzes, and polls to vote on the next read.</p></div>
+          </div>
+        </div>
+        <a class="btn green" href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma" target="_blank" rel="noopener">Join the Community</a>
+      </div>
+
+      <div class="shot">
+        <!-- General -->
+        <div class="wa-chat-pane active" id="chat-general">
+          <div class="wa-chat">
+            <div class="wa-header">
+              <div class="g-avatar">💬</div>
+              <div><h4>General</h4><small>Read4All Community · Alice, Jennie, Jack, Alex, You…</small></div>
+            </div>
+            <div class="wa-body">
+              <span class="wa-date">Today</span>
+              <div class="msg in"><span class="who" style="color:#0b6b5d">Alice (Admin)</span>
+                Welcome to Read4All! 🎉 Say hi, check the pinned community guidelines, and explore the website:
+                <a href="https://read4all.pages.dev/" target="_blank" rel="noopener">read4all.pages.dev</a>
+                <span class="time">9:00 AM</span></div>
+              <div class="msg out">Hi everyone, just joined from the website! 👋
+                <span class="time">9:06 AM</span></div>
+              <div class="msg in"><span class="who" style="color:#b5651d">Jennie</span>
+                Welcome! 🥳 This week's reading challenge just dropped in 🎯 Challenge Zone. Come join us!
+                <span class="time">9:08 AM</span></div>
+              <div class="msg in"><span class="who" style="color:#0b6b5d">Alice (Admin)</span>
+                📢 Update: our new Instagram quiz is live! Follow @read4all__ and test your book knowledge 📚
+                <span class="time">10:15 AM</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Challenge Zone -->
+        <div class="wa-chat-pane" id="chat-challenge">
+          <div class="wa-chat">
+            <div class="wa-header">
+              <div class="g-avatar" style="background:#f0c9a0">🎯</div>
+              <div><h4>Challenge Zone</h4><small>Read4All Community · Alice, Jennie, Jack, Alex, You…</small></div>
+            </div>
+            <div class="wa-body">
+              <span class="wa-date">Today</span>
+              <div class="msg in"><span class="who" style="color:#0b6b5d">Alice (Admin)</span>
+                🏆 This week's challenge: read <strong>15 minutes a day for 5 days</strong>. Reply ✅ each day
+                you finish!
+                <span class="time">8:30 AM</span></div>
+              <div class="msg in"><span class="who" style="color:#2e6da4">Jack</span>
+                Day 3 done ✅ Sherlock Holmes has me completely hooked 🔍
+                <span class="time">8:47 AM</span></div>
+              <div class="msg out">Day 1 done ✅ 15 minutes goes by so fast!
+                <span class="time">9:02 AM</span></div>
+              <div class="msg in"><span class="who" style="color:#b5651d">Jennie</span>
+                📊 Poll time: next week's book? 1️⃣ Alice in Wonderland 2️⃣ Romeo and Juliet. Vote before Friday!
+                <span class="time">11:20 AM</span></div>
+              <div class="msg out">Voting 1️⃣. Been wanting to read it forever 🐇
+                <span class="time">11:24 AM</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Discussion Corner -->
+        <div class="wa-chat-pane" id="chat-discussion">
+          <div class="wa-chat">
+            <div class="wa-header">
+              <div class="g-avatar">💭</div>
+              <div><h4>Discussion Corner</h4><small>Read4All Community · Alice, Jennie, Jack, Alex, You…</small></div>
+            </div>
+            <div class="wa-body">
+              <span class="wa-date">Today</span>
+              <div class="msg in"><span class="who" style="color:#0b6b5d">Alice (Admin)</span>
+                📚 Week 3 discussion: <strong>The Adventures of Sherlock Holmes</strong>, stories 1–2.
+                What surprised you the most? Free legal copy:
+                <a href="https://www.gutenberg.org/ebooks/1661" target="_blank" rel="noopener">gutenberg.org/ebooks/1661</a>
+                <span class="time">9:02 AM</span></div>
+              <div class="msg out">The observation scenes are wild. Holmes noticed everything from a single glove 🔍
+                <span class="time">9:41 AM</span></div>
+              <div class="msg in"><span class="who" style="color:#2e6da4">Jack</span>
+                Same! “You see, but you do not observe” is my favourite line so far.
+                <span class="time">9:45 AM</span></div>
+              <div class="msg in"><span class="who" style="color:#7a4a8e">Alex</span>
+                I love how Watson narrates. It makes Holmes feel even more mysterious 🕵️
+                <span class="time">9:50 AM</span></div>
+              <div class="msg in"><span class="who" style="color:#0b6b5d">Alice (Admin)</span>
+                Great reflections everyone 👏 Keep them coming. Recap poll on Sunday!
+                <span class="time">10:05 AM</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Book Sharing Circle -->
+        <div class="wa-chat-pane" id="chat-books">
+          <div class="wa-chat">
+            <div class="wa-header">
+              <div class="g-avatar" style="background:#aebfe8">📖</div>
+              <div><h4>Book Sharing Circle</h4><small>Read4All Community · Alice, Jennie, Jack, Alex, You…</small></div>
+            </div>
+            <div class="wa-body">
+              <span class="wa-date">Today</span>
+              <div class="msg in"><span class="who" style="color:#7a4a8e">Alex</span>
+                Found a gem 💎 <strong>Alice's Adventures in Wonderland</strong>, free and legal on
+                <a href="https://www.gutenberg.org/ebooks/11" target="_blank" rel="noopener">gutenberg.org/ebooks/11</a>
+                <span class="time">2:14 PM</span></div>
+              <div class="msg out">Adding it to my list, thanks! 📚
+                <span class="time">2:20 PM</span></div>
+              <div class="msg in"><span class="who" style="color:#b5651d">Jennie</span>
+                Quote of the day: “It is a truth universally acknowledged…” I just started
+                <em>Pride and Prejudice</em> 😍
+                <span class="time">3:05 PM</span></div>
+              <div class="msg in"><span class="who" style="color:#2e6da4">Jack</span>
+                If you like mysteries after Sherlock, the Resources page has a whole detective shelf 🔎
+                <span class="time">3:12 PM</span></div>
+              <div class="msg in"><span class="who" style="color:#0b6b5d">Alice (Admin)</span>
+                Friendly reminder 🙏 only legal, public-domain, or authorized links here. See Guidelines.
+                <span class="time">3:30 PM</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- devices -->
+  <section class="block" id="devices">
+    <span class="kicker">One website, every screen</span>
+    <h2 class="title">Use it on desktop <em>and</em> on your mobile phone.</h2>
+    <p class="sub">Read4All is fully responsive. The same website adapts beautifully to a laptop in the library or
+       a phone on the bus. There is <strong>nothing to install</strong>: open the link in any browser
+       (Chrome, Safari, Edge, Firefox) on any device. Below, both previews are the <strong>real live
+       website</strong> rendered at desktop and phone size.</p>
+
+    <div class="devices">
+      <div class="device-desktop">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="b-dot" style="background:#f26d5f"></span><span class="b-dot" style="background:#f2b13c"></span><span class="b-dot" style="background:#4fbf67"></span>
+            <span class="url">read4all.pages.dev | desktop view</span>
+          </div>
+          <div class="viewport" style="height:460px">
+            <div class="offline-note">Connect to the internet to load the desktop preview</div>
+            <iframe loading="lazy" src="https://read4all.pages.dev/" title="Desktop view of Read4All"></iframe>
+            <a class="jump" href="https://read4all.pages.dev/" target="_blank" rel="noopener" aria-label="Open Read4All"><span>Click to open the website ↗</span></a>
+          </div>
+        </div>
+        <div class="device-label">Desktop / Laptop <small>Full navigation bar and wide layout</small></div>
+      </div>
+
+      <div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="offline-note">Connect to the internet to load the mobile preview</div>
+            <iframe loading="lazy" src="https://read4all.pages.dev/" title="Mobile view of Read4All"></iframe>
+            <a class="jump" href="https://read4all.pages.dev/" target="_blank" rel="noopener" aria-label="Open Read4All on this device"><span>Click to open ↗</span></a>
+          </div>
+        </div>
+        <div class="device-label">Mobile Phone <small>Compact, touch-friendly layout</small></div>
+      </div>
+    </div>
+
+    <!-- QR -->
+    <div class="qr-band" id="join">
+      <div>
+        <h3>Try it on your phone right now.</h3>
+        <p>Scan this QR code with your phone camera to open <strong>read4all.pages.dev</strong> instantly,
+           then tap <strong>“Join Community!”</strong> to enter the WhatsApp book club, or follow
+           <strong>@read4all__</strong> on Instagram for weekly reading content.</p>
+      </div>
+      <div>
+        <div class="qr-box"><div id="qrcode"></div></div>
+        <div class="qr-caption">Scan → read4all.pages.dev</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand footer-brand" href="index.html" aria-label="Read4All home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Read4All</span>
+      </a>
+      <p>Aligned with SDG 4: Quality Education.</p>
+      <p class="legal-note">
+        Read4All does not host copyrighted books or pirated PDFs. All shared materials are legal, publicly
+        available, or authorized resources.
+      </p>
+    </div>
+    <div class="footer-links" aria-label="Footer links">
+      <a href="https://www.instagram.com/read4all__" target="_blank" rel="noreferrer">Instagram</a>
+      <a href="resources.html">Reading resources</a>
+      <a href="guidelines.html">Guidelines</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="script.js" defer></script>
+<script>
+  // swap the WhatsApp chat demo when a group card is clicked
+  function showChat(card) {
+    document.querySelectorAll('.wa-group').forEach(g => g.classList.remove('active'));
+    document.querySelectorAll('.wa-chat-pane').forEach(p => p.classList.remove('active'));
+    card.classList.add('active');
+    document.getElementById(card.dataset.chat).classList.add('active');
+  }
+</script>
+<script>
+  try {
+    new QRCode(document.getElementById("qrcode"), {
+      text: "https://read4all.pages.dev/",
+      width: 150, height: 150,
+      colorDark: "#10243f", colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  } catch (e) {
+    document.getElementById("qrcode").innerHTML =
+      '<a href="https://read4all.pages.dev/" style="font-size:12px">read4all.pages.dev</a>';
+  }
+</script>
+</body>
+</html>
