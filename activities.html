@@ -17,6 +17,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/read4all-hero.jpg" />
     <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -24,7 +30,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="activities-page">
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <header class="site-header" data-header>
@@ -58,52 +64,69 @@
       </nav>
     </header>
 
-    <main id="main">
-      <section class="page-hero section-band" aria-labelledby="page-title">
-        <div class="container page-hero-copy reveal">
-          <p class="eyebrow">Weekly activities</p>
-          <h1 id="page-title">Simple rituals that keep readers moving.</h1>
-          <p>
-            Read4All activities make reading feel consistent, social, and achievable through small weekly prompts and
-            community discussion.
-          </p>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="activities-title">
+    <main id="main" class="activity-quest">
+      <section class="activity-levels-section" aria-labelledby="activities-title">
         <div class="container">
-          <div class="section-heading reveal">
-            <p class="eyebrow">Activity menu</p>
-            <h2 id="activities-title">Choose a reading rhythm for the week.</h2>
+          <div class="activity-levels-heading reveal">
+            <div>
+              <p class="eyebrow">Activity map</p>
+              <h2 id="activities-title">Start your adventure</h2>
+              <br>
+              <p>New reading activities will unlock as the journey continues.</p>
+            </div>
           </div>
 
-          <div class="activity-timeline">
-            <article class="activity-item reveal">
-              <span>01</span>
-              <h3>Weekly book discussions</h3>
-              <p>Discuss a selected book, chapter, article, or theme inside the WhatsApp community.</p>
-            </article>
-            <article class="activity-item reveal">
-              <span>02</span>
-              <h3>Reading challenges</h3>
-              <p>Join short challenges that make reading feel consistent, social, and achievable.</p>
-            </article>
-            <article class="activity-item reveal">
-              <span>03</span>
-              <h3>Quizzes and polls</h3>
-              <p>Vote on next reads, answer literary questions, and reflect on reading preferences.</p>
-            </article>
-            <article class="activity-item reveal">
-              <span>04</span>
-              <h3>Quotes and summaries</h3>
-              <p>Share favorite quotes, key insights, short summaries, and personal reflections.</p>
-            </article>
-            <article class="activity-item reveal">
-              <span>05</span>
-              <h3>Instagram storytelling</h3>
-              <p>Use reels and story posts to make literacy awareness more visible and engaging.</p>
-            </article>
-          </div>
+          <ol class="activity-levels">
+            <li class="activity-level is-unlocked reveal">
+              <div class="level-marker" aria-hidden="true"><span>1</span></div>
+              <a class="level-card" href="reading_motivation_blog.html">
+                <span class="level-status"><i class="fa-solid fa-unlock-keyhole" aria-hidden="true"></i> Unlocked</span>
+                <span class="level-icon" aria-hidden="true"><i class="fa-solid fa-book-open"></i></span>
+                <span class="level-copy">
+                  <small>Activity 1</small>
+                  <strong>Reading Motivation Blog</strong>
+                  <span>Find your reason to read and turn it into a habit that lasts.</span>
+                </span>
+                <span class="level-action">Start activity <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+              </a>
+            </li>
+
+            <li class="activity-level is-locked reveal">
+              <div class="level-marker" aria-hidden="true"><span>2</span></div>
+              <div class="level-card">
+                <span class="level-status"><i class="fa-solid fa-lock" aria-hidden="true"></i> Locked</span>
+                <span class="level-icon" aria-hidden="true"><i class="fa-solid fa-puzzle-piece"></i></span>
+                <span class="level-copy"><small>Activity 2</small><strong>Mystery Activity</strong><span>Coming soon...</span></span>
+              </div>
+            </li>
+
+            <li class="activity-level is-locked reveal">
+              <div class="level-marker" aria-hidden="true"><span>3</span></div>
+              <div class="level-card">
+                <span class="level-status"><i class="fa-solid fa-lock" aria-hidden="true"></i> Locked</span>
+                <span class="level-icon" aria-hidden="true"><i class="fa-solid fa-lightbulb"></i></span>
+                <span class="level-copy"><small>Activity 3</small><strong>Mystery Activity</strong><span>Coming soon...</span></span>
+              </div>
+            </li>
+
+            <li class="activity-level is-locked reveal">
+              <div class="level-marker" aria-hidden="true"><span>4</span></div>
+              <div class="level-card">
+                <span class="level-status"><i class="fa-solid fa-lock" aria-hidden="true"></i> Locked</span>
+                <span class="level-icon" aria-hidden="true"><i class="fa-solid fa-comments"></i></span>
+                <span class="level-copy"><small>Activity 4</small><strong>Mystery Activity</strong><span>Coming soon...</span></span>
+              </div>
+            </li>
+
+            <li class="activity-level is-locked reveal">
+              <div class="level-marker" aria-hidden="true"><span>5</span></div>
+              <div class="level-card">
+                <span class="level-status"><i class="fa-solid fa-lock" aria-hidden="true"></i> Locked</span>
+                <span class="level-icon" aria-hidden="true"><i class="fa-solid fa-trophy"></i></span>
+                <span class="level-copy"><small>Final activity</small><strong>Mystery Activity</strong><span>Coming soon...</span></span>
+              </div>
+            </li>
+          </ol>
         </div>
       </section>
     </main>
