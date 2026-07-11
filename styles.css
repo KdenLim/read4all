@@ -2286,6 +2286,11 @@ p {
   background: var(--ink);
 }
 
+.activities-page .site-header,
+.activities-page .site-header.is-scrolled {
+  background: var(--white);
+}
+
 .activity-quest {
   overflow: hidden;
   background:
@@ -2399,10 +2404,17 @@ p {
   box-shadow: 0 0 0 2px #e94f64, 0 7px 18px rgba(233, 79, 100, 0.28);
 }
 
-.activity-level:nth-child(2) .level-marker span { background: #e9b949; }
-.activity-level:nth-child(3) .level-marker span { background: #54a78a; }
-.activity-level:nth-child(4) .level-marker span { background: #6688c9; }
-.activity-level:nth-child(5) .level-marker span { background: #9a72bd; }
+/* Future unlocked activity marker colours:
+   Activity 2: #e9b949
+   Activity 3: #54a78a
+   Activity 4: #6688c9
+   Activity 5: #9a72bd
+*/
+.is-locked .level-marker span {
+  color: #687078;
+  background: #c9cdd0;
+  box-shadow: 0 0 0 2px #aeb4b8;
+}
 
 .level-card {
   position: relative;
@@ -2452,7 +2464,7 @@ p {
 }
 
 .is-locked .level-status {
-  color: #78818a;
+  color: #747b81;
 }
 
 .level-icon {
@@ -2468,13 +2480,16 @@ p {
 }
 
 .is-locked .level-icon {
-  color: var(--white);
-  background: #e9b949;
+  color: #f7f7f7;
+  background: #969da2;
 }
 
-.activity-level:nth-child(3) .level-icon { background: #54a78a; }
-.activity-level:nth-child(4) .level-icon { background: #6688c9; }
-.activity-level:nth-child(5) .level-icon { background: #9a72bd; }
+/* Future unlocked activity icon colours:
+   Activity 2: #e9b949
+   Activity 3: #54a78a
+   Activity 4: #6688c9
+   Activity 5: #9a72bd
+*/
 
 .level-copy {
   display: grid;
@@ -2498,7 +2513,14 @@ p {
 }
 
 .is-locked .level-copy {
-  opacity: 0.76;
+  filter: grayscale(1);
+  opacity: 0.62;
+}
+
+.is-locked .level-card {
+  border-color: #c8cccf;
+  background: rgba(239, 240, 240, 0.84);
+  box-shadow: 0 10px 24px rgba(65, 72, 78, 0.08);
 }
 
 .level-action {
