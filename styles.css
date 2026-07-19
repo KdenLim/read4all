@@ -2458,6 +2458,11 @@ p {
   box-shadow: 0 0 0 2px #e94f64, 0 7px 18px rgba(233, 79, 100, 0.28);
 }
 
+.activity-level:nth-child(2).is-unlocked .level-marker span {
+  background: #e9b949;
+  box-shadow: 0 0 0 2px #e9b949, 0 7px 18px rgba(233, 185, 73, 0.3);
+}
+
 /* Future unlocked activity marker colours:
    Activity 2: #e9b949
    Activity 3: #54a78a
@@ -2494,6 +2499,15 @@ p {
 .is-unlocked .level-card:hover {
   transform: translate(-3px, -3px);
   box-shadow: 10px 10px 0 rgba(233, 79, 100, 0.2);
+}
+
+.activity-level:nth-child(2).is-unlocked .level-card {
+  border-color: #e9b949;
+  box-shadow: 7px 7px 0 rgba(233, 185, 73, 0.2);
+}
+
+.activity-level:nth-child(2).is-unlocked .level-card:hover {
+  box-shadow: 10px 10px 0 rgba(233, 185, 73, 0.24);
 }
 
 .is-unlocked .level-card:active {
@@ -2533,6 +2547,10 @@ p {
   font-size: 1.25rem;
 }
 
+.activity-level:nth-child(2).is-unlocked .level-icon {
+  background: #e9b949;
+}
+
 .is-locked .level-icon {
   color: #f7f7f7;
   background: #969da2;
@@ -2555,6 +2573,10 @@ p {
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.activity-level:nth-child(2).is-unlocked .level-copy small {
+  color: #9b7010;
 }
 
 .level-copy strong {
