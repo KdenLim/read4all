@@ -152,9 +152,9 @@
   <section class="rules">
     <h2>📜 How Challenge Week works</h2>
     <ol>
-      <li><strong>Join once</strong> with your Instagram account name and a short password — your points from all five challenges accumulate under it. Changing device? Just <strong>Log in</strong> with the same name and password.</li>
+      <li><strong>Join once</strong> with your Instagram account name and a short password - your points from all five challenges accumulate under it. Changing device? Just <strong>Log in</strong> with the same name and password.</li>
       <li>A new challenge <strong>unlocks each day</strong> from Monday 27 July to Friday 31 July (and stays open once unlocked).</li>
-      <li>Play as many times as you like — your <strong>best score per day</strong> counts.</li>
+      <li>Play as many times as you like - your <strong>best score per day</strong> counts.</li>
       <li>Come back here anytime to see your total and the leaderboard.</li>
     </ol>
     <div class="gift">🎁 At the end of the week, show your leaderboard score to the Read4All team
@@ -162,13 +162,13 @@
       to redeem your mystery gift!</div>
     <p style="font-size:.8rem;color:var(--muted);margin-top:12px">🔒 <strong>Privacy:</strong> we never
       see or collect your actual password. It is stored only as an encrypted fingerprint (hash) that
-      cannot be read by anyone — including the Read4All team. Please still avoid reusing an important
+      cannot be read by anyone - including the Read4All team. Please still avoid reusing an important
       password.</p>
   </section>
 
   <!-- challenge cards -->
   <h2 class="sec-title">This week's missions</h2>
-  <p class="sec-sub">One short challenge per day — each takes just a few minutes.</p>
+  <p class="sec-sub">One short challenge per day - each takes just a few minutes.</p>
   <div class="cards" id="cards"></div>
 
   <!-- leaderboard -->
@@ -206,7 +206,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 /* =====================================================================
-   READ4ALL MINI CHALLENGE WEEK — MENU + SHARED LEADERBOARD
+   READ4ALL MINI CHALLENGE WEEK - MENU + SHARED LEADERBOARD
    - Players join once (unique Instagram name, no login).
    - Each challenge page saves its best score locally; this page (and the
      challenge pages) push the best scores into the shared week_scores
@@ -283,8 +283,8 @@ function renderName(){
 function loadBoard(){
   if(!LIVE){$("lbBody").innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic">Leaderboard not connected.</td></tr>';return;}
   sb.from("week_scores").select("name,mon,tue,wed,thu,fri,total").order("total",{ascending:false}).limit(10).then(function(res){
-    if(res.error||!res.data){$("lbBody").innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic">Leaderboard unavailable — did you create the week_scores table?</td></tr>';return;}
-    if(!res.data.length){$("lbBody").innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic">No players yet — be the first!</td></tr>';return;}
+    if(res.error||!res.data){$("lbBody").innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic">Leaderboard unavailable - did you create the week_scores table?</td></tr>';return;}
+    if(!res.data.length){$("lbBody").innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic">No players yet - be the first!</td></tr>';return;}
     var medals=["🥇","🥈","🥉"];
     function dayChips(r){
       var days=[["Mon",r.mon],["Tue",r.tue],["Wed",r.wed],["Thu",r.thu],["Fri",r.fri]];
@@ -307,10 +307,10 @@ function joinBoard(){
   if(name.length<2){msg.textContent="Name too short.";msg.className="msg err";return;}
   if(pin.length<4){msg.textContent="Password must be at least 4 characters.";msg.className="msg err";return;}
   if(!LIVE){msg.textContent="Leaderboard not connected.";msg.className="msg err";return;}
-  if(!confirm('Join Challenge Week as "'+name+'"?\n\nMake sure this is your correct Instagram account name — your points and gift redemption are tied to it.\nRemember your password so you can log in from another device.'))return;
+  if(!confirm('Join Challenge Week as "'+name+'"?\n\nMake sure this is your correct Instagram account name - your points and gift redemption are tied to it.\nRemember your password so you can log in from another device.'))return;
   sb.rpc("week_join",{p_name:name,p_pin:pin}).then(function(res){
-    if(res.error){msg.textContent="Could not join — "+res.error.message;msg.className="msg err";return;}
-    if(res.data==="taken"){msg.textContent="Name already registered — use Log in if it's yours.";msg.className="msg err";return;}
+    if(res.error){msg.textContent="Could not join - "+res.error.message;msg.className="msg err";return;}
+    if(res.data==="taken"){msg.textContent="Name already registered - use Log in if it's yours.";msg.className="msg err";return;}
     if(res.data!=="ok"){msg.textContent="Could not join ("+res.data+").";msg.className="msg err";return;}
     wk.name=name; wk.pin=pin; saveWk(); renderName(); syncScores();
   });
@@ -321,8 +321,8 @@ function loginBoard(){
   if(name.length<2||pin.length<4){msg.textContent="Enter your name and password.";msg.className="msg err";return;}
   if(!LIVE){msg.textContent="Leaderboard not connected.";msg.className="msg err";return;}
   sb.rpc("week_login",{p_name:name,p_pin:pin}).then(function(res){
-    if(res.error){msg.textContent="Could not log in — "+res.error.message;msg.className="msg err";return;}
-    if(res.data==="not_found"){msg.textContent="Name not found — use Join instead.";msg.className="msg err";return;}
+    if(res.error){msg.textContent="Could not log in - "+res.error.message;msg.className="msg err";return;}
+    if(res.data==="not_found"){msg.textContent="Name not found - use Join instead.";msg.className="msg err";return;}
     if(res.data!=="ok"){msg.textContent="Wrong password.";msg.className="msg err";return;}
     wk.name=name; wk.pin=pin; saveWk(); renderName(); syncScores();
   });

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Emoji Book Detective | Read4All</title>
-<meta name="description" content="Decode the emojis and identify the book or story — a Read4All mini challenge.">
+<meta name="description" content="Decode the emojis and identify the book or story - a Read4All mini challenge.">
 <link rel="icon" href="https://read4all.pages.dev/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -95,7 +95,7 @@
   <span class="kicker">Monday Mini Challenge</span>
   <div class="icon">🕵️</div>
   <h1>Emoji Book Detective</h1>
-  <p>Decode the emojis and identify the book or story. Three random puzzles per round —
+  <p>Decode the emojis and identify the book or story. Three random puzzles per round -
      get a hint if you miss, and learn a fun fact about every book.</p>
   <button class="btn yellow" id="heroStart" type="button">Start Challenge</button>
 </header>
@@ -109,7 +109,7 @@
   <div class="panel">
     <h2>📜 How to play</h2>
     <ol>
-      <li>Click <strong>Start Challenge</strong> — 3 random emoji puzzles appear one by one.</li>
+      <li>Click <strong>Start Challenge</strong> - 3 random emoji puzzles appear one by one.</li>
       <li>Pick the book or story the emojis describe (answers are shuffled every round).</li>
       <li>Wrong answer? You get <strong>one hint and one retry</strong> (worth half points).</li>
       <li>Each correct answer earns <strong>10 points</strong> and reveals a short story fact.</li>
@@ -133,31 +133,31 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-/* ============ EMOJI BOOK DETECTIVE — all content lives here ============ */
+/* ============ EMOJI BOOK DETECTIVE - all content lives here ============ */
 var QS=[
   {e:"👧🐇🕳️🫖", a:"Alice's Adventures in Wonderland", wrong:["Peter Pan","The Wizard of Oz","Snow White"],
    hint:"A curious girl follows a white rabbit down a hole…",
    info:"Lewis Carroll's 1865 classic about a girl who tumbles into a nonsense world of tea parties and talking creatures. Free on Project Gutenberg!"},
   {e:"🧙‍♂️💍🌋", a:"The Lord of the Rings", wrong:["Harry Potter","The Hobbit","Eragon"],
-   hint:"One ring to rule them all — and it must be destroyed in a volcano.",
+   hint:"One ring to rule them all - and it must be destroyed in a volcano.",
    info:"J.R.R. Tolkien's epic trilogy (1954) about the quest to destroy a ring of power in the fires of Mount Doom."},
   {e:"👠🎃🏰", a:"Cinderella", wrong:["Sleeping Beauty","Rapunzel","Beauty and the Beast"],
-   hint:"She must leave the ball before midnight — and loses a shoe.",
+   hint:"She must leave the ball before midnight - and loses a shoe.",
    info:"A folk tale told worldwide for centuries; the glass-slipper version was published by Charles Perrault in 1697."},
   {e:"🐷🐷🐷🐺🏠", a:"The Three Little Pigs", wrong:["Little Red Riding Hood","Goldilocks","The Gingerbread Man"],
    hint:"He'll huff, and he'll puff, and he'll blow your house down!",
    info:"A classic fable about planning ahead: only the house built of bricks survives the wolf."},
   {e:"🦁👑🌅", a:"The Lion King", wrong:["The Jungle Book","Madagascar","Aslan's Tale"],
    hint:"A young prince of the savanna must reclaim his throne.",
-   info:"Disney's 1994 story of Simba — famously inspired by Shakespeare's Hamlet."},
+   info:"Disney's 1994 story of Simba - famously inspired by Shakespeare's Hamlet."},
   {e:"🐋⛵🦵😤", a:"Moby-Dick", wrong:["Treasure Island","The Old Man and the Sea","20,000 Leagues Under the Sea"],
    hint:"A one-legged captain hunts the white whale that took his leg.",
    info:"Herman Melville's 1851 novel of Captain Ahab's obsessive hunt. Free on Project Gutenberg!"},
   {e:"🕵️🎻🐝🏠", a:"The Adventures of Sherlock Holmes", wrong:["Hercule Poirot","Nancy Drew","The Hardy Boys"],
    hint:"This violin-playing detective retired to keep bees.",
-   info:"Arthur Conan Doyle's detective solves cases through pure observation — 'You see, but you do not observe.'"},
+   info:"Arthur Conan Doyle's detective solves cases through pure observation - 'You see, but you do not observe.'"},
   {e:"🏝️👦👦🐷🔥", a:"Lord of the Flies", wrong:["Robinson Crusoe","Treasure Island","Swiss Family Robinson"],
-   hint:"Boys stranded on an island — and civilisation slowly breaks down.",
+   hint:"Boys stranded on an island - and civilisation slowly breaks down.",
    info:"William Golding's 1954 novel asking what happens to rules when no adults are watching."},
   {e:"🚂🕵️❄️🔪", a:"Murder on the Orient Express", wrong:["The Girl on the Train","Strangers on a Train","North by Northwest"],
    hint:"A famous Belgian detective is trapped on a snowbound luxury train.",
@@ -190,7 +190,7 @@ function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(M
 
 function renderStatus(){
   $("best").textContent=state.best;
-  $("statusTxt").textContent=state.done?"🏅 Challenge completed — play again to beat your best!":"Not attempted yet";
+  $("statusTxt").textContent=state.done?"🏅 Challenge completed - play again to beat your best!":"Not attempted yet";
 }
 
 /* modal plumbing (keyboard accessible) */
@@ -201,7 +201,7 @@ $("modalClose").addEventListener("click",closeModal);
 $("overlay").addEventListener("click",function(ev){if(ev.target===this)closeModal();});
 document.addEventListener("keydown",function(ev){if(ev.key==="Escape"&&$("overlay").classList.contains("show"))closeModal();});
 
-/* ready screen — questions only appear after Start Now */
+/* ready screen - questions only appear after Start Now */
 function showReady(){
   openModal('<div class="ready"><div class="icon">🕵️</div>'
     +'<h2 id="modalHead">Are you ready for the challenge?</h2>'
@@ -225,7 +225,7 @@ $("heroStart").addEventListener("click",function(){
   if(!wkp.name||!wkp.pin){
     openModal('<div class="ready"><div class="icon">🧭</div>'
       +'<h2 id="modalHead">Join Challenge Week first</h2>'
-      +'<p>Before playing, join on the menu page with your Instagram account name and a short password — that is how your points are recorded.</p>'
+      +'<p>Before playing, join on the menu page with your Instagram account name and a short password - that is how your points are recorded.</p>'
       +'<div class="row"><a class="btn yellow" href="challenge-week.html" style="text-decoration:none">Go to Menu &amp; Join</a></div></div>');
     return;
   }
@@ -266,7 +266,7 @@ function startChallenge(){
         if(!used){
           used=true;
           $("fb").className="feedback hint show";
-          $("fb").innerHTML="<b>💡 Hint</b>"+esc(q.hint)+" (one retry — half points)";
+          $("fb").innerHTML="<b>💡 Hint</b>"+esc(q.hint)+" (one retry - half points)";
         }else{
           all.forEach(function(x){x.disabled=true;});
           all[correct].classList.add("correct");
@@ -297,7 +297,7 @@ function finish(earned){
   $("modalContent").innerHTML='<div class="result">'
     +'<div class="big">'+(perfect?"🎉":"🏅")+'</div>'
     +'<h2 id="modalHead">'+(perfect?"Perfect detective work!":"Challenge complete!")+'</h2>'
-    +'<p>You earned <b>'+earned+' points</b>'+(isBest?" — a new personal best!":" · Best: "+state.best)+'</p>'
+    +'<p>You earned <b>'+earned+' points</b>'+(isBest?" - a new personal best!":" · Best: "+state.best)+'</p>'
     +'<div class="q-actions" style="justify-content:center;margin-top:18px">'
     +'<button class="btn blue" id="againBtn" type="button">Try Again</button>'
     +'<button class="btn grey" id="doneBtn" type="button">Close</button>'

@@ -192,9 +192,9 @@
   <section class="rules" aria-label="Game rules">
     <h2>📜 How to play</h2>
     <ol>
-      <li><strong>Join once on the <a href="challenge-week.html">Challenge Week menu page</a></strong> with your Instagram account name — your points here accumulate under it automatically.</li>
+      <li><strong>Join once on the <a href="challenge-week.html">Challenge Week menu page</a></strong> with your Instagram account name - your points here accumulate under it automatically.</li>
       <li>Open a mystery article and <strong>read the clues carefully</strong>.</li>
-      <li>Tap <strong>"Are You Ready for the Challenge?"</strong> and answer the question — every correct answer wins points (a retry costs half).</li>
+      <li>Tap <strong>"Are You Ready for the Challenge?"</strong> and answer the question - every correct answer wins points (a retry costs half).</li>
       <li>Solve all <strong>six mysteries</strong> to complete the game! 🎊</li>
     </ol>
     <div class="gift">🎁 At the end of the day, show your score on the leaderboard to the Read4All team
@@ -244,7 +244,7 @@
 <canvas id="confetti"></canvas>
 
 <footer>
-  <strong>Read4All</strong> · Guess the Place — a reading mini-game · All "keep reading" links lead to
+  <strong>Read4All</strong> · Guess the Place - a reading mini-game · All "keep reading" links lead to
   free, legal sources (Wikipedia, Wikivoyage, Project Gutenberg).<br>
   ⚙️ Any technical issues? Contact us on Instagram:
   <a href="https://www.instagram.com/read4all__" target="_blank" rel="noopener"><strong>@read4all__</strong></a>
@@ -252,7 +252,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-/* ============ CONFIG — must match your Supabase project ============ */
+/* ============ CONFIG - must match your Supabase project ============ */
 var SUPABASE_URL = "https://dmtpwyvdddkocvrvmsrd.supabase.co";
 var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtdHB3eXZkZGRrb2N2cnZtc3JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5MjA5ODYsImV4cCI6MjA5OTQ5Njk4Nn0.3Ku9GY_QqRCAMNzDBaBHchrBRLl-MsYolYl6PCB9vIc";
 /* =================================================================== */
@@ -281,18 +281,18 @@ var ARTICLES = [
   ],
   text:[
     "Somewhere on this planet, an endless sea of <mark>golden sand</mark> stretches to the horizon. Caravans once crossed it for weeks, guided only by the stars and the promise of a mighty river.",
-    "That river is no ordinary stream. It flows <mark>from south to north</mark> — one of very few great rivers on Earth to do so — flooding its banks each year and leaving behind rich black soil. An entire ancient civilisation grew along its shores, ruled by kings who were buried like gods.",
+    "That river is no ordinary stream. It flows <mark>from south to north</mark>, one of very few great rivers on Earth to do so, flooding its banks each year and leaving behind rich black soil. An entire ancient civilisation grew along its shores, ruled by kings who were buried like gods.",
     "Their tombs still stand today: enormous <mark>stone triangles</mark> built from more than two million blocks each, so precisely placed that engineers still debate how it was done. The largest was the tallest structure made by humans for over 3,800 years.",
     "Nearby, a creature with a lion's body and a human face keeps silent watch over the plateau. Carved from a single ridge of limestone, it has gazed at the sunrise for some 4,500 years.",
-    "In the sprawling modern capital close by — home to over 20 million people — markets overflow with spices and papyrus, and a grand museum guards the golden mask of a boy king whose name the whole world knows."
+    "In the sprawling modern capital close by, home to over 20 million people, markets overflow with spices and papyrus, and a grand museum guards the golden mask of a boy king whose name the whole world knows."
   ],
   questions:[
     {q:"Which country is this mystery destination?", opts:["Egypt","Morocco","Mexico","India"], a:0, why:"The desert, the northward-flowing river (the Nile) and the stone triangles (pyramids) all point to Egypt.", type:"country"},
     {q:"Which city is the sprawling modern capital near the ancient tombs?", opts:["Cairo","Alexandria","Luxor","Marrakesh"], a:0, why:"Cairo sits right beside the Giza plateau and its pyramids.", type:"city"},
     {q:"What is the famous landmark with a lion's body and a human face?", opts:["The Great Sphinx","The Colossus","The Minotaur statue","The Winged Bull"], a:0, why:"The article hints at the Great Sphinx of Giza, carved from a single ridge of limestone.", type:"landmark"},
-    {q:"Which clue points most strongly to this destination?", opts:["A river flowing south to north","Endless beaches","Bullet trains","Bicycles everywhere"], a:0, why:"The Nile is one of very few great rivers flowing northwards — a classic clue for Egypt.", type:"clue"},
-    {q:"True or false: the famous river in this article flows from south to north.", opts:["True","False"], a:0, why:"True — the Nile flows northward into the Mediterranean.", type:"tf"},
-    {q:"Which image matches this mystery article?", img:true, opts:[IMGS.egypt,IMGS.nl,IMGS.jp,IMGS.au], a:0, why:"Golden sands and pyramids — the desert giants match.", type:"img"}
+    {q:"Which clue points most strongly to this destination?", opts:["A river flowing south to north","Endless beaches","Bullet trains","Bicycles everywhere"], a:0, why:"The Nile is one of very few great rivers flowing northwards, a classic clue for Egypt.", type:"clue"},
+    {q:"True or false: the famous river in this article flows from south to north.", opts:["True","False"], a:0, why:"True: the Nile flows northward into the Mediterranean.", type:"tf"},
+    {q:"Which image matches this mystery article?", img:true, opts:[IMGS.egypt,IMGS.nl,IMGS.jp,IMGS.au], a:0, why:"Golden sands and pyramids, the desert giants match.", type:"img"}
   ]
 },
 {
@@ -306,9 +306,9 @@ var ARTICLES = [
     {t:"Free book: Anne Frank on Wikipedia", u:"https://en.wikipedia.org/wiki/The_Diary_of_a_Young_Girl"}
   ],
   text:[
-    "Imagine a city where the streets are made of <mark>water</mark>. Half-moon canals — dug 400 years ago and now protected as world heritage — curve through its heart, crossed by more than a thousand little bridges.",
-    "Tall, narrow <mark>brick houses</mark> lean gently against each other like old friends. They were taxed by their width, so owners built upward instead — and installed hooks on the roofs to winch furniture through the windows.",
-    "Here, the bicycle is king. There are said to be <mark>more bicycles than people</mark>, and every morning a river of cyclists flows past flower markets bursting with tulips — a flower that once cost more than a house during a famous 17th-century craze.",
+    "Imagine a city where the streets are made of <mark>water</mark>. Half-moon canals, dug 400 years ago and now protected as world heritage, curve through its heart, crossed by more than a thousand little bridges.",
+    "Tall, narrow <mark>brick houses</mark> lean gently against each other like old friends. They were taxed by their width, so owners built upward instead and installed hooks on the roofs to winch furniture through the windows.",
+    "Here, the bicycle is king. There are said to be <mark>more bicycles than people</mark>, and every morning a river of cyclists flows past flower markets bursting with tulips, a flower that once cost more than a house during a famous 17th-century craze.",
     "Much of this country lies <mark>below sea level</mark>. For centuries its people have pushed back the ocean with dikes, pumps and windmills, literally engineering new land out of the seabed.",
     "In its museums hang paintings by masters of light and shadow, and a young girl's wartime diary, written in a hidden annex here, is read by students all over the world."
   ],
@@ -317,7 +317,7 @@ var ARTICLES = [
     {q:"Which city is described in the article?", opts:["Amsterdam","Venice","Copenhagen","Bruges"], a:0, why:"The half-moon canal ring, narrow houses and the hidden annex point to Amsterdam.", type:"city"},
     {q:"What landmark network is this city famous for?", opts:["Its canal ring","A giant ferris wheel","An ancient aqueduct","A royal pyramid"], a:0, why:"Amsterdam's 17th-century canal ring is a UNESCO World Heritage Site.", type:"landmark"},
     {q:"Which clue points most strongly to this destination?", opts:["More bicycles than people","Cherry blossoms","A carnival parade","Kangaroos"], a:0, why:"The Netherlands is world-famous for having more bikes than residents.", type:"clue"},
-    {q:"True or false: houses here were once taxed by their width.", opts:["True","False"], a:0, why:"True — that's why Amsterdam's canal houses are so narrow and tall.", type:"tf"},
+    {q:"True or false: houses here were once taxed by their width.", opts:["True","False"], a:0, why:"True: that's why Amsterdam's canal houses are so narrow and tall.", type:"tf"},
     {q:"Which image matches this mystery article?", img:true, opts:[IMGS.nl,IMGS.br,IMGS.egypt,IMGS.jp], a:0, why:"The canal houses picture matches the floating city.", type:"img"}
   ]
 },
@@ -332,18 +332,18 @@ var ARTICLES = [
     {t:"Wikipedia: Amazon rainforest", u:"https://en.wikipedia.org/wiki/Amazon_rainforest"}
   ],
   text:[
-    "This destination holds the largest <mark>rainforest</mark> on the planet — a green ocean of trees producing a fifth of the world's fresh river water and sheltering one in ten of all known species on Earth.",
+    "This destination holds the largest <mark>rainforest</mark> on the planet, a green ocean of trees producing a fifth of the world's fresh river water and sheltering one in ten of all known species on Earth.",
     "Once a year, its most famous city explodes into colour. Around <mark>two million people a day</mark> fill the streets in feathers and sequins during a festival known as the world's biggest party: <mark>carnival</mark>.",
-    "High above the celebration, on a mountain wrapped in clouds, an enormous <mark>statue with open arms</mark> — 30 metres tall — watches over sweeping beaches with names the whole world can hum.",
-    "And everywhere — on the sand, in alleyways, in a stadium that once held nearly 200,000 fans — you will hear the thump of a ball. This nation has lifted the sport's greatest trophy <mark>five times</mark>, more than any other country.",
-    "Its language may surprise you too: unlike its neighbours, this nation speaks Portuguese — a clue left behind by sailors who arrived five centuries ago."
+    "High above the celebration, on a mountain wrapped in clouds, an enormous <mark>statue with open arms</mark>, 30 metres tall, watches over sweeping beaches with names the whole world can hum.",
+    "And everywhere, on the sand, in alleyways, and in a stadium that once held nearly 200,000 fans, you will hear the thump of a ball. This nation has lifted the sport's greatest trophy <mark>five times</mark>, more than any other country.",
+    "Its language may surprise you too: unlike its neighbours, this nation speaks Portuguese, a clue left behind by sailors who arrived five centuries ago."
   ],
   questions:[
     {q:"Which country is this mystery destination?", opts:["Brazil","Argentina","Colombia","Spain"], a:0, why:"The Amazon rainforest, carnival and five football World Cups are all Brazilian clues.", type:"country"},
     {q:"Which city hosts the famous carnival in the article?", opts:["Rio de Janeiro","São Paulo","Buenos Aires","Lisbon"], a:0, why:"Rio de Janeiro hosts the world's most famous carnival.", type:"city"},
     {q:"What is the enormous statue with open arms?", opts:["Christ the Redeemer","The Statue of Liberty","The Motherland Calls","The Colossus of Rhodes"], a:0, why:"Christ the Redeemer stands on Corcovado mountain above Rio.", type:"landmark"},
     {q:"Which clue points most strongly to this destination?", opts:["Winning the football trophy five times","Canals and bicycles","Bullet trains","Desert caravans"], a:0, why:"Brazil is the only nation with five FIFA World Cup titles.", type:"clue"},
-    {q:"True or false: this country speaks Spanish like most of its neighbours.", opts:["False","True"], a:0, why:"False — Brazil speaks Portuguese, a legacy of Portuguese explorers.", type:"tf"},
+    {q:"True or false: this country speaks Spanish like most of its neighbours.", opts:["False","True"], a:0, why:"False: Brazil speaks Portuguese, a legacy of Portuguese explorers.", type:"tf"},
     {q:"Which image matches this mystery article?", img:true, opts:[IMGS.br,IMGS.au,IMGS.nl,IMGS.egypt], a:0, why:"The mountain city by the sea matches the carnival destination.", type:"img"}
   ]
 },
@@ -358,10 +358,10 @@ var ARTICLES = [
     {t:"Free book: Japanese Fairy Tales (Gutenberg)", u:"https://www.gutenberg.org/ebooks/4018"}
   ],
   text:[
-    "On these islands — nearly 7,000 of them — spring arrives as a soft pink storm. For a few precious weeks, <mark>cherry blossoms</mark> bloom and whole families picnic beneath the falling petals, a tradition over a thousand years old.",
+    "On these islands, nearly 7,000 of them, spring arrives as a soft pink storm. For a few precious weeks, <mark>cherry blossoms</mark> bloom and whole families picnic beneath the falling petals, a tradition over a thousand years old.",
     "Serene wooden <mark>temples and shrines</mark> with red gates stand beside neon-lit streets where vending machines sell almost anything and trains are never late.",
     "Truly never late: between cities, sleek white <mark>bullet trains</mark> glide at nearly 300 km/h, and the average annual delay is measured in <mark>seconds</mark>. A delay of one minute earns an official apology.",
-    "The capital is the largest metropolitan area on Earth, home to more than 37 million people — yet lost wallets here are famously returned to their owners.",
+    "The capital is the largest metropolitan area on Earth, home to more than 37 million people, yet lost wallets here are famously returned to their owners.",
     "Watching over it all is a perfectly symmetrical <mark>snow-capped volcano</mark>, sacred for centuries and painted in a famous series of woodblock prints known around the world."
   ],
   questions:[
@@ -369,7 +369,7 @@ var ARTICLES = [
     {q:"Which city is the giant neon-lit capital of these islands?", opts:["Tokyo","Kyoto","Osaka","Seoul"], a:0, why:"Tokyo is the world's largest metropolitan area.", type:"city"},
     {q:"What is the snow-capped, perfectly symmetrical volcano?", opts:["Mount Fuji","Mount Etna","Mount Kilimanjaro","Mount Vesuvius"], a:0, why:"Mount Fuji is Japan's sacred, much-painted mountain.", type:"landmark"},
     {q:"Which clue points most strongly to this destination?", opts:["Trains that apologise for one-minute delays","A northward-flowing river","A giant open-armed statue","Windmills"], a:0, why:"Japan's Shinkansen is famous for its extreme punctuality.", type:"clue"},
-    {q:"True or false: the famous trains here travel at nearly 300 km/h.", opts:["True","False"], a:0, why:"True — bullet trains reach speeds around 300 km/h.", type:"tf"},
+    {q:"True or false: the famous trains here travel at nearly 300 km/h.", opts:["True","False"], a:0, why:"True: bullet trains reach speeds around 300 km/h.", type:"tf"},
     {q:"Which image matches this mystery article?", img:true, opts:[IMGS.jp,IMGS.egypt,IMGS.br,IMGS.nl], a:0, why:"The blossom-framed volcano matches the island mystery.", type:"img"}
   ]
 },
@@ -384,18 +384,18 @@ var ARTICLES = [
     {t:"Wikipedia: Great Barrier Reef", u:"https://en.wikipedia.org/wiki/Great_Barrier_Reef"}
   ],
   text:[
-    "This destination is a country, an island and an entire <mark>continent</mark> all at once — the only place on Earth that can claim all three titles.",
-    "Nearly nine in ten of its mammal species exist nowhere else: creatures that <mark>bounce</mark> instead of run, sleepy tree-dwellers that eat only eucalyptus leaves, and mammals so strange — duck-billed and egg-laying — that scientists first thought they were a hoax.",
-    "Its coastline is stitched with more than 10,000 <mark>beaches</mark>; visiting one a day would take 27 years. Far offshore lies a living rainbow — a <mark>coral reef so vast it can be seen from space</mark>, built by billions of tiny creatures.",
+    "This destination is a country, an island and an entire <mark>continent</mark> all at once, the only place on Earth that can claim all three titles.",
+    "Nearly nine in ten of its mammal species exist nowhere else: creatures that <mark>bounce</mark> instead of run, sleepy tree-dwellers that eat only eucalyptus leaves, and mammals so strange (duck-billed and egg-laying) that scientists first thought they were a hoax.",
+    "Its coastline is stitched with more than 10,000 <mark>beaches</mark>; visiting one a day would take 27 years. Far offshore lies a living rainbow, a <mark>coral reef so vast it can be seen from space</mark>, built by billions of tiny creatures.",
     "In its most famous harbour city, a building with gleaming <mark>white sail-shaped roofs</mark> hosts operas beside the water, next to a giant steel arch bridge that locals affectionately call 'the coathanger'.",
-    "Deep in the red centre of the land, a massive sandstone monolith glows crimson at sunset — a sacred place for the world's oldest continuous living culture, stretching back more than 60,000 years."
+    "Deep in the red centre of the land, a massive sandstone monolith glows crimson at sunset, a sacred place for the world's oldest continuous living culture, stretching back more than 60,000 years."
   ],
   questions:[
     {q:"Which country is this mystery destination?", opts:["Australia","New Zealand","South Africa","Indonesia"], a:0, why:"Kangaroos, the giant reef and the sail-roofed opera house are unmistakably Australian.", type:"country"},
-    {q:"Which harbour city has the building with white sail-shaped roofs?", opts:["Sydney","Melbourne","Auckland","Perth"], a:0, why:"The Sydney Opera House sits beside the Harbour Bridge — 'the coathanger'.", type:"city"},
+    {q:"Which harbour city has the building with white sail-shaped roofs?", opts:["Sydney","Melbourne","Auckland","Perth"], a:0, why:"The Sydney Opera House sits beside the Harbour Bridge, 'the coathanger'.", type:"city"},
     {q:"What is the living landmark visible from space?", opts:["The Great Barrier Reef","The Amazon River","The Ring of Fire","The White Cliffs"], a:0, why:"The Great Barrier Reef is the world's largest coral reef system.", type:"landmark"},
     {q:"Which clue points most strongly to this destination?", opts:["Animals that bounce instead of run","Cherry blossoms","Stone triangles","Canal houses"], a:0, why:"Kangaroos live in the wild only in this destination.", type:"clue"},
-    {q:"True or false: this destination is both a country and a continent.", opts:["True","False"], a:0, why:"True — it's the only country that covers an entire continent.", type:"tf"},
+    {q:"True or false: this destination is both a country and a continent.", opts:["True","False"], a:0, why:"True: it's the only country that covers an entire continent.", type:"tf"},
     {q:"Which image matches this mystery article?", img:true, opts:[IMGS.au,IMGS.jp,IMGS.nl,IMGS.br], a:0, why:"The wild coastal landscape matches the continent at the edge of the map.", type:"img"}
   ]
 },
@@ -410,18 +410,18 @@ var ARTICLES = [
     {t:"Free Norse folk tales (Gutenberg)", u:"https://www.gutenberg.org/ebooks/search/?query=norse+tales"}
   ],
   text:[
-    "In this far-northern kingdom, winter nights put on the greatest light show on Earth. Ribbons of <mark>green and violet light</mark> ripple silently across the sky — a display so magical that ancient people believed they were bridges to the gods.",
+    "In this far-northern kingdom, winter nights put on the greatest light show on Earth. Ribbons of <mark>green and violet light</mark> ripple silently across the sky, a display so magical that ancient people believed they were bridges to the gods.",
     "Summer flips the world upside down: above the Arctic Circle, the <mark>sun does not set for weeks</mark>. Children play football at midnight in broad daylight in the 'land of the midnight sun'.",
-    "The coastline is sliced by deep, glassy sea valleys carved by ancient glaciers — <mark>fjords</mark> — with cliffs plunging a kilometre into water so still it mirrors the sky. The longest stretches more than 200 km inland.",
+    "The coastline is sliced by deep, glassy sea valleys carved by ancient glaciers, called <mark>fjords</mark>, with cliffs plunging a kilometre into water so still it mirrors the sky. The longest stretches more than 200 km inland.",
     "A thousand years ago, fearless sailors set out from these shores in dragon-headed <mark>longships</mark>, reaching America centuries before Columbus. Their ships now rest in museums near the capital.",
-    "Today this nation of just five million people wins more Winter Olympic medals than any other country on Earth — perhaps because skiing here is practically a birthright."
+    "Today this nation of just five million people wins more Winter Olympic medals than any other country on Earth, perhaps because skiing here is practically a birthright."
   ],
   questions:[
     {q:"Which country is this mystery destination?", opts:["Norway","Sweden","Iceland","Finland"], a:0, why:"Fjords, the midnight sun, Viking longships and Winter Olympic dominance all point to Norway.", type:"country"},
     {q:"Which city is the capital of this kingdom?", opts:["Oslo","Stockholm","Helsinki","Copenhagen"], a:0, why:"Oslo is Norway's capital, home to the Viking ship museums.", type:"city"},
-    {q:"What are the deep sea valleys carved by ancient glaciers called?", opts:["Fjords","Canyons","Atolls","Deltas"], a:0, why:"Fjords are Norway's signature landscape — the word itself is Norwegian.", type:"landmark"},
+    {q:"What are the deep sea valleys carved by ancient glaciers called?", opts:["Fjords","Canyons","Atolls","Deltas"], a:0, why:"Fjords are Norway's signature landscape, and the word itself is Norwegian.", type:"landmark"},
     {q:"Which clue points most strongly to this destination?", opts:["A summer sun that doesn't set for weeks","Stone triangles in the desert","A giant coral reef","Carnival parades"], a:0, why:"The midnight sun above the Arctic Circle is a classic clue for Norway.", type:"clue"},
-    {q:"True or false: sailors from this land reached America before Columbus.", opts:["True","False"], a:0, why:"True — Norse explorers reached North America around the year 1000.", type:"tf"},
+    {q:"True or false: sailors from this land reached America before Columbus.", opts:["True","False"], a:0, why:"True: Norse explorers reached North America around the year 1000.", type:"tf"},
     {q:"Which image matches this mystery article?", img:true, opts:[IMGS.no,IMGS.au,IMGS.jp,IMGS.egypt], a:0, why:"The dancing green lights match the far-northern kingdom.", type:"img"}
   ]
 }];
@@ -506,7 +506,7 @@ function openArticle(a){
   $("readyFromArt").addEventListener("click",function(){ closeOverlay("articleOverlay"); showQuizIntro(); });
   openOverlay("articleOverlay");
 }
-/* Challenge Week: this game is Tuesday's challenge — unlocks 28 July 2026 */
+/* Challenge Week: this game is Tuesday's challenge - unlocks 28 July 2026 */
 var UNLOCK_DATE="2026-07-28", UNLOCK_LABEL="Tuesday 28 July";
 function isLocked(){return new Date()<new Date(UNLOCK_DATE+"T00:00:00");}
 $("cards").addEventListener("click",function(ev){
@@ -521,7 +521,7 @@ $("cards").addEventListener("click",function(ev){
   if(isLocked()){alert("🔒 This challenge unlocks on "+UNLOCK_LABEL+". Come back then!");return;}
   var wkp=weekPlayer();
   if(!wkp.name||!wkp.pin){
-    if(confirm("Please join Challenge Week first with your Instagram account name — that is how your points are recorded.\n\nGo to the menu page to join now?"))location.href="challenge-week.html";
+    if(confirm("Please join Challenge Week first with your Instagram account name - that is how your points are recorded.\n\nGo to the menu page to join now?"))location.href="challenge-week.html";
     return;
   }
   openArticle(a);
@@ -591,7 +591,7 @@ function answer(i,btn){
     if(!run.retried){
       run.retried=true;
       fb.className="feedback bad show";
-      fb.innerHTML="<b>❌ Not quite — you get one retry!</b>Think back to the highlighted clues in the article.";
+      fb.innerHTML="<b>❌ Not quite - you get one retry!</b>Think back to the highlighted clues in the article.";
     }else{
       buttons.forEach(function(b){b.disabled=true;});
       buttons[q.a].classList.add("correct");
@@ -628,7 +628,7 @@ function showResult(){
   $("quizContent").innerHTML='<div class="q-result">'
     +'<div class="top"><div class="big">'+(allDone?"🎉":solved?"🌟":"🧐")+'</div>'
     +'<h2 id="quizHead">'+(allDone?"All six mysteries solved!":solved?"Mystery solved!":"So close!")+'</h2>'
-    +'<p>'+(solved?"You earned <b>"+run.earned+" points</b>!":"No points this time — read the clues once more and try again.")+'</p></div>'
+    +'<p>'+(solved?"You earned <b>"+run.earned+" points</b>!":"No points this time - read the clues once more and try again.")+'</p></div>'
     +reveal
     +'<div class="q-actions" style="justify-content:center;margin-top:16px">'
     +(solved?'':'<button class="btn" id="tryAgain" type="button">Try Again</button>')

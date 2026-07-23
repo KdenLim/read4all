@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>History or Fiction? | Read4All</title>
-<meta name="description" content="Decide whether unusual historical statements are real or made up — a Read4All mini challenge.">
+<meta name="description" content="Decide whether unusual historical statements are real or made up - a Read4All mini challenge.">
 <link rel="icon" href="https://read4all.pages.dev/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@
   <span class="kicker">Friday Mini Challenge</span>
   <div class="icon">🏺</div>
   <h1>History or Fiction?</h1>
-  <p>Decide whether unusual historical statements are real or made up. Five random flip-cards —
+  <p>Decide whether unusual historical statements are real or made up. Five random flip-cards -
      build a streak and earn the <strong>History Detective</strong> badge.</p>
   <button class="btn yellow" id="heroStart" type="button">Start Challenge</button>
 </header>
@@ -134,28 +134,28 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-/* ============ HISTORY OR FICTION? — all statements live here ============ */
+/* ============ HISTORY OR FICTION? - all statements live here ============ */
 var QS=[
   {s:"Some medieval courts placed animals on trial.", a:"History",
    why:"True! Pigs, rats and even insects were formally tried in medieval Europe, sometimes with lawyers."},
   {s:"The Great Wall of China is clearly visible from the Moon.", a:"Fiction",
-   why:"A myth — astronauts confirm it isn't visible from the Moon, and it's barely visible even from low orbit."},
+   why:"A myth - astronauts confirm it isn't visible from the Moon, and it's barely visible even from low orbit."},
   {s:"Ancient Romans sometimes used urine when washing clothes.", a:"History",
    why:"True! The ammonia in urine worked as a cleaning agent, and Rome even taxed its collection."},
   {s:"Napoleon was extremely short compared with men of his time.", a:"Fiction",
-   why:"He was about 1.69 m — average for his era. The 'tiny Napoleon' image was British propaganda plus confusing French units."},
+   why:"He was about 1.69 m - average for his era. The 'tiny Napoleon' image was British propaganda plus confusing French units."},
   {s:"Vikings commonly wore horned helmets in battle.", a:"Fiction",
    why:"No battle-ready horned helmet has ever been found. The image comes from 19th-century opera costumes."},
   {s:"Oxford University is older than the Aztec Empire.", a:"History",
    why:"True! Teaching at Oxford began around 1096; the Aztec Empire was founded in 1428."},
   {s:"Albert Einstein failed mathematics at school.", a:"Fiction",
-   why:"A myth — Einstein excelled at maths and had mastered calculus by age 15."},
+   why:"A myth - Einstein excelled at maths and had mastered calculus by age 15."},
   {s:"Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid.", a:"History",
    why:"True! The pyramid was ~2,500 years old before Cleopatra was born; the Moon landing was only ~2,000 years after her."},
   {s:"In 1518, a 'dancing plague' made people in Strasbourg dance for days without stopping.", a:"History",
    why:"True! Dozens of people danced uncontrollably for days; historians still debate the cause."},
   {s:"Most educated people in the Middle Ages believed the Earth was flat.", a:"Fiction",
-   why:"Educated medieval people knew the Earth was round — the 'flat Earth belief' story was invented in the 1800s."}
+   why:"Educated medieval people knew the Earth was round - the 'flat Earth belief' story was invented in the 1800s."}
 ];
 var KEY="r4a_hist", COUNT=5, PER_Q=10;
 
@@ -194,7 +194,7 @@ document.addEventListener("keydown",function(ev){if(ev.key==="Escape"&&$("overla
 function showReady(){
   openModal('<div class="ready"><div class="icon">🏺</div>'
     +'<h2 id="modalHead">Are you ready for the challenge?</h2>'
-    +'<p>Five unusual statements — decide: did it really happen, or is it made up?</p>'
+    +'<p>Five unusual statements: decide whether it really happened or was made up.</p>'
     +'<div class="meta"><span class="pill">⏱ 4 min</span><span class="pill pts">🪙 up to 50 pts + badge</span></div>'
     +'<div class="row"><button class="btn yellow" id="startNow" type="button">Start Now</button>'
     +'<button class="btn grey" id="cancelBtn" type="button">Cancel</button></div></div>');
@@ -214,7 +214,7 @@ $("heroStart").addEventListener("click",function(){
   if(!wkp.name||!wkp.pin){
     openModal('<div class="ready"><div class="icon">🧭</div>'
       +'<h2 id="modalHead">Join Challenge Week first</h2>'
-      +'<p>Before playing, join on the menu page with your Instagram account name and a short password — that is how your points are recorded.</p>'
+      +'<p>Before playing, join on the menu page with your Instagram account name and a short password - that is how your points are recorded.</p>'
       +'<div class="row"><a class="btn yellow" href="challenge-week.html" style="text-decoration:none">Go to Menu &amp; Join</a></div></div>');
     return;
   }
@@ -243,7 +243,7 @@ function startChallenge(){
       var ok=pick===q.a;
       if(ok){streak++; best=Math.max(best,streak); earned+=PER_Q;}
       else streak=0;
-      $("flipBack").innerHTML="<b>"+(ok?"✅ Correct — ":"❌ It's ")+esc(q.a)+"!</b><p style='font-size:.88rem;margin-top:6px'>"+esc(q.why)+"</p>";
+      $("flipBack").innerHTML="<b>"+(ok?"✅ Correct: ":"❌ It's ")+esc(q.a)+"!</b><p style='font-size:.88rem;margin-top:6px'>"+esc(q.why)+"</p>";
       $("flip").classList.add("revealed");
       $("acts").innerHTML='<button class="btn blue" id="nextBtn" type="button">'+(idx<COUNT-1?"Next Statement →":"See Result")+'</button>';
       $("nextBtn").addEventListener("click",function(){
@@ -268,7 +268,7 @@ function finish(earned,gotBadge){
   $("modalContent").innerHTML='<div class="result">'
     +'<div class="big">'+(gotBadge?"🎉":"🏅")+'</div>'
     +'<h2 id="modalHead">'+(gotBadge?"Perfect streak!":"Challenge complete!")+'</h2>'
-    +'<p>You earned <b>'+earned+' points</b>'+(isBest?" — a new personal best!":" · Best: "+state.best)+'</p>'
+    +'<p>You earned <b>'+earned+' points</b>'+(isBest?" - a new personal best!":" · Best: "+state.best)+'</p>'
     +(gotBadge?'<span class="bdg">🏺 History Detective badge earned!</span>':'')
     +'<div class="q-actions" style="justify-content:center;margin-top:18px">'
     +'<button class="btn blue" id="againBtn" type="button">Try Again</button>'
