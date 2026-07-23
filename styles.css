@@ -2463,9 +2463,12 @@ p {
   box-shadow: 0 0 0 2px #e9b949, 0 7px 18px rgba(233, 185, 73, 0.3);
 }
 
+.activity-level:nth-child(3).is-unlocked .level-marker span {
+  background: #54a78a;
+  box-shadow: 0 0 0 2px #54a78a, 0 7px 18px rgba(84, 167, 138, 0.3);
+}
+
 /* Future unlocked activity marker colours:
-   Activity 2: #e9b949
-   Activity 3: #54a78a
    Activity 4: #6688c9
    Activity 5: #9a72bd
 */
@@ -2510,6 +2513,15 @@ p {
   box-shadow: 10px 10px 0 rgba(233, 185, 73, 0.24);
 }
 
+.activity-level:nth-child(3).is-unlocked .level-card {
+  border-color: #54a78a;
+  box-shadow: 7px 7px 0 rgba(84, 167, 138, 0.2);
+}
+
+.activity-level:nth-child(3).is-unlocked .level-card:hover {
+  box-shadow: 10px 10px 0 rgba(84, 167, 138, 0.24);
+}
+
 .is-unlocked .level-card:active {
   transform: translate(1px, 1px);
 }
@@ -2551,14 +2563,16 @@ p {
   background: #e9b949;
 }
 
+.activity-level:nth-child(3).is-unlocked .level-icon {
+  background: #54a78a;
+}
+
 .is-locked .level-icon {
   color: #f7f7f7;
   background: #969da2;
 }
 
 /* Future unlocked activity icon colours:
-   Activity 2: #e9b949
-   Activity 3: #54a78a
    Activity 4: #6688c9
    Activity 5: #9a72bd
 */
@@ -2577,6 +2591,10 @@ p {
 
 .activity-level:nth-child(2).is-unlocked .level-copy small {
   color: #9b7010;
+}
+
+.activity-level:nth-child(3).is-unlocked .level-copy small {
+  color: #31745e;
 }
 
 .level-copy strong {

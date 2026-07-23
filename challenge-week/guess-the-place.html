@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guess the Place: Read, Explore, Guess | Read4All</title>
+<meta name="description" content="Read five short mystery destination articles, then test your memory in one big location-guessing challenge.">
+<link rel="icon" href="https://read4all.pages.dev/assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#10243f; --cream:#fffaf0; --cream-2:#fdf3e0; --green:#3d6b4f;
+    --gold:#b98a2e; --ink:#2b2b25; --muted:#6d6a5e; --line:#eadfc8;
+    --radius:18px; --shadow:0 10px 30px rgba(16,36,63,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  .backhome{position:fixed;top:14px;left:14px;z-index:60;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:50%;box-shadow:var(--shadow);color:var(--navy);font-weight:800;font-size:1.25rem;text-decoration:none}
+  .backhome:hover{background:var(--cream-2)}
+  body{font-family:'Nunito Sans',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65}
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--navy)}
+  a{color:var(--green)}
+  button{font-family:inherit}
+
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,250,240,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:1150px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:10px 20px}
+  .nav img{width:36px;height:36px;border-radius:9px}
+  .nav .logo-text{font-weight:800;color:var(--navy);text-decoration:none;font-size:1.05rem}
+  .nav nav{margin-left:auto;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .nav nav a{color:var(--navy);text-decoration:none;font-weight:700;font-size:.88rem}
+  .nav nav a:hover{color:var(--green)}
+
+  .hero{text-align:center;padding:46px 20px 24px;background:linear-gradient(180deg,var(--cream),var(--cream-2))}
+  .kicker{display:inline-block;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--gold);margin-bottom:8px}
+  .hero h1{font-size:clamp(1.9rem,4.6vw,2.9rem);font-weight:900;margin-bottom:8px}
+  .hero p{max-width:660px;margin:0 auto;color:var(--muted)}
+
+  .wrap{max-width:1150px;margin:0 auto;padding:18px 20px 70px}
+
+  /* rules */
+  .rules{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 26px;margin:8px 0 18px}
+  .rules h2{font-size:1.2rem;margin-bottom:10px}
+  .rules ol{margin:0 0 0 20px;font-size:.92rem;color:var(--ink)}
+  .rules li{margin-bottom:6px}
+  .rules .gift{background:var(--cream-2);border:1px dashed var(--gold);border-radius:12px;padding:10px 14px;margin-top:12px;font-size:.9rem;font-weight:700;color:var(--navy)}
+
+  /* status bar */
+  .statusbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 20px;margin:8px 0 18px}
+  .statusbar .left{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .scorebox{font-weight:800;color:var(--navy);font-size:.95rem}
+  .scorebox b{color:var(--gold);font-size:1.15rem}
+  .progress{display:flex;align-items:center;gap:8px}
+  .progress .bar{width:150px;height:10px;background:var(--cream-2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .progress .fill{height:100%;width:0%;background:var(--green);border-radius:999px;transition:width .4s ease}
+  .progress span{font-size:.8rem;font-weight:800;color:var(--muted)}
+  .btn{border:0;cursor:pointer;background:var(--green);color:#fff;font-weight:800;font-size:.9rem;border-radius:999px;padding:11px 22px;transition:transform .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.navy{background:var(--navy)}
+  .btn.gold{background:var(--gold)}
+  .btn.ghost{background:#fff;color:var(--green);border:1.5px solid var(--green)}
+  .btn.small{padding:8px 16px;font-size:.8rem}
+  .btn:disabled{opacity:.5;cursor:default;transform:none}
+
+  /* challenge banner */
+  .challenge-banner{display:none;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--navy);color:#fff;border-radius:var(--radius);padding:20px 26px;margin-bottom:22px;box-shadow:var(--shadow)}
+  .challenge-banner.show{display:flex;animation:fadein .3s ease}
+  .challenge-banner.locked{background:#fff;color:var(--muted);border:1.5px dashed var(--line);box-shadow:none}
+  .challenge-banner h3{color:inherit;font-family:'Nunito Sans',sans-serif;font-size:1.05rem}
+  .challenge-banner.locked h3{color:var(--muted)}
+  .challenge-banner p{font-size:.85rem;opacity:.85}
+
+  /* player name */
+  .playerbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .playerbox input{font-family:inherit;font-size:.88rem;background:var(--cream);border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;outline:none;width:170px}
+  .playerbox input:focus{border-color:var(--green)}
+  .playerbox .who{font-size:.88rem;font-weight:800;color:var(--navy)}
+  .playerbox .msg{font-size:.75rem;font-weight:700}
+  .playerbox .msg.err{color:#a33}
+  .playerbox .msg.ok{color:var(--green)}
+
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+  .mcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 14px rgba(16,36,63,.06);display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease;position:relative}
+  .mcard:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(16,36,63,.14)}
+  .mcard .imgbox{position:relative;height:180px;overflow:hidden}
+  .mcard img{width:100%;height:100%;object-fit:cover;display:block}
+  .mcard .mystery-label{position:absolute;top:12px;left:12px;background:rgba(16,36,63,.85);color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:5px 12px}
+  .mcard .badges{position:absolute;top:12px;right:12px;display:flex;gap:6px}
+  .mcard .b{color:#fff;font-size:.85rem;border-radius:50%;width:30px;height:30px;display:none;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+  .mcard .b.read{background:var(--gold)}
+  .mcard .b.solved{background:var(--green)}
+  .mcard.is-read .b.read{display:flex}
+  .mcard.is-solved .b.solved{display:flex}
+  .mcard .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .mcard h3{font-size:1.15rem;line-height:1.35}
+  .mcard .teaser{font-size:.88rem;color:var(--muted);flex:1}
+  .mcard .meta{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{font-size:.7rem;font-weight:800;border-radius:999px;padding:4px 12px;background:var(--cream-2);border:1px solid var(--line);color:var(--muted)}
+  .pill.easy{background:#e3f2ee;color:#1f5c49;border-color:#cfe3d4}
+  .pill.medium{background:#fdeee0;color:#8a5a1d;border-color:#f0dcc0}
+  .pill.hard{background:#fbe9ec;color:#a03d5e;border-color:#efd0d6}
+
+  /* leaderboard */
+  .lb{margin-top:46px}
+  .lb h2{font-size:1.5rem;margin-bottom:14px}
+  .lb table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .lb th,.lb td{text-align:left;padding:11px 18px;font-size:.9rem;border-bottom:1px solid var(--line)}
+  .lb th{background:var(--navy);color:#fff;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+  .lb tr:last-child td{border-bottom:none}
+  .lb .me{background:#f1f7f2;font-weight:800}
+  .lb .medal{font-size:1rem}
+
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(16,36,63,.55);z-index:100;display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto}
+  .overlay.show{display:flex;animation:fadein .2s ease}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  .modal{background:var(--cream);border-radius:20px;max-width:680px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:pop .25s ease;position:relative;margin:auto 0}
+  @keyframes pop{from{transform:translateY(14px);opacity:.6}to{transform:none;opacity:1}}
+  .modal .close{position:absolute;top:12px;right:14px;z-index:5;border:none;background:rgba(16,36,63,.75);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;font-weight:800}
+  .modal .close:hover{background:var(--navy)}
+  .modal .m-img{height:230px;overflow:hidden;border-radius:20px 20px 0 0}
+  .modal .m-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .modal .m-body{padding:26px 30px 30px}
+  .modal .m-body h2{font-size:1.5rem;margin-bottom:6px}
+  .modal .m-meta{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .modal .m-body p{margin-bottom:12px;font-size:.95rem}
+  .modal mark{background:#fdeec9;border-radius:4px;padding:0 3px}
+  .modal .m-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+
+  /* quiz */
+  .quiz-intro{text-align:center;padding:44px 30px}
+  .quiz-intro .big{font-size:2.4rem;margin-bottom:4px}
+  .quiz-intro h2{font-size:1.6rem;margin-bottom:8px}
+  .quiz-intro p{color:var(--muted);margin-bottom:20px}
+  .q-body{padding:28px 30px 30px}
+  .q-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+  .q-top .qnum{font-size:.78rem;font-weight:800;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+  .q-top .qpts{font-size:.78rem;font-weight:800;color:var(--muted)}
+  .q-art{font-size:.8rem;font-weight:800;color:var(--muted);margin-bottom:12px}
+  .q-body h3{font-size:1.25rem;margin-bottom:16px}
+  .opts{display:grid;gap:10px}
+  .opts.imgs{grid-template-columns:1fr 1fr}
+  .opt{cursor:pointer;text-align:left;background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px 16px;font-size:.92rem;font-weight:700;color:var(--ink);transition:border-color .12s ease, background .12s ease}
+  .opt:hover,.opt:focus-visible{border-color:var(--green);background:#f3faf6;outline:none}
+  .opt.img{padding:0;overflow:hidden;height:120px}
+  .opt.img img{width:100%;height:100%;object-fit:cover;display:block}
+  .opt.correct{border-color:#2e7d4f;background:#e3f2ee}
+  .opt.wrong{border-color:#c0392b;background:#fbe9ec}
+  .opt:disabled{cursor:default}
+  .feedback{display:none;margin-top:16px;border-radius:12px;padding:14px 16px;font-size:.9rem}
+  .feedback.show{display:block;animation:fadein .2s ease}
+  .feedback.good{background:#e3f2ee;border:1px solid #bfdcc9}
+  .feedback.bad{background:#fbe9ec;border:1px solid #efd0d6}
+  .feedback b{display:block;margin-bottom:4px}
+  .q-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+  .q-result{padding:36px 30px}
+  .q-result .top{text-align:center}
+  .q-result .big{font-size:2.6rem}
+  .q-result h2{margin:6px 0}
+  .q-result p{color:var(--muted);margin-bottom:16px;text-align:center}
+  .reveal{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:10px;font-size:.88rem}
+  .reveal b{color:var(--navy)}
+  .reveal .links{margin-top:4px;font-size:.8rem}
+  .reveal .links a{margin-right:12px;font-weight:800}
+  .reveal.pending{opacity:.7;font-style:italic}
+
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:300}
+
+  footer{background:var(--cream-2);border-top:1px solid var(--line);padding:26px 20px;text-align:center;color:var(--muted);font-size:.84rem;margin-top:60px}
+  footer strong{color:var(--navy)}
+  @media(max-width:560px){
+    .modal .m-body,.q-body{padding:20px}
+    .opts.imgs{grid-template-columns:1fr}
+    .progress .bar{width:100px}
+  }
+</style>
+</head>
+<body>
+
+<a class="backhome" href="challenge-week.html" aria-label="Back to Challenge Week menu" title="Back to menu">←</a>
+
+<header class="hero">
+  <span class="kicker">Guess the Place</span>
+  <h1>Read. Explore. Guess.</h1>
+  <p>Six mystery destinations are hiding in these short articles. Read the clues carefully,
+     then take each article's challenge to guess the place and win points.</p>
+</header>
+
+<div class="wrap">
+
+  <!-- rules -->
+  <section class="rules" aria-label="Game rules">
+    <h2>📜 How to play</h2>
+    <ol>
+      <li><strong>Join once on the <a href="challenge-week.html">Challenge Week menu page</a></strong> with your Instagram account name — your points here accumulate under it automatically.</li>
+      <li>Open a mystery article and <strong>read the clues carefully</strong>.</li>
+      <li>Tap <strong>"Are You Ready for the Challenge?"</strong> and answer the question — every correct answer wins points (a retry costs half).</li>
+      <li>Solve all <strong>six mysteries</strong> to complete the game! 🎊</li>
+    </ol>
+    <div class="gift">🎁 At the end of the day, show your score on the leaderboard to the Read4All team
+      (or DM <a href="https://www.instagram.com/read4all__" target="_blank" rel="noopener">@read4all__</a>)
+      to redeem your gift!</div>
+  </section>
+
+  <!-- status bar -->
+  <div class="statusbar">
+    <div class="left">
+      <div class="scorebox">Score: <b id="score">0</b></div>
+      <div class="progress">
+        <div class="bar"><div class="fill" id="progFill"></div></div>
+        <span id="progText">0/5 read</span>
+      </div>
+    </div>
+    <div class="playerbox" id="playerBox"></div>
+  </div>
+
+  <!-- article cards -->
+  <div class="cards" id="cards"></div>
+
+</div>
+
+<!-- article modal -->
+<div class="overlay" id="articleOverlay" role="dialog" aria-modal="true" aria-labelledby="artTitle">
+  <div class="modal">
+    <button class="close" type="button" data-close="articleOverlay" aria-label="Close article">✕</button>
+    <div class="m-img"><img id="artImg" src="" alt="Mystery destination"></div>
+    <div class="m-body">
+      <h2 id="artTitle"></h2>
+      <div class="m-meta" id="artMeta"></div>
+      <div id="artText"></div>
+      <div class="m-actions" id="artActions"></div>
+    </div>
+  </div>
+</div>
+
+<!-- quiz modal -->
+<div class="overlay" id="quizOverlay" role="dialog" aria-modal="true" aria-labelledby="quizHead">
+  <div class="modal">
+    <button class="close" type="button" data-close="quizOverlay" aria-label="Close quiz">✕</button>
+    <div id="quizContent"></div>
+  </div>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<footer>
+  <strong>Read4All</strong> · Guess the Place — a reading mini-game · All "keep reading" links lead to
+  free, legal sources (Wikipedia, Wikivoyage, Project Gutenberg).<br>
+  ⚙️ Any technical issues? Contact us on Instagram:
+  <a href="https://www.instagram.com/read4all__" target="_blank" rel="noopener"><strong>@read4all__</strong></a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+/* ============ CONFIG — must match your Supabase project ============ */
+var SUPABASE_URL = "https://dmtpwyvdddkocvrvmsrd.supabase.co";
+var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtdHB3eXZkZGRrb2N2cnZtc3JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5MjA5ODYsImV4cCI6MjA5OTQ5Njk4Nn0.3Ku9GY_QqRCAMNzDBaBHchrBRLl-MsYolYl6PCB9vIc";
+/* =================================================================== */
+var LIVE = SUPABASE_URL.indexOf("supabase.co") !== -1 && typeof supabase !== "undefined";
+var sb = LIVE ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+/* ============================= ARTICLE DATA ============================= */
+var IMGS = {
+  egypt:"https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=900&q=60",
+  nl:"https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=900&q=60",
+  br:"https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=900&q=60",
+  jp:"https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=60",
+  au:"https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=900&q=60",
+  no:"https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=900&q=60"
+};
+var ARTICLES = [
+{
+  id:"sands", img:IMGS.egypt, difficulty:"Easy", read:"3 min", basePts:10,
+  title:"The Land of Golden Sands and Ancient Giants",
+  teaser:"Colossal stone triangles rise from the desert beside a river that once fed an entire civilisation…",
+  country:"Egypt", city:"Cairo",
+  more:[
+    {t:"Wikipedia: Egypt", u:"https://en.wikipedia.org/wiki/Egypt"},
+    {t:"Wikivoyage guide", u:"https://en.wikivoyage.org/wiki/Egypt"},
+    {t:"Free book: Ancient Egypt (Gutenberg)", u:"https://www.gutenberg.org/ebooks/63988"}
+  ],
+  text:[
+    "Somewhere on this planet, an endless sea of <mark>golden sand</mark> stretches to the horizon. Caravans once crossed it for weeks, guided only by the stars and the promise of a mighty river.",
+    "That river is no ordinary stream. It flows <mark>from south to north</mark> — one of very few great rivers on Earth to do so — flooding its banks each year and leaving behind rich black soil. An entire ancient civilisation grew along its shores, ruled by kings who were buried like gods.",
+    "Their tombs still stand today: enormous <mark>stone triangles</mark> built from more than two million blocks each, so precisely placed that engineers still debate how it was done. The largest was the tallest structure made by humans for over 3,800 years.",
+    "Nearby, a creature with a lion's body and a human face keeps silent watch over the plateau. Carved from a single ridge of limestone, it has gazed at the sunrise for some 4,500 years.",
+    "In the sprawling modern capital close by — home to over 20 million people — markets overflow with spices and papyrus, and a grand museum guards the golden mask of a boy king whose name the whole world knows."
+  ],
+  questions:[
+    {q:"Which country is this mystery destination?", opts:["Egypt","Morocco","Mexico","India"], a:0, why:"The desert, the northward-flowing river (the Nile) and the stone triangles (pyramids) all point to Egypt.", type:"country"},
+    {q:"Which city is the sprawling modern capital near the ancient tombs?", opts:["Cairo","Alexandria","Luxor","Marrakesh"], a:0, why:"Cairo sits right beside the Giza plateau and its pyramids.", type:"city"},
+    {q:"What is the famous landmark with a lion's body and a human face?", opts:["The Great Sphinx","The Colossus","The Minotaur statue","The Winged Bull"], a:0, why:"The article hints at the Great Sphinx of Giza, carved from a single ridge of limestone.", type:"landmark"},
+    {q:"Which clue points most strongly to this destination?", opts:["A river flowing south to north","Endless beaches","Bullet trains","Bicycles everywhere"], a:0, why:"The Nile is one of very few great rivers flowing northwards — a classic clue for Egypt.", type:"clue"},
+    {q:"True or false: the famous river in this article flows from south to north.", opts:["True","False"], a:0, why:"True — the Nile flows northward into the Mediterranean.", type:"tf"},
+    {q:"Which image matches this mystery article?", img:true, opts:[IMGS.egypt,IMGS.nl,IMGS.jp,IMGS.au], a:0, why:"Golden sands and pyramids — the desert giants match.", type:"img"}
+  ]
+},
+{
+  id:"canals", img:IMGS.nl, difficulty:"Medium", read:"3 min", basePts:15,
+  title:"The City That Floats on Water and Wheels",
+  teaser:"Narrow brick houses lean over quiet canals while thousands of bicycles glide past…",
+  country:"Netherlands", city:"Amsterdam",
+  more:[
+    {t:"Wikipedia: Netherlands", u:"https://en.wikipedia.org/wiki/Netherlands"},
+    {t:"Wikivoyage: Amsterdam", u:"https://en.wikivoyage.org/wiki/Amsterdam"},
+    {t:"Free book: Anne Frank on Wikipedia", u:"https://en.wikipedia.org/wiki/The_Diary_of_a_Young_Girl"}
+  ],
+  text:[
+    "Imagine a city where the streets are made of <mark>water</mark>. Half-moon canals — dug 400 years ago and now protected as world heritage — curve through its heart, crossed by more than a thousand little bridges.",
+    "Tall, narrow <mark>brick houses</mark> lean gently against each other like old friends. They were taxed by their width, so owners built upward instead — and installed hooks on the roofs to winch furniture through the windows.",
+    "Here, the bicycle is king. There are said to be <mark>more bicycles than people</mark>, and every morning a river of cyclists flows past flower markets bursting with tulips — a flower that once cost more than a house during a famous 17th-century craze.",
+    "Much of this country lies <mark>below sea level</mark>. For centuries its people have pushed back the ocean with dikes, pumps and windmills, literally engineering new land out of the seabed.",
+    "In its museums hang paintings by masters of light and shadow, and a young girl's wartime diary, written in a hidden annex here, is read by students all over the world."
+  ],
+  questions:[
+    {q:"Which country is this mystery destination?", opts:["Netherlands","Belgium","Denmark","Italy"], a:0, why:"Canals, bicycles, tulips, windmills and land below sea level are classic Dutch clues.", type:"country"},
+    {q:"Which city is described in the article?", opts:["Amsterdam","Venice","Copenhagen","Bruges"], a:0, why:"The half-moon canal ring, narrow houses and the hidden annex point to Amsterdam.", type:"city"},
+    {q:"What landmark network is this city famous for?", opts:["Its canal ring","A giant ferris wheel","An ancient aqueduct","A royal pyramid"], a:0, why:"Amsterdam's 17th-century canal ring is a UNESCO World Heritage Site.", type:"landmark"},
+    {q:"Which clue points most strongly to this destination?", opts:["More bicycles than people","Cherry blossoms","A carnival parade","Kangaroos"], a:0, why:"The Netherlands is world-famous for having more bikes than residents.", type:"clue"},
+    {q:"True or false: houses here were once taxed by their width.", opts:["True","False"], a:0, why:"True — that's why Amsterdam's canal houses are so narrow and tall.", type:"tf"},
+    {q:"Which image matches this mystery article?", img:true, opts:[IMGS.nl,IMGS.br,IMGS.egypt,IMGS.jp], a:0, why:"The canal houses picture matches the floating city.", type:"img"}
+  ]
+},
+{
+  id:"carnival", img:IMGS.br, difficulty:"Medium", read:"4 min", basePts:15,
+  title:"Where the Forest Sings and the Streets Dance",
+  teaser:"A giant statue watches over beaches, samba drums and the greatest street party on Earth…",
+  country:"Brazil", city:"Rio de Janeiro",
+  more:[
+    {t:"Wikipedia: Brazil", u:"https://en.wikipedia.org/wiki/Brazil"},
+    {t:"Wikivoyage: Rio de Janeiro", u:"https://en.wikivoyage.org/wiki/Rio_de_Janeiro"},
+    {t:"Wikipedia: Amazon rainforest", u:"https://en.wikipedia.org/wiki/Amazon_rainforest"}
+  ],
+  text:[
+    "This destination holds the largest <mark>rainforest</mark> on the planet — a green ocean of trees producing a fifth of the world's fresh river water and sheltering one in ten of all known species on Earth.",
+    "Once a year, its most famous city explodes into colour. Around <mark>two million people a day</mark> fill the streets in feathers and sequins during a festival known as the world's biggest party: <mark>carnival</mark>.",
+    "High above the celebration, on a mountain wrapped in clouds, an enormous <mark>statue with open arms</mark> — 30 metres tall — watches over sweeping beaches with names the whole world can hum.",
+    "And everywhere — on the sand, in alleyways, in a stadium that once held nearly 200,000 fans — you will hear the thump of a ball. This nation has lifted the sport's greatest trophy <mark>five times</mark>, more than any other country.",
+    "Its language may surprise you too: unlike its neighbours, this nation speaks Portuguese — a clue left behind by sailors who arrived five centuries ago."
+  ],
+  questions:[
+    {q:"Which country is this mystery destination?", opts:["Brazil","Argentina","Colombia","Spain"], a:0, why:"The Amazon rainforest, carnival and five football World Cups are all Brazilian clues.", type:"country"},
+    {q:"Which city hosts the famous carnival in the article?", opts:["Rio de Janeiro","São Paulo","Buenos Aires","Lisbon"], a:0, why:"Rio de Janeiro hosts the world's most famous carnival.", type:"city"},
+    {q:"What is the enormous statue with open arms?", opts:["Christ the Redeemer","The Statue of Liberty","The Motherland Calls","The Colossus of Rhodes"], a:0, why:"Christ the Redeemer stands on Corcovado mountain above Rio.", type:"landmark"},
+    {q:"Which clue points most strongly to this destination?", opts:["Winning the football trophy five times","Canals and bicycles","Bullet trains","Desert caravans"], a:0, why:"Brazil is the only nation with five FIFA World Cup titles.", type:"clue"},
+    {q:"True or false: this country speaks Spanish like most of its neighbours.", opts:["False","True"], a:0, why:"False — Brazil speaks Portuguese, a legacy of Portuguese explorers.", type:"tf"},
+    {q:"Which image matches this mystery article?", img:true, opts:[IMGS.br,IMGS.au,IMGS.nl,IMGS.egypt], a:0, why:"The mountain city by the sea matches the carnival destination.", type:"img"}
+  ]
+},
+{
+  id:"blossom", img:IMGS.jp, difficulty:"Easy", read:"3 min", basePts:10,
+  title:"The Islands of Blossoms and Lightning Trains",
+  teaser:"Ancient wooden temples, trains faster than the wind, and pink petals falling like snow…",
+  country:"Japan", city:"Tokyo",
+  more:[
+    {t:"Wikipedia: Japan", u:"https://en.wikipedia.org/wiki/Japan"},
+    {t:"Wikivoyage: Tokyo", u:"https://en.wikivoyage.org/wiki/Tokyo"},
+    {t:"Free book: Japanese Fairy Tales (Gutenberg)", u:"https://www.gutenberg.org/ebooks/4018"}
+  ],
+  text:[
+    "On these islands — nearly 7,000 of them — spring arrives as a soft pink storm. For a few precious weeks, <mark>cherry blossoms</mark> bloom and whole families picnic beneath the falling petals, a tradition over a thousand years old.",
+    "Serene wooden <mark>temples and shrines</mark> with red gates stand beside neon-lit streets where vending machines sell almost anything and trains are never late.",
+    "Truly never late: between cities, sleek white <mark>bullet trains</mark> glide at nearly 300 km/h, and the average annual delay is measured in <mark>seconds</mark>. A delay of one minute earns an official apology.",
+    "The capital is the largest metropolitan area on Earth, home to more than 37 million people — yet lost wallets here are famously returned to their owners.",
+    "Watching over it all is a perfectly symmetrical <mark>snow-capped volcano</mark>, sacred for centuries and painted in a famous series of woodblock prints known around the world."
+  ],
+  questions:[
+    {q:"Which country is this mystery destination?", opts:["Japan","China","South Korea","Thailand"], a:0, why:"Cherry blossoms, bullet trains, shrines and the sacred volcano all point to Japan.", type:"country"},
+    {q:"Which city is the giant neon-lit capital of these islands?", opts:["Tokyo","Kyoto","Osaka","Seoul"], a:0, why:"Tokyo is the world's largest metropolitan area.", type:"city"},
+    {q:"What is the snow-capped, perfectly symmetrical volcano?", opts:["Mount Fuji","Mount Etna","Mount Kilimanjaro","Mount Vesuvius"], a:0, why:"Mount Fuji is Japan's sacred, much-painted mountain.", type:"landmark"},
+    {q:"Which clue points most strongly to this destination?", opts:["Trains that apologise for one-minute delays","A northward-flowing river","A giant open-armed statue","Windmills"], a:0, why:"Japan's Shinkansen is famous for its extreme punctuality.", type:"clue"},
+    {q:"True or false: the famous trains here travel at nearly 300 km/h.", opts:["True","False"], a:0, why:"True — bullet trains reach speeds around 300 km/h.", type:"tf"},
+    {q:"Which image matches this mystery article?", img:true, opts:[IMGS.jp,IMGS.egypt,IMGS.br,IMGS.nl], a:0, why:"The blossom-framed volcano matches the island mystery.", type:"img"}
+  ]
+},
+{
+  id:"reef", img:IMGS.au, difficulty:"Hard", read:"4 min", basePts:20,
+  title:"The Wild Continent at the Edge of the Map",
+  teaser:"Bouncing animals, a shining white opera house, and a reef visible from space…",
+  country:"Australia", city:"Sydney",
+  more:[
+    {t:"Wikipedia: Australia", u:"https://en.wikipedia.org/wiki/Australia"},
+    {t:"Wikivoyage: Sydney", u:"https://en.wikivoyage.org/wiki/Sydney"},
+    {t:"Wikipedia: Great Barrier Reef", u:"https://en.wikipedia.org/wiki/Great_Barrier_Reef"}
+  ],
+  text:[
+    "This destination is a country, an island and an entire <mark>continent</mark> all at once — the only place on Earth that can claim all three titles.",
+    "Nearly nine in ten of its mammal species exist nowhere else: creatures that <mark>bounce</mark> instead of run, sleepy tree-dwellers that eat only eucalyptus leaves, and mammals so strange — duck-billed and egg-laying — that scientists first thought they were a hoax.",
+    "Its coastline is stitched with more than 10,000 <mark>beaches</mark>; visiting one a day would take 27 years. Far offshore lies a living rainbow — a <mark>coral reef so vast it can be seen from space</mark>, built by billions of tiny creatures.",
+    "In its most famous harbour city, a building with gleaming <mark>white sail-shaped roofs</mark> hosts operas beside the water, next to a giant steel arch bridge that locals affectionately call 'the coathanger'.",
+    "Deep in the red centre of the land, a massive sandstone monolith glows crimson at sunset — a sacred place for the world's oldest continuous living culture, stretching back more than 60,000 years."
+  ],
+  questions:[
+    {q:"Which country is this mystery destination?", opts:["Australia","New Zealand","South Africa","Indonesia"], a:0, why:"Kangaroos, the giant reef and the sail-roofed opera house are unmistakably Australian.", type:"country"},
+    {q:"Which harbour city has the building with white sail-shaped roofs?", opts:["Sydney","Melbourne","Auckland","Perth"], a:0, why:"The Sydney Opera House sits beside the Harbour Bridge — 'the coathanger'.", type:"city"},
+    {q:"What is the living landmark visible from space?", opts:["The Great Barrier Reef","The Amazon River","The Ring of Fire","The White Cliffs"], a:0, why:"The Great Barrier Reef is the world's largest coral reef system.", type:"landmark"},
+    {q:"Which clue points most strongly to this destination?", opts:["Animals that bounce instead of run","Cherry blossoms","Stone triangles","Canal houses"], a:0, why:"Kangaroos live in the wild only in this destination.", type:"clue"},
+    {q:"True or false: this destination is both a country and a continent.", opts:["True","False"], a:0, why:"True — it's the only country that covers an entire continent.", type:"tf"},
+    {q:"Which image matches this mystery article?", img:true, opts:[IMGS.au,IMGS.jp,IMGS.nl,IMGS.br], a:0, why:"The wild coastal landscape matches the continent at the edge of the map.", type:"img"}
+  ]
+},
+{
+  id:"aurora", img:IMGS.no, difficulty:"Medium", read:"3 min", basePts:15,
+  title:"The Kingdom of Dancing Lights and Endless Days",
+  teaser:"Green ribbons swirl across winter skies, while in summer the sun simply refuses to set…",
+  country:"Norway", city:"Oslo",
+  more:[
+    {t:"Wikipedia: Norway", u:"https://en.wikipedia.org/wiki/Norway"},
+    {t:"Wikivoyage guide", u:"https://en.wikivoyage.org/wiki/Norway"},
+    {t:"Free Norse folk tales (Gutenberg)", u:"https://www.gutenberg.org/ebooks/search/?query=norse+tales"}
+  ],
+  text:[
+    "In this far-northern kingdom, winter nights put on the greatest light show on Earth. Ribbons of <mark>green and violet light</mark> ripple silently across the sky — a display so magical that ancient people believed they were bridges to the gods.",
+    "Summer flips the world upside down: above the Arctic Circle, the <mark>sun does not set for weeks</mark>. Children play football at midnight in broad daylight in the 'land of the midnight sun'.",
+    "The coastline is sliced by deep, glassy sea valleys carved by ancient glaciers — <mark>fjords</mark> — with cliffs plunging a kilometre into water so still it mirrors the sky. The longest stretches more than 200 km inland.",
+    "A thousand years ago, fearless sailors set out from these shores in dragon-headed <mark>longships</mark>, reaching America centuries before Columbus. Their ships now rest in museums near the capital.",
+    "Today this nation of just five million people wins more Winter Olympic medals than any other country on Earth — perhaps because skiing here is practically a birthright."
+  ],
+  questions:[
+    {q:"Which country is this mystery destination?", opts:["Norway","Sweden","Iceland","Finland"], a:0, why:"Fjords, the midnight sun, Viking longships and Winter Olympic dominance all point to Norway.", type:"country"},
+    {q:"Which city is the capital of this kingdom?", opts:["Oslo","Stockholm","Helsinki","Copenhagen"], a:0, why:"Oslo is Norway's capital, home to the Viking ship museums.", type:"city"},
+    {q:"What are the deep sea valleys carved by ancient glaciers called?", opts:["Fjords","Canyons","Atolls","Deltas"], a:0, why:"Fjords are Norway's signature landscape — the word itself is Norwegian.", type:"landmark"},
+    {q:"Which clue points most strongly to this destination?", opts:["A summer sun that doesn't set for weeks","Stone triangles in the desert","A giant coral reef","Carnival parades"], a:0, why:"The midnight sun above the Arctic Circle is a classic clue for Norway.", type:"clue"},
+    {q:"True or false: sailors from this land reached America before Columbus.", opts:["True","False"], a:0, why:"True — Norse explorers reached North America around the year 1000.", type:"tf"},
+    {q:"Which image matches this mystery article?", img:true, opts:[IMGS.no,IMGS.au,IMGS.jp,IMGS.egypt], a:0, why:"The dancing green lights match the far-northern kingdom.", type:"img"}
+  ]
+}];
+
+/* ============================= STATE ============================= */
+var state = { score:0, read:{}, done:{}, name:"" };
+try{ state = Object.assign(state, JSON.parse(localStorage.getItem("r4a_gtp")||"{}")); }catch(e){}
+function saveState(){ localStorage.setItem("r4a_gtp", JSON.stringify(state)); }
+
+var current=null;
+var run=null;
+var lastFocus=null;
+
+function $(id){return document.getElementById(id);}
+function esc(s){var d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML;}
+function shuffle(arr){
+  arr=arr.slice();
+  for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}
+  return arr;
+}
+function readCount(){return Object.keys(state.read).length;}
+function solvedCount(){return Object.keys(state.done).length;}
+
+/* ============================= CARDS + STATUS ============================= */
+function diffClass(d){return d==="Easy"?"easy":d==="Medium"?"medium":"hard";}
+function renderCards(){
+  $("cards").innerHTML=ARTICLES.map(function(a,i){
+    var cls=(state.read[a.id]?" is-read":"")+(state.done[a.id]?" is-solved":"");
+    return '<article class="mcard'+cls+'" id="card-'+a.id+'">'
+      +'<div class="imgbox"><img src="'+a.img+'" alt="Mystery destination '+(i+1)+'" loading="lazy">'
+      +'<span class="mystery-label">Mystery Article</span>'
+      +'<span class="badges"><span class="b read" title="Article read">📖</span><span class="b solved" title="Mystery solved">✓</span></span></div>'
+      +'<div class="body"><h3>'+esc(a.title)+'</h3>'
+      +'<p class="teaser">'+esc(a.teaser)+'</p>'
+      +'<div class="meta"><span class="pill">⏱ '+esc(a.read)+' read</span>'
+      +'<span class="pill '+diffClass(a.difficulty)+'">'+esc(a.difficulty)+'</span>'
+      +'<span class="pill">+'+a.basePts+' pts/question</span></div>'
+      +'<button class="btn ghost" data-open="'+a.id+'" type="button">🔍 Explore the Clues</button>'
+      +'</div></article>';
+  }).join("");
+}
+function updateStatus(){
+  $("score").textContent=state.score;
+  $("progFill").style.width=(solvedCount()/ARTICLES.length*100)+"%";
+  $("progText").textContent=solvedCount()+"/"+ARTICLES.length+" solved";
+}
+
+/* ============================= MODALS ============================= */
+function openOverlay(id){
+  lastFocus=document.activeElement;
+  var o=$(id); o.classList.add("show");
+  var c=o.querySelector(".close"); if(c)c.focus();
+  document.body.style.overflow="hidden";
+}
+function closeOverlay(id){
+  $(id).classList.remove("show");
+  document.body.style.overflow="";
+  if(lastFocus)lastFocus.focus();
+}
+document.addEventListener("keydown",function(ev){
+  if(ev.key==="Escape"){
+    ["articleOverlay","quizOverlay"].forEach(function(id){ if($(id).classList.contains("show"))closeOverlay(id); });
+  }
+});
+document.addEventListener("click",function(ev){
+  var c=ev.target.closest("[data-close]");
+  if(c)closeOverlay(c.dataset.close);
+});
+["articleOverlay","quizOverlay"].forEach(function(id){
+  $(id).addEventListener("click",function(ev){ if(ev.target===this)closeOverlay(id); });
+});
+
+/* ============================= ARTICLE ============================= */
+function openArticle(a){
+  current=a;
+  $("artImg").src=a.img;
+  $("artTitle").textContent=a.title;
+  $("artMeta").innerHTML='<span class="pill">⏱ '+esc(a.read)+' read</span><span class="pill '+diffClass(a.difficulty)+'">'+esc(a.difficulty)+'</span><span class="pill">Mystery Article</span>';
+  $("artText").innerHTML=a.text.map(function(p){return "<p>"+p+"</p>";}).join("");
+  state.read[a.id]=true; saveState(); renderCards();
+  $("artActions").innerHTML='<button class="btn gold" id="readyFromArt" type="button">Are You Ready for the Challenge?</button>';
+  $("readyFromArt").addEventListener("click",function(){ closeOverlay("articleOverlay"); showQuizIntro(); });
+  openOverlay("articleOverlay");
+}
+/* Challenge Week: this game is Tuesday's challenge — unlocks 28 July 2026 */
+var UNLOCK_DATE="2026-07-28", UNLOCK_LABEL="Tuesday 28 July";
+function isLocked(){return new Date()<new Date(UNLOCK_DATE+"T00:00:00");}
+$("cards").addEventListener("click",function(ev){
+  var b=ev.target.closest("[data-open]");
+  var a=null;
+  if(b)a=ARTICLES.find(function(x){return x.id===b.dataset.open;});
+  else{
+    var card=ev.target.closest(".mcard");
+    if(card)a=ARTICLES.find(function(x){return "card-"+x.id===card.id;});
+  }
+  if(!a)return;
+  if(isLocked()){alert("🔒 This challenge unlocks on "+UNLOCK_LABEL+". Come back then!");return;}
+  var wkp=weekPlayer();
+  if(!wkp.name||!wkp.pin){
+    if(confirm("Please join Challenge Week first with your Instagram account name — that is how your points are recorded.\n\nGo to the menu page to join now?"))location.href="challenge-week.html";
+    return;
+  }
+  openArticle(a);
+});
+
+/* ============================= QUIZ ============================= */
+function showQuizIntro(){
+  $("quizContent").innerHTML='<div class="quiz-intro">'
+    +'<div class="big">🧭</div>'
+    +'<h2 id="quizHead">Ready to Guess the Place?</h2>'
+    +'<p>You have read the clues. Now test your memory and observation skills.</p>'
+    +'<button class="btn" id="startBtn" type="button">Start Challenge</button>'
+    +'</div>';
+  openOverlay("quizOverlay");
+  $("startBtn").addEventListener("click",startChallenge);
+  $("startBtn").focus();
+}
+function startChallenge(){
+  /* one random question from the current article */
+  var q=shuffle(current.questions)[0];
+  var idx=q.opts.map(function(_,i){return i;});
+  var order=shuffle(idx);
+  var qq={
+    art:current, q:q.q, img:!!q.img, why:q.why,
+    opts:order.map(function(i){return q.opts[i];}),
+    a:order.indexOf(q.a)
+  };
+  run={questions:[qq], idx:0, retried:false, earned:0, correct:0};
+  showQuestion();
+}
+function showQuestion(){
+  var q=run.questions[run.idx];
+  run.retried=false;
+  var optsHtml=q.opts.map(function(o,i){
+    if(q.img)return '<button class="opt img" data-i="'+i+'" type="button"><img src="'+o+'" alt="Option '+(i+1)+'"></button>';
+    return '<button class="opt" data-i="'+i+'" type="button">'+esc(o)+'</button>';
+  }).join("");
+  $("quizContent").innerHTML='<div class="q-body">'
+    +'<div class="q-top"><span class="qnum">Question '+(run.idx+1)+' of '+run.questions.length+'</span>'
+    +'<span class="qpts">+'+q.art.basePts+' pts · '+esc(q.art.difficulty)+'</span></div>'
+    +'<div class="q-art">🔍 Mystery: '+esc(q.art.title)+'</div>'
+    +'<h3 id="quizHead">'+esc(q.q)+'</h3>'
+    +'<div class="opts'+(q.img?" imgs":"")+'" id="opts">'+optsHtml+'</div>'
+    +'<div class="feedback" id="fb"></div>'
+    +'<div class="q-actions" id="qActions"></div>'
+    +'</div>';
+  var first=$("opts").querySelector(".opt"); if(first)first.focus();
+  $("opts").addEventListener("click",function(ev){
+    var b=ev.target.closest(".opt"); if(!b||b.disabled)return;
+    answer(Number(b.dataset.i),b);
+  });
+}
+function answer(i,btn){
+  var q=run.questions[run.idx];
+  var fb=$("fb");
+  var buttons=$("opts").querySelectorAll(".opt");
+  if(i===q.a){
+    buttons.forEach(function(b){b.disabled=true;});
+    btn.classList.add("correct");
+    var pts=run.retried?Math.ceil(q.art.basePts/2):q.art.basePts;
+    run.correct++; run.earned+=pts;
+    fb.className="feedback good show";
+    fb.innerHTML="<b>✅ Correct! +"+pts+" points</b>"+esc(q.why);
+    nextAction();
+  }else{
+    btn.classList.add("wrong"); btn.disabled=true;
+    if(!run.retried){
+      run.retried=true;
+      fb.className="feedback bad show";
+      fb.innerHTML="<b>❌ Not quite — you get one retry!</b>Think back to the highlighted clues in the article.";
+    }else{
+      buttons.forEach(function(b){b.disabled=true;});
+      buttons[q.a].classList.add("correct");
+      fb.className="feedback bad show";
+      fb.innerHTML="<b>❌ Incorrect.</b>"+esc(q.why);
+      nextAction();
+    }
+  }
+}
+function nextAction(){
+  var acts=$("qActions");
+  if(run.idx<run.questions.length-1){
+    acts.innerHTML='<button class="btn" id="nextQ" type="button">Next Question →</button>';
+    $("nextQ").addEventListener("click",function(){run.idx++;showQuestion();});
+    $("nextQ").focus();
+  }else{
+    acts.innerHTML='<button class="btn" id="finishQ" type="button">See Result</button>';
+    $("finishQ").addEventListener("click",showResult);
+    $("finishQ").focus();
+  }
+}
+function showResult(){
+  var solved=run.correct===run.questions.length;
+  state.score+=run.earned;
+  if(solved)state.done[current.id]=true;
+  saveState(); updateStatus(); renderCards(); pushWeek();
+  var allDone=solvedCount()===ARTICLES.length;
+  var reveal='';
+  if(solved){
+    var links=current.more.map(function(l){return '<a href="'+l.u+'" target="_blank" rel="noopener">'+esc(l.t)+' ↗</a>';}).join("");
+    reveal='<div class="reveal">✅ <b>'+esc(current.title)+'</b> → '+esc(current.city)+', '+esc(current.country)
+      +'<div class="links">Keep reading (free &amp; legal): '+links+'</div></div>';
+  }
+  $("quizContent").innerHTML='<div class="q-result">'
+    +'<div class="top"><div class="big">'+(allDone?"🎉":solved?"🌟":"🧐")+'</div>'
+    +'<h2 id="quizHead">'+(allDone?"All six mysteries solved!":solved?"Mystery solved!":"So close!")+'</h2>'
+    +'<p>'+(solved?"You earned <b>"+run.earned+" points</b>!":"No points this time — read the clues once more and try again.")+'</p></div>'
+    +reveal
+    +'<div class="q-actions" style="justify-content:center;margin-top:16px">'
+    +(solved?'':'<button class="btn" id="tryAgain" type="button">Try Again</button>')
+    +'<button class="btn ghost" id="readAgain" type="button">Read Again</button>'
+    +'<button class="btn navy" id="nextMystery" type="button">Next Mystery</button>'
+    +'</div></div>';
+  var ta=$("tryAgain");
+  if(ta)ta.addEventListener("click",startChallenge);
+  $("readAgain").addEventListener("click",function(){closeOverlay("quizOverlay");openArticle(current);});
+  $("nextMystery").addEventListener("click",function(){
+    closeOverlay("quizOverlay");
+    var pool=ARTICLES.filter(function(a){return !state.done[a.id];});
+    if(pool.length)openArticle(pool[Math.floor(Math.random()*pool.length)]);
+  });
+  if(allDone)setTimeout(confetti,300);
+}
+
+/* ============================= CONFETTI ============================= */
+function confetti(){
+  var cv=$("confetti"), ctx=cv.getContext("2d");
+  cv.width=innerWidth; cv.height=innerHeight;
+  var colors=["#b98a2e","#3d6b4f","#10243f","#e8b400","#8e4a68","#5b719c"];
+  var parts=[];
+  for(var i=0;i<180;i++)parts.push({
+    x:Math.random()*cv.width, y:-20-Math.random()*cv.height*0.5,
+    w:6+Math.random()*6, h:8+Math.random()*8,
+    c:colors[i%colors.length], v:2+Math.random()*3.5,
+    r:Math.random()*Math.PI, vr:(Math.random()-.5)*.2
+  });
+  var t0=Date.now();
+  (function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    parts.forEach(function(p){
+      p.y+=p.v; p.r+=p.vr;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r);
+      ctx.fillStyle=p.c; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+    });
+    if(Date.now()-t0<4200)requestAnimationFrame(tick);
+    else ctx.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+
+/* ============================= CHALLENGE WEEK LINK ============================= */
+/* Identity comes from the Challenge Week menu page (localStorage "r4a_week").
+   Scores are pushed to the shared week leaderboard via the week_submit function. */
+function weekPlayer(){
+  try{return JSON.parse(localStorage.getItem("r4a_week")||"{}");}catch(e){return {};}
+}
+function renderName(){
+  var wk=weekPlayer();
+  if(wk.name){
+    $("playerBox").innerHTML='<span class="who">🧭 '+esc(wk.name)+'</span>';
+  }else{
+    $("playerBox").innerHTML='<a class="btn small" style="text-decoration:none" href="challenge-week.html">Join on the Menu page</a>';
+  }
+}
+function pushWeek(){
+  var wk=weekPlayer();
+  if(!LIVE||!wk.name||!wk.pin||!state.score)return;
+  sb.rpc("week_submit",{p_name:wk.name,p_pin:wk.pin,p_day:"tue",p_score:state.score}).then(function(){});
+}
+
+/* ============================= INIT ============================= */
+renderCards(); updateStatus(); renderName(); pushWeek();
+</script>
+</body>
+</html>

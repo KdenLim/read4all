@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini Challenge Week | Read4All</title>
+<meta name="description" content="Five days, five challenges: read, think, solve, and climb the Read4All leaderboard.">
+<meta name="theme-color" content="#10243f">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="styles.css">
+<style>
+  :root{
+    --navy:#10243f; --sky:#fffaf0; --sky-2:#fdf3e0; --blue:#3d6b4f;
+    --yellow:#b98a2e; --yellow-soft:#fdeec9; --white:#fff; --ink:#2b2b25;
+    --muted:#6d6a5e; --line:#eadfc8; --radius:18px;
+    --shadow:0 10px 30px rgba(16,36,63,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito Sans',system-ui,sans-serif;background:var(--sky);color:var(--ink);line-height:1.65;font-size:17px}
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--navy)}
+  a{color:var(--blue)}
+  button{font-family:inherit}
+  .challenge-hero{background:linear-gradient(180deg,var(--sky),var(--sky-2));text-align:center;padding:56px 20px 44px;border-bottom:1px solid var(--line)}
+  .challenge-hero .kicker{display:inline-block;color:var(--yellow);font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .challenge-hero h1{font-size:clamp(2rem,5.4vw,3.1rem);font-weight:900;margin-bottom:8px}
+  .challenge-hero .sub{font-size:1.1rem;color:var(--blue);font-weight:700;font-style:italic;margin-bottom:10px}
+  .challenge-hero p{max-width:640px;margin:0 auto;color:var(--muted)}
+  .btn{border:0;cursor:pointer;font-weight:800;font-size:.92rem;border-radius:999px;padding:12px 26px;transition:transform .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  .btn.green{background:var(--blue);color:#fff}
+  .btn.navy{background:var(--navy);color:#fff}
+  .btn.small{padding:8px 16px;font-size:.8rem}
+  .btn.grey{background:var(--line);color:var(--muted)}
+  .btn:disabled{opacity:.5;cursor:default;transform:none}
+
+  .wrap{max-width:1100px;margin:0 auto;padding:26px 20px 70px}
+
+  .status{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 24px;margin-bottom:26px}
+  .stat{font-weight:800;color:var(--navy);font-size:.95rem}
+  .stat b{color:var(--yellow);font-size:1.3rem}
+  .playerbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .playerbox input{font-family:inherit;font-size:.88rem;background:var(--sky);border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;outline:none;width:180px}
+  .playerbox input:focus{border-color:var(--blue)}
+  .playerbox .who{font-size:.9rem;font-weight:800;color:var(--navy)}
+  .playerbox .msg{font-size:.75rem;font-weight:700}
+  .playerbox .msg.err{color:#a33}
+  .playerbox .msg.ok{color:var(--blue)}
+
+  .rules{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 26px;margin-bottom:26px}
+  .rules h2{font-size:1.2rem;margin-bottom:10px}
+  .rules ol{margin-left:20px;font-size:.92rem}
+  .rules li{margin-bottom:6px}
+  .rules .gift{background:var(--yellow-soft);border:1px dashed var(--yellow);border-radius:12px;padding:10px 14px;margin-top:12px;font-size:.9rem;font-weight:700;color:var(--navy)}
+
+  .sec-title{margin:10px 0 4px;font-size:clamp(1.4rem,3.2vw,1.9rem)}
+  .sec-sub{color:var(--muted);margin-bottom:20px;font-size:.92rem}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:20px}
+  .ccard{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column;gap:10px;transition:transform .18s ease}
+  .ccard:hover{transform:translateY(-4px)}
+  .ccard.locked{opacity:.6}
+  .ccard .day{display:inline-flex;align-self:flex-start;background:var(--navy);color:#fff;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:5px 14px}
+  .ccard .icon{font-size:2rem}
+  .ccard h3{font-size:1.2rem}
+  .ccard .teaser{color:var(--muted);font-size:.88rem;flex:1}
+  .ccard .meta{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{font-size:.7rem;font-weight:800;border-radius:999px;padding:4px 12px;background:var(--sky);border:1px solid var(--line);color:var(--muted)}
+  .pill.pts{background:var(--yellow-soft);border-color:#efd98d;color:#8a6d0b}
+  .pill.done{background:#e3f2ee;border-color:#bfdcc9;color:#2e7d4f}
+  .ccard a.btn{text-decoration:none;text-align:center}
+
+  .lb{margin-top:44px}
+  .lb h2{font-size:1.5rem;margin-bottom:14px}
+  .lb table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .lb th,.lb td{text-align:left;padding:11px 16px;font-size:.88rem;border-bottom:1px solid var(--line)}
+  .lb th{background:var(--navy);color:#fff;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+  .lb tr:last-child td{border-bottom:none}
+  .lb .me{background:#f1f7f2;font-weight:800}
+  .lb .medal{font-size:1rem}
+  .lb .days{white-space:nowrap}
+  .dscore{display:inline-flex;flex-direction:column;align-items:center;gap:1px;min-width:36px;padding:5px 7px;border-radius:10px;background:var(--sky);border:1px solid var(--line);margin-right:5px}
+  .dscore b{font-size:.82rem;color:var(--muted);line-height:1.1}
+  .dscore span{font-size:.56rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1.1}
+  .dscore.got{background:var(--yellow-soft);border-color:#efd98d}
+  .dscore.got b{color:var(--yellow)}
+  .dscore.got span{color:#8a6d0b}
+  .lb .total-cell{font-size:1.05rem;color:var(--navy)}
+
+</style>
+</head>
+<body class="challenge-week-page">
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header" data-header>
+  <nav class="nav container" aria-label="Primary navigation">
+    <a class="brand" href="index.html" aria-label="Read4All home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Read4All</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="primary-menu"
+      data-nav-toggle
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="primary-menu" data-nav-menu>
+      <li><a href="activities.html">Activities</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="books.html">Explore</a></li>
+      <li><a href="sdg.html">SDG 4</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a class="nav-cta" href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma" target="_blank" rel="noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Join Community!</span></a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="challenge-hero">
+  <span class="kicker">Read4All · SDG 4 Quality Education</span>
+  <h1>Read4All Mini Challenge Week</h1>
+  <div class="sub">Read the clues. Think carefully. Solve the challenge.</div>
+  <p>Five days, five interactive missions, 27 to 31 July. Join with your Instagram name and
+     your points from every challenge add up on one leaderboard.</p>
+</section>
+
+<main id="main" class="wrap">
+
+  <!-- player + total -->
+  <div class="status">
+    <div class="stat">Total score: <b id="totalScore">0</b></div>
+    <div class="playerbox" id="playerBox">
+      <input id="nameInput" maxlength="30" placeholder="@your_instagram_name" aria-label="Your Instagram account name">
+      <input id="pinInput" type="password" maxlength="20" placeholder="Password (min 4)" style="width:150px" aria-label="Password">
+      <button class="btn small green" id="joinBtn" type="button">Join</button>
+      <button class="btn small navy" id="loginBtn" type="button">Log in</button>
+      <span class="msg" id="nameMsg"></span>
+    </div>
+  </div>
+
+  <!-- rules -->
+  <section class="rules">
+    <h2>📜 How Challenge Week works</h2>
+    <ol>
+      <li><strong>Join once</strong> with your Instagram account name and a short password — your points from all five challenges accumulate under it. Changing device? Just <strong>Log in</strong> with the same name and password.</li>
+      <li>A new challenge <strong>unlocks each day</strong> from Monday 27 July to Friday 31 July (and stays open once unlocked).</li>
+      <li>Play as many times as you like — your <strong>best score per day</strong> counts.</li>
+      <li>Come back here anytime to see your total and the leaderboard.</li>
+    </ol>
+    <div class="gift">🎁 At the end of the week, show your leaderboard score to the Read4All team
+      (or DM <a href="https://www.instagram.com/read4all__" target="_blank" rel="noopener">@read4all__</a>)
+      to redeem your mystery gift!</div>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:12px">🔒 <strong>Privacy:</strong> we never
+      see or collect your actual password. It is stored only as an encrypted fingerprint (hash) that
+      cannot be read by anyone — including the Read4All team. Please still avoid reusing an important
+      password.</p>
+  </section>
+
+  <!-- challenge cards -->
+  <h2 class="sec-title">This week's missions</h2>
+  <p class="sec-sub">One short challenge per day — each takes just a few minutes.</p>
+  <div class="cards" id="cards"></div>
+
+  <!-- leaderboard -->
+  <div class="lb">
+    <h2>🏆 Week Leaderboard</h2>
+    <table aria-label="Week leaderboard">
+      <thead><tr><th>#</th><th>Instagram</th><th>Daily scores</th><th>Total</th></tr></thead>
+      <tbody id="lbBody"><tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic">Loading…</td></tr></tbody>
+    </table>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand footer-brand" href="index.html" aria-label="Read4All home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Read4All</span>
+      </a>
+      <p>Aligned with SDG 4: Quality Education.</p>
+      <p class="legal-note">
+        Read4All does not host copyrighted books or pirated PDFs. All shared materials are legal, publicly
+        available, or authorized resources.
+      </p>
+    </div>
+
+    <div class="footer-links" aria-label="Footer links">
+      <a href="https://www.instagram.com/read4all__" target="_blank" rel="noreferrer">Instagram</a>
+      <a href="resources.html">Reading resources</a>
+      <a href="guidelines.html">Guidelines</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+/* =====================================================================
+   READ4ALL MINI CHALLENGE WEEK — MENU + SHARED LEADERBOARD
+   - Players join once (unique Instagram name, no login).
+   - Each challenge page saves its best score locally; this page (and the
+     challenge pages) push the best scores into the shared week_scores
+     table, where total = mon+tue+wed+thu+fri.
+   - Challenges unlock by date: 27–31 July 2026.
+   ===================================================================== */
+var SUPABASE_URL="https://dmtpwyvdddkocvrvmsrd.supabase.co";
+var SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtdHB3eXZkZGRrb2N2cnZtc3JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5MjA5ODYsImV4cCI6MjA5OTQ5Njk4Nn0.3Ku9GY_QqRCAMNzDBaBHchrBRLl-MsYolYl6PCB9vIc";
+var LIVE=SUPABASE_URL.indexOf("supabase.co")!==-1&&typeof supabase!=="undefined";
+var sb=LIVE?supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+
+var CHALLENGES=[
+  {col:"mon", day:"Mon 27 Jul", unlock:"2026-07-27", icon:"🕵️", title:"Emoji Book Detective",
+   teaser:"Decode the emojis and identify the book or story.", time:"3 min", pts:30,
+   href:"emoji-detective.html", localKey:"r4a_emoji", localField:"best"},
+  {col:"tue", day:"Tue 28 Jul", unlock:"2026-07-28", icon:"🧭", title:"Guess the Place",
+   teaser:"Read mystery destination articles and guess where in the world they are.", time:"10 min", pts:85,
+   href:"guess-the-place.html", localKey:"r4a_gtp", localField:"score"},
+  {col:"wed", day:"Wed 29 Jul", unlock:"2026-07-29", icon:"🔎", title:"Who Is Suspicious?",
+   teaser:"Read the statements, compare the evidence, and solve the case.", time:"5 min", pts:40,
+   href:"who-is-suspicious.html", localKey:"r4a_case", localField:"best"},
+  {col:"thu", day:"Thu 30 Jul", unlock:"2026-07-30", icon:"📰", title:"Fact or Fake Online?",
+   teaser:"Identify misleading headlines and online warning signs.", time:"4 min", pts:40,
+   href:"fact-or-fake.html", localKey:"r4a_fact", localField:"best"},
+  {col:"fri", day:"Fri 31 Jul", unlock:"2026-07-31", icon:"🏺", title:"History or Fiction?",
+   teaser:"Decide whether unusual historical statements are real or made up.", time:"4 min", pts:50,
+   href:"history-or-fiction.html", localKey:"r4a_hist", localField:"best"}
+];
+
+var wk={name:""};
+try{wk=Object.assign(wk,JSON.parse(localStorage.getItem("r4a_week")||"{}"));}catch(e){}
+function saveWk(){localStorage.setItem("r4a_week",JSON.stringify(wk));}
+
+function $(id){return document.getElementById(id);}
+function esc(s){var d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML;}
+function localBest(c){
+  try{
+    var o=JSON.parse(localStorage.getItem(c.localKey)||"{}");
+    return Number(o[c.localField])||0;
+  }catch(e){return 0;}
+}
+function isUnlocked(c){return new Date()>=new Date(c.unlock+"T00:00:00");}
+function localTotal(){return CHALLENGES.reduce(function(s,c){return s+localBest(c);},0);}
+
+/* ---------------- cards ---------------- */
+function renderCards(){
+  $("cards").innerHTML=CHALLENGES.map(function(c){
+    var unlocked=isUnlocked(c);
+    var best=localBest(c);
+    return '<article class="ccard'+(unlocked?'':' locked')+'">'
+      +'<span class="day">'+esc(c.day)+'</span>'
+      +'<div class="icon">'+(unlocked?c.icon:"🔒")+'</div>'
+      +'<h3>'+esc(c.title)+'</h3>'
+      +'<p class="teaser">'+esc(c.teaser)+'</p>'
+      +'<div class="meta">'
+      +'<span class="pill">⏱ '+c.time+'</span>'
+      +'<span class="pill pts">🪙 up to '+c.pts+' pts</span>'
+      +(best>0?'<span class="pill done">Best: '+best+' pts</span>':'')
+      +'</div>'
+      +(unlocked
+        ?'<a class="btn green" href="'+c.href+'">'+(best>0?'Play Again':'Start Challenge')+'</a>'
+        :'<button class="btn grey" type="button" disabled>🔒 Unlocks '+esc(c.day)+'</button>')
+      +'</article>';
+  }).join("");
+}
+function renderTotal(){$("totalScore").textContent=localTotal();}
+
+/* ---------------- leaderboard ---------------- */
+function renderName(){
+  if(wk.name){
+    $("playerBox").innerHTML='<span class="who">🧭 '+esc(wk.name)+'</span><span class="msg ok" id="nameMsg"></span>';
+  }
+}
+function loadBoard(){
+  if(!LIVE){$("lbBody").innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic">Leaderboard not connected.</td></tr>';return;}
+  sb.from("week_scores").select("name,mon,tue,wed,thu,fri,total").order("total",{ascending:false}).limit(10).then(function(res){
+    if(res.error||!res.data){$("lbBody").innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic">Leaderboard unavailable — did you create the week_scores table?</td></tr>';return;}
+    if(!res.data.length){$("lbBody").innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic">No players yet — be the first!</td></tr>';return;}
+    var medals=["🥇","🥈","🥉"];
+    function dayChips(r){
+      var days=[["Mon",r.mon],["Tue",r.tue],["Wed",r.wed],["Thu",r.thu],["Fri",r.fri]];
+      return days.map(function(d){
+        return '<span class="dscore'+(d[1]>0?" got":"")+'"><b>'+d[1]+'</b><span>'+d[0]+'</span></span>';
+      }).join("");
+    }
+    $("lbBody").innerHTML=res.data.map(function(r,i){
+      var me=wk.name&&r.name.toLowerCase()===wk.name.toLowerCase();
+      return '<tr'+(me?' class="me"':'')+'><td class="medal">'+(medals[i]||(i+1))+'</td>'
+        +'<td>'+esc(r.name)+'</td>'
+        +'<td class="days">'+dayChips(r)+'</td>'
+        +'<td class="total-cell"><b>'+r.total+'</b></td></tr>';
+    }).join("");
+  });
+}
+function joinBoard(){
+  var name=$("nameInput").value.trim(), pin=$("pinInput").value;
+  var msg=$("nameMsg");
+  if(name.length<2){msg.textContent="Name too short.";msg.className="msg err";return;}
+  if(pin.length<4){msg.textContent="Password must be at least 4 characters.";msg.className="msg err";return;}
+  if(!LIVE){msg.textContent="Leaderboard not connected.";msg.className="msg err";return;}
+  if(!confirm('Join Challenge Week as "'+name+'"?\n\nMake sure this is your correct Instagram account name — your points and gift redemption are tied to it.\nRemember your password so you can log in from another device.'))return;
+  sb.rpc("week_join",{p_name:name,p_pin:pin}).then(function(res){
+    if(res.error){msg.textContent="Could not join — "+res.error.message;msg.className="msg err";return;}
+    if(res.data==="taken"){msg.textContent="Name already registered — use Log in if it's yours.";msg.className="msg err";return;}
+    if(res.data!=="ok"){msg.textContent="Could not join ("+res.data+").";msg.className="msg err";return;}
+    wk.name=name; wk.pin=pin; saveWk(); renderName(); syncScores();
+  });
+}
+function loginBoard(){
+  var name=$("nameInput").value.trim(), pin=$("pinInput").value;
+  var msg=$("nameMsg");
+  if(name.length<2||pin.length<4){msg.textContent="Enter your name and password.";msg.className="msg err";return;}
+  if(!LIVE){msg.textContent="Leaderboard not connected.";msg.className="msg err";return;}
+  sb.rpc("week_login",{p_name:name,p_pin:pin}).then(function(res){
+    if(res.error){msg.textContent="Could not log in — "+res.error.message;msg.className="msg err";return;}
+    if(res.data==="not_found"){msg.textContent="Name not found — use Join instead.";msg.className="msg err";return;}
+    if(res.data!=="ok"){msg.textContent="Wrong password.";msg.className="msg err";return;}
+    wk.name=name; wk.pin=pin; saveWk(); renderName(); syncScores();
+  });
+}
+document.addEventListener("click",function(ev){
+  if(ev.target&&ev.target.id==="joinBtn")joinBoard();
+  if(ev.target&&ev.target.id==="loginBtn")loginBoard();
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key==="Enter"&&ev.target&&(ev.target.id==="nameInput"||ev.target.id==="pinInput"))joinBoard();
+});
+
+/* push all local best scores up (best-only, never lowers) via the secure function */
+function syncScores(){
+  if(!LIVE||!wk.name||!wk.pin){loadBoard();return;}
+  var pending=0, notFound=false;
+  function done(){
+    if(notFound){
+      /* player row was removed by the team → reset local identity */
+      wk={name:""}; saveWk(); location.reload(); return;
+    }
+    loadBoard();
+  }
+  CHALLENGES.forEach(function(c){
+    var best=localBest(c);
+    if(best>0){
+      pending++;
+      sb.rpc("week_submit",{p_name:wk.name,p_pin:wk.pin,p_day:c.col,p_score:best}).then(function(res){
+        if(res.data==="not_found")notFound=true;
+        pending--;
+        if(pending===0)done();
+      });
+    }
+  });
+  if(pending===0)done();
+}
+
+/* ---------------- init ---------------- */
+renderCards(); renderTotal(); renderName(); syncScores();
+</script>
+<script src="script.js" defer></script>
+</body>
+</html>

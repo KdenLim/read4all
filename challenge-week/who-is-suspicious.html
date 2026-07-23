@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Is Suspicious? | Read4All</title>
+<meta name="description" content="Read the statements, compare the evidence, and solve the case — a Read4All mini challenge.">
+<link rel="icon" href="https://read4all.pages.dev/assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#10243f; --navy-2:#1d3a5f; --sky:#fffaf0; --sky-2:#fdf3e0;
+    --blue:#3d6b4f; --yellow:#b98a2e; --yellow-soft:#fdeec9;
+    --white:#fff; --ink:#2b2b25; --muted:#6d6a5e; --line:#eadfc8;
+    --radius:18px; --shadow:0 10px 30px rgba(16,36,63,.10);
+    --ok:#2e7d4f; --bad:#c0392b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito Sans',system-ui,sans-serif;background:var(--sky);color:var(--ink);line-height:1.65;font-size:17px}
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--navy)}
+  a{color:var(--blue)}
+  button{font-family:inherit}
+  .hero{background:linear-gradient(180deg,var(--sky),var(--sky-2));text-align:center;padding:52px 20px 44px;border-bottom:1px solid var(--line)}
+  .hero .kicker{display:inline-block;color:var(--yellow);font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .hero .icon{font-size:2.6rem;margin-bottom:6px}
+  .hero h1{color:var(--navy);font-size:clamp(1.9rem,5vw,2.9rem);font-weight:900;margin-bottom:8px}
+  .hero p{max-width:600px;margin:0 auto 22px;color:var(--muted)}
+  .btn{border:0;cursor:pointer;font-weight:800;font-size:.95rem;border-radius:999px;padding:13px 28px;transition:transform .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  .btn.yellow{background:var(--yellow);color:var(--navy)}
+  .btn.blue{background:var(--blue);color:#fff}
+  .btn.grey{background:var(--line);color:var(--muted)}
+  .btn:disabled{opacity:.5;cursor:default;transform:none}
+  .backhome{position:fixed;top:14px;left:14px;z-index:60;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--white);border:1px solid var(--line);border-radius:50%;box-shadow:var(--shadow);color:var(--navy);font-weight:800;font-size:1.25rem;text-decoration:none}
+  .backhome:hover{background:var(--sky-2)}
+  .wrap{max-width:820px;margin:0 auto;padding:26px 20px 70px}
+  .status{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 22px;margin-bottom:26px}
+  .stat{font-weight:800;color:var(--navy);font-size:.92rem}
+  .stat b{color:var(--yellow);font-size:1.2rem}
+  .panel{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;margin-bottom:20px}
+  .panel h2{font-size:1.25rem;margin-bottom:10px}
+  .panel p.sc{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+  .case-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:560px){.case-grid{grid-template-columns:1fr}}
+  .case-card{background:var(--sky);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:.88rem}
+  .case-card b{color:var(--navy)}
+  .overlay{position:fixed;inset:0;background:rgba(16,36,63,.6);z-index:100;display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto}
+  .overlay.show{display:flex;animation:fadein .2s ease}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  .modal{background:var(--white);border-radius:20px;max-width:640px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.4);animation:pop .25s ease;position:relative;margin:auto 0}
+  @keyframes pop{from{transform:translateY(14px);opacity:.6}to{transform:none;opacity:1}}
+  .modal .close{position:absolute;top:12px;right:14px;z-index:5;border:none;background:var(--sky);color:var(--navy);width:36px;height:36px;border-radius:50%;cursor:pointer;font-weight:800}
+  .m-pad{padding:30px}
+  @media(max-width:560px){.m-pad{padding:20px}}
+  .ready{text-align:center;padding:44px 30px}
+  .ready .icon{font-size:2.6rem;margin-bottom:6px}
+  .ready h2{font-size:1.55rem;margin-bottom:6px}
+  .ready p{color:var(--muted);margin-bottom:8px}
+  .ready .meta{display:flex;gap:10px;justify-content:center;margin:14px 0 22px;flex-wrap:wrap}
+  .ready .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .pill{font-size:.72rem;font-weight:800;border-radius:999px;padding:4px 12px;background:var(--sky);border:1px solid var(--line);color:var(--muted)}
+  .pill.pts{background:var(--yellow-soft);border-color:#efd98d;color:#8a6d0b}
+  .q-top{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+  .q-top .qnum{font-size:.75rem;font-weight:800;color:var(--yellow);letter-spacing:.08em;text-transform:uppercase;background:var(--navy);border-radius:999px;padding:4px 14px}
+  .q-top .qpts{font-size:.78rem;font-weight:800;color:var(--muted);align-self:center}
+  h3.qtext{font-size:1.15rem;margin-bottom:14px;font-family:'Nunito Sans',sans-serif;color:var(--navy)}
+  .opts{display:grid;gap:10px}
+  .opt{cursor:pointer;text-align:left;background:var(--white);border:2px solid var(--line);border-radius:12px;padding:13px 16px;font-size:.92rem;font-weight:700;color:var(--ink);transition:border-color .12s ease}
+  .opt:hover,.opt:focus-visible{border-color:var(--blue);background:var(--sky);outline:none}
+  .opt.correct{border-color:var(--ok);background:#e3f2ee}
+  .opt.wrong{border-color:var(--bad);background:#fbe9ec}
+  .opt:disabled{cursor:default}
+  .check{display:flex;align-items:flex-start;gap:10px;background:var(--white);border:2px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;font-size:.88rem;font-weight:700}
+  .check input{margin-top:4px;accent-color:var(--blue);width:18px;height:18px}
+  .feedback{display:none;margin-top:14px;border-radius:12px;padding:14px 16px;font-size:.9rem}
+  .feedback.show{display:block;animation:fadein .2s ease}
+  .feedback.good{background:#e3f2ee;border:1px solid #bfdcc9}
+  .feedback.bad{background:#fbe9ec;border:1px solid #efd0d6}
+  .feedback.hint{background:var(--yellow-soft);border:1px solid #efd98d}
+  .feedback b{display:block;margin-bottom:4px}
+  .q-actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  .result{text-align:center;padding:40px 30px}
+  .result .big{font-size:2.8rem}
+  .result h2{margin:8px 0 4px}
+  .result p{color:var(--muted)}
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:300}
+  footer{background:var(--sky-2);border-top:1px solid var(--line);color:var(--muted);padding:24px 20px;text-align:center;font-size:.85rem;margin-top:60px}
+  footer a{color:var(--blue)}
+  footer strong{color:var(--navy)}
+</style>
+</head>
+<body>
+
+<a class="backhome" href="challenge-week.html" aria-label="Back to Challenge Week menu" title="Back to menu">←</a>
+
+<header class="hero">
+  <span class="kicker">Wednesday Mini Challenge</span>
+  <div class="icon">🔎</div>
+  <h1>Who Is Suspicious?</h1>
+  <p>Read the statements, compare the evidence, and solve the case of
+     <strong>The Missing Reading Tablet</strong>.</p>
+  <button class="btn yellow" id="heroStart" type="button">Start Challenge</button>
+</header>
+
+<div class="wrap">
+  <div class="status">
+    <div class="stat">Best score: <b id="best">0</b>/40</div>
+    <div class="stat" id="statusTxt">Case unsolved</div>
+  </div>
+
+  <!-- the case file is public reading material; questions only appear in the challenge -->
+  <div class="panel">
+    <h2>📁 Case File: The Missing Reading Tablet</h2>
+    <p class="sc">A tablet disappeared from the reading room between <strong>2:05 PM and 2:15 PM</strong>.
+       Study the statements and the evidence carefully before starting.</p>
+    <div class="case-grid" id="chars"></div>
+    <h2 style="font-size:1.05rem;margin:16px 0 8px">📋 Evidence</h2>
+    <div class="case-grid" id="evid"></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalHead">
+  <div class="modal">
+    <button class="close" type="button" id="modalClose" aria-label="Close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<canvas id="confetti"></canvas>
+
+<footer>
+  <strong>Read4All</strong> · Mini Challenge Week · SDG 4: Quality Education<br>
+  ⚙️ Any technical issues? Contact us on Instagram:
+  <a href="https://www.instagram.com/read4all__" target="_blank" rel="noopener"><strong>@read4all__</strong></a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+/* ============ WHO IS SUSPICIOUS? — all case content lives here ============ */
+var CASE={
+  characters:[
+    {n:"Maya", s:"“I left the room at 2:00 PM to buy a drink.”"},
+    {n:"Daniel", s:"“I stayed near the entrance and never entered the reading room.”"},
+    {n:"Sara", s:"“I saw Daniel inside the reading room at around 2:10 PM.”"},
+    {n:"Amir", s:"“I was helping at the registration desk.”"}
+  ],
+  evidence:[
+    "Camera footage showed Maya outside at 2:08 PM",
+    "Registration records confirmed Amir was at the desk",
+    "Daniel claimed he never entered the room",
+    "Sara said she saw Daniel inside the room"
+  ],
+  questions:[
+    {q:"Who appears most suspicious?", opts:["Daniel","Maya","Sara","Amir"], a:0,
+     why:"Sara places Daniel inside the room during the theft window, but Daniel denies ever entering — his story conflicts with a witness."},
+    {q:"Which statement conflicts with the evidence?", opts:["Daniel's statement","Maya's statement","Amir's statement","Sara's statement"], a:0,
+     why:"Daniel says he never entered, but Sara reported seeing him inside at 2:10 PM — both cannot be true."},
+    {q:"Who has a confirmed alibi?", opts:["Both Maya and Amir","Only Daniel","Only Sara","No one"], a:0,
+     why:"Camera footage confirms Maya was outside, and registration records confirm Amir was at the desk."},
+    {q:"Which clue is most important?", opts:["Sara seeing Daniel inside at 2:10 PM","Maya buying a drink","Amir helping at the desk","The tablet's colour"], a:0,
+     why:"It directly contradicts Daniel's own statement during the exact theft window."},
+    {q:"What time period matters most?", opts:["2:05 PM – 2:15 PM","1:00 PM – 2:00 PM","2:30 PM – 3:00 PM","Lunchtime"], a:0,
+     why:"The tablet disappeared between 2:05 and 2:15 PM — only events in that window matter."}
+  ],
+  suspect:{opts:["Daniel","Maya","Sara","Amir"], a:0},
+  proof:{opts:["Sara said she saw Daniel inside the room","Daniel claimed he never entered the room","Camera footage showed Maya outside at 2:08 PM","Registration records confirmed Amir was at the desk"], a:[0,1]}
+};
+var KEY="r4a_case";
+
+var state={best:0,done:false};
+try{state=Object.assign(state,JSON.parse(localStorage.getItem(KEY)||"{}"));}catch(e){}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+
+/* ---- Challenge Week: unlock date + shared leaderboard ---- */
+var DAYCOL="wed", UNLOCK_DATE="2026-07-29", UNLOCK_LABEL="Wednesday 29 July";
+var WK_URL="https://dmtpwyvdddkocvrvmsrd.supabase.co";
+var WK_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtdHB3eXZkZGRrb2N2cnZtc3JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5MjA5ODYsImV4cCI6MjA5OTQ5Njk4Nn0.3Ku9GY_QqRCAMNzDBaBHchrBRLl-MsYolYl6PCB9vIc";
+var sbw=(typeof supabase!=="undefined")?supabase.createClient(WK_URL,WK_KEY):null;
+function isLocked(){return new Date()<new Date(UNLOCK_DATE+"T00:00:00");}
+function pushWeek(){
+  var wk={}; try{wk=JSON.parse(localStorage.getItem("r4a_week")||"{}");}catch(e){}
+  if(!sbw||!wk.name||!wk.pin||!state.best)return;
+  sbw.rpc("week_submit",{p_name:wk.name,p_pin:wk.pin,p_day:DAYCOL,p_score:state.best}).then(function(){});
+}
+
+function $(id){return document.getElementById(id);}
+function esc(s){var d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML;}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* render the public case file */
+$("chars").innerHTML=CASE.characters.map(function(c){return '<div class="case-card">🧑 <b>'+esc(c.n)+':</b> '+esc(c.s)+'</div>';}).join("");
+$("evid").innerHTML=CASE.evidence.map(function(e){return '<div class="case-card">📋 '+esc(e)+'</div>';}).join("");
+function renderStatus(){
+  $("best").textContent=state.best;
+  $("statusTxt").textContent=state.done?"🏅 Case solved — replay to beat your best!":"Case unsolved";
+}
+
+/* modal plumbing */
+var lastFocus=null;
+function openModal(html){lastFocus=document.activeElement;$("modalContent").innerHTML=html;$("overlay").classList.add("show");document.body.style.overflow="hidden";$("modalClose").focus();}
+function closeModal(){$("overlay").classList.remove("show");document.body.style.overflow="";if(lastFocus)lastFocus.focus();}
+$("modalClose").addEventListener("click",closeModal);
+$("overlay").addEventListener("click",function(ev){if(ev.target===this)closeModal();});
+document.addEventListener("keydown",function(ev){if(ev.key==="Escape"&&$("overlay").classList.contains("show"))closeModal();});
+
+function showReady(){
+  openModal('<div class="ready"><div class="icon">🔎</div>'
+    +'<h2 id="modalHead">Are you ready for the challenge?</h2>'
+    +'<p>Two random detective questions, then name your suspect with supporting evidence.</p>'
+    +'<div class="meta"><span class="pill">⏱ 5 min</span><span class="pill pts">🪙 up to 40 pts</span></div>'
+    +'<div class="row"><button class="btn yellow" id="startNow" type="button">Start Now</button>'
+    +'<button class="btn grey" id="cancelBtn" type="button">Cancel</button></div></div>');
+  $("cancelBtn").addEventListener("click",closeModal);
+  $("startNow").addEventListener("click",startChallenge);
+  $("startNow").focus();
+}
+$("heroStart").addEventListener("click",function(){
+  if(isLocked()){
+    openModal('<div class="ready"><div class="icon">🔒</div>'
+      +'<h2 id="modalHead">Challenge locked</h2>'
+      +'<p>This challenge unlocks on <strong>'+UNLOCK_LABEL+'</strong>. Come back then!</p>'
+      +'<div class="row"><a class="btn grey" href="challenge-week.html" style="text-decoration:none">Back to Menu</a></div></div>');
+    return;
+  }
+  var wkp={}; try{wkp=JSON.parse(localStorage.getItem("r4a_week")||"{}");}catch(e){}
+  if(!wkp.name||!wkp.pin){
+    openModal('<div class="ready"><div class="icon">🧭</div>'
+      +'<h2 id="modalHead">Join Challenge Week first</h2>'
+      +'<p>Before playing, join on the menu page with your Instagram account name and a short password — that is how your points are recorded.</p>'
+      +'<div class="row"><a class="btn yellow" href="challenge-week.html" style="text-decoration:none">Go to Menu &amp; Join</a></div></div>');
+    return;
+  }
+  showReady();
+});
+
+/* challenge: 2 random questions + final deduction */
+function startChallenge(){
+  var earned=0;
+  var picked=shuffle(CASE.questions).slice(0,2);
+  var idx=0;
+  function step(){
+    var q=picked[idx];
+    var order=shuffle(q.opts.map(function(_,i){return i;}));
+    var correct=order.indexOf(q.a);
+    var used=false;
+    $("modalContent").innerHTML='<div class="m-pad">'
+      +'<div class="q-top"><span class="qnum">Detective question '+(idx+1)+' of 2</span><span class="qpts">+10 pts</span></div>'
+      +'<h3 class="qtext" id="modalHead">'+esc(q.q)+'</h3>'
+      +'<div class="opts" id="opts">'+order.map(function(oi,i){return '<button class="opt" data-i="'+i+'" type="button">'+esc(q.opts[oi])+'</button>';}).join("")+'</div>'
+      +'<div class="feedback" id="fb"></div>'
+      +'<div class="q-actions" id="acts"></div></div>';
+    var first=$("opts").querySelector(".opt"); if(first)first.focus();
+    $("opts").addEventListener("click",function(ev){
+      var b=ev.target.closest(".opt"); if(!b||b.disabled)return;
+      var i=Number(b.dataset.i);
+      var all=$("opts").querySelectorAll(".opt");
+      if(i===correct){
+        all.forEach(function(x){x.disabled=true;});
+        b.classList.add("correct");
+        var pts=used?5:10; earned+=pts;
+        $("fb").className="feedback good show";
+        $("fb").innerHTML="<b>✅ Correct! +"+pts+" points</b>"+esc(q.why);
+        next();
+      }else{
+        b.classList.add("wrong"); b.disabled=true;
+        if(!used){used=true;
+          $("fb").className="feedback hint show";
+          $("fb").innerHTML="<b>💡 Look again</b>Compare each statement with the evidence — one retry allowed (half points).";
+        }else{
+          all.forEach(function(x){x.disabled=true;});
+          all[correct].classList.add("correct");
+          $("fb").className="feedback bad show";
+          $("fb").innerHTML="<b>❌ Not this time.</b>"+esc(q.why);
+          next();
+        }
+      }
+    });
+    function next(){
+      $("acts").innerHTML='<button class="btn blue" id="nextBtn" type="button">'+(idx<1?"Next Question →":"Name Your Suspect →")+'</button>';
+      $("nextBtn").addEventListener("click",function(){idx++; if(idx<2)step(); else deduction();});
+      $("nextBtn").focus();
+    }
+  }
+  function deduction(){
+    var order=shuffle(CASE.suspect.opts.map(function(_,i){return i;}));
+    $("modalContent").innerHTML='<div class="m-pad">'
+      +'<div class="q-top"><span class="qnum">Final Deduction</span><span class="qpts">+20 pts</span></div>'
+      +'<h3 class="qtext" id="modalHead">Who is your suspect — and what evidence supports it?</h3>'
+      +'<div class="opts" id="suspects">'+order.map(function(oi){return '<button class="opt" data-i="'+oi+'" type="button">🧑 '+esc(CASE.suspect.opts[oi])+'</button>';}).join("")+'</div>'
+      +'<p style="font-weight:800;color:var(--navy);font-size:.85rem;margin:14px 0 8px">Select the TWO pieces of supporting evidence:</p>'
+      +'<div class="opts" id="proofs">'+CASE.proof.opts.map(function(p,i){return '<label class="check"><input type="checkbox" data-p="'+i+'"> '+esc(p)+'</label>';}).join("")+'</div>'
+      +'<div class="feedback" id="fb"></div>'
+      +'<div class="q-actions"><button class="btn yellow" id="submitCase" type="button">Submit Deduction</button><span id="acts"></span></div></div>';
+    var chosen=null;
+    $("suspects").addEventListener("click",function(ev){
+      var b=ev.target.closest(".opt"); if(!b)return;
+      $("suspects").querySelectorAll(".opt").forEach(function(x){x.classList.remove("correct");});
+      b.classList.add("correct"); chosen=Number(b.dataset.i);
+    });
+    $("submitCase").addEventListener("click",function(){
+      var picks=[].slice.call(document.querySelectorAll("#proofs input:checked")).map(function(x){return Number(x.dataset.p);});
+      if(chosen===null){$("fb").className="feedback hint show";$("fb").innerHTML="<b>Choose a suspect first.</b>";return;}
+      if(picks.length!==2){$("fb").className="feedback hint show";$("fb").innerHTML="<b>Select exactly two pieces of evidence.</b>";return;}
+      var suspectOk=chosen===CASE.suspect.a;
+      var proofOk=picks.indexOf(0)!==-1&&picks.indexOf(1)!==-1;
+      var pts=(suspectOk?10:0)+(proofOk?10:0); earned+=pts;
+      $("fb").className="feedback "+(suspectOk&&proofOk?"good":"bad")+" show";
+      $("fb").innerHTML="<b>"+(suspectOk&&proofOk?"🕵️ Case closed! +20 points":"Partly right — +"+pts+" points")+"</b>"
+        +"Daniel is the strongest suspect: Sara saw him inside the room at 2:10 PM, which directly contradicts his claim that he never entered. Maya and Amir both have confirmed alibis.<br><br>"
+        +"<em>“Suspicion is not proof. Good readers compare evidence carefully.”</em>";
+      $("submitCase").disabled=true;
+      $("acts").innerHTML=' <button class="btn blue" id="finBtn" type="button">See Result</button>';
+      $("finBtn").addEventListener("click",function(){finish(earned);});
+    });
+  }
+  step();
+}
+
+function finish(earned){
+  var isBest=earned>state.best;
+  state.best=Math.max(state.best,earned);
+  state.done=true;
+  save(); renderStatus(); pushWeek();
+  var perfect=earned===40;
+  $("modalContent").innerHTML='<div class="result">'
+    +'<div class="big">'+(perfect?"🎉":"🏅")+'</div>'
+    +'<h2 id="modalHead">'+(perfect?"Flawless investigation!":"Investigation complete!")+'</h2>'
+    +'<p>You earned <b>'+earned+' points</b>'+(isBest?" — a new personal best!":" · Best: "+state.best)+'</p>'
+    +'<div class="q-actions" style="justify-content:center;margin-top:18px">'
+    +'<button class="btn blue" id="againBtn" type="button">Try Again</button>'
+    +'<button class="btn grey" id="doneBtn" type="button">Close</button>'
+    +'</div></div>';
+  $("againBtn").addEventListener("click",startChallenge);
+  $("doneBtn").addEventListener("click",closeModal);
+  if(perfect)setTimeout(confettiFx,300);
+}
+
+function confettiFx(){
+  var cv=$("confetti"),ctx=cv.getContext("2d");
+  cv.width=innerWidth;cv.height=innerHeight;
+  var colors=["#f5b70a","#3d6fa8","#10243f","#7fb3e8","#ffffff"];
+  var parts=[];for(var i=0;i<180;i++)parts.push({x:Math.random()*cv.width,y:-20-Math.random()*cv.height*.5,w:6+Math.random()*6,h:8+Math.random()*8,c:colors[i%colors.length],v:2+Math.random()*3.5,r:Math.random()*Math.PI,vr:(Math.random()-.5)*.2});
+  var t0=Date.now();
+  (function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    parts.forEach(function(p){p.y+=p.v;p.r+=p.vr;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});
+    if(Date.now()-t0<4200)requestAnimationFrame(tick);else ctx.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+
+renderStatus();
+</script>
+</body>
+</html>

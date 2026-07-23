@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>History or Fiction? | Read4All</title>
+<meta name="description" content="Decide whether unusual historical statements are real or made up — a Read4All mini challenge.">
+<link rel="icon" href="https://read4all.pages.dev/assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#10243f; --navy-2:#1d3a5f; --sky:#fffaf0; --sky-2:#fdf3e0;
+    --blue:#3d6b4f; --yellow:#b98a2e; --yellow-soft:#fdeec9;
+    --white:#fff; --ink:#2b2b25; --muted:#6d6a5e; --line:#eadfc8;
+    --radius:18px; --shadow:0 10px 30px rgba(16,36,63,.10);
+    --ok:#2e7d4f; --bad:#c0392b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito Sans',system-ui,sans-serif;background:var(--sky);color:var(--ink);line-height:1.65;font-size:17px}
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--navy)}
+  a{color:var(--blue)}
+  button{font-family:inherit}
+  .hero{background:linear-gradient(180deg,var(--sky),var(--sky-2));text-align:center;padding:52px 20px 44px;border-bottom:1px solid var(--line)}
+  .hero .kicker{display:inline-block;color:var(--yellow);font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .hero .icon{font-size:2.6rem;margin-bottom:6px}
+  .hero h1{color:var(--navy);font-size:clamp(1.9rem,5vw,2.9rem);font-weight:900;margin-bottom:8px}
+  .hero p{max-width:600px;margin:0 auto 22px;color:var(--muted)}
+  .btn{border:0;cursor:pointer;font-weight:800;font-size:.95rem;border-radius:999px;padding:13px 28px;transition:transform .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  .btn.yellow{background:var(--yellow);color:var(--navy)}
+  .btn.blue{background:var(--blue);color:#fff}
+  .btn.grey{background:var(--line);color:var(--muted)}
+  .btn:disabled{opacity:.5;cursor:default;transform:none}
+  .backhome{position:fixed;top:14px;left:14px;z-index:60;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--white);border:1px solid var(--line);border-radius:50%;box-shadow:var(--shadow);color:var(--navy);font-weight:800;font-size:1.25rem;text-decoration:none}
+  .backhome:hover{background:var(--sky-2)}
+  .wrap{max-width:760px;margin:0 auto;padding:26px 20px 70px}
+  .status{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 22px;margin-bottom:26px}
+  .stat{font-weight:800;color:var(--navy);font-size:.92rem}
+  .stat b{color:var(--yellow);font-size:1.2rem}
+  .panel{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
+  .panel h2{font-size:1.25rem;margin-bottom:10px}
+  .panel ol{margin-left:20px;font-size:.92rem}
+  .panel li{margin-bottom:5px}
+  .overlay{position:fixed;inset:0;background:rgba(16,36,63,.6);z-index:100;display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto}
+  .overlay.show{display:flex;animation:fadein .2s ease}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  .modal{background:var(--white);border-radius:20px;max-width:620px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.4);animation:pop .25s ease;position:relative;margin:auto 0}
+  @keyframes pop{from{transform:translateY(14px);opacity:.6}to{transform:none;opacity:1}}
+  .modal .close{position:absolute;top:12px;right:14px;z-index:5;border:none;background:var(--sky);color:var(--navy);width:36px;height:36px;border-radius:50%;cursor:pointer;font-weight:800}
+  .m-pad{padding:30px}
+  @media(max-width:560px){.m-pad{padding:20px}}
+  .ready{text-align:center;padding:44px 30px}
+  .ready .icon{font-size:2.6rem;margin-bottom:6px}
+  .ready h2{font-size:1.55rem;margin-bottom:6px}
+  .ready p{color:var(--muted);margin-bottom:8px}
+  .ready .meta{display:flex;gap:10px;justify-content:center;margin:14px 0 22px;flex-wrap:wrap}
+  .ready .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .pill{font-size:.72rem;font-weight:800;border-radius:999px;padding:4px 12px;background:var(--sky);border:1px solid var(--line);color:var(--muted)}
+  .pill.pts{background:var(--yellow-soft);border-color:#efd98d;color:#8a6d0b}
+  .q-top{display:flex;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .q-top .qnum{font-size:.75rem;font-weight:800;color:var(--yellow);letter-spacing:.08em;text-transform:uppercase;background:var(--navy);border-radius:999px;padding:4px 14px}
+  .q-top .qpts{font-size:.78rem;font-weight:800;color:var(--muted);align-self:center}
+  .streak{font-size:.85rem;font-weight:800;color:var(--muted);margin-bottom:10px}
+  .streak b{color:var(--yellow)}
+  .flip{perspective:1000px;margin-bottom:14px}
+  .flip-inner{position:relative;transition:transform .5s;transform-style:preserve-3d;min-height:170px}
+  .flip.revealed .flip-inner{transform:rotateY(180deg)}
+  .flip-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:18px;display:flex;flex-direction:column;justify-content:center}
+  .flip-front{background:var(--sky);border:1px solid var(--line)}
+  .flip-back{background:var(--navy);color:#fff;transform:rotateY(180deg);overflow-y:auto}
+  .flip-back b{color:var(--yellow)}
+  .flip-front .stmt{font-size:1.05rem;font-weight:700;color:var(--navy)}
+  .opts2{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+  .opt{cursor:pointer;text-align:center;background:var(--white);border:2px solid var(--line);border-radius:12px;padding:13px 16px;font-size:.95rem;font-weight:800;color:var(--ink)}
+  .opt:hover,.opt:focus-visible{border-color:var(--blue);background:var(--sky);outline:none}
+  .opt:disabled{cursor:default;opacity:.7}
+  .q-actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  .result{text-align:center;padding:40px 30px}
+  .result .big{font-size:2.8rem}
+  .result h2{margin:8px 0 4px}
+  .result p{color:var(--muted)}
+  .bdg{display:inline-block;background:var(--yellow-soft);border:1px solid #efd98d;border-radius:999px;padding:8px 20px;font-weight:800;color:var(--navy);margin-top:10px}
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:300}
+  footer{background:var(--sky-2);border-top:1px solid var(--line);color:var(--muted);padding:24px 20px;text-align:center;font-size:.85rem;margin-top:60px}
+  footer a{color:var(--blue)}
+  footer strong{color:var(--navy)}
+</style>
+</head>
+<body>
+
+<a class="backhome" href="challenge-week.html" aria-label="Back to Challenge Week menu" title="Back to menu">←</a>
+
+<header class="hero">
+  <span class="kicker">Friday Mini Challenge</span>
+  <div class="icon">🏺</div>
+  <h1>History or Fiction?</h1>
+  <p>Decide whether unusual historical statements are real or made up. Five random flip-cards —
+     build a streak and earn the <strong>History Detective</strong> badge.</p>
+  <button class="btn yellow" id="heroStart" type="button">Start Challenge</button>
+</header>
+
+<div class="wrap">
+  <div class="status">
+    <div class="stat">Best score: <b id="best">0</b>/50</div>
+    <div class="stat" id="badgeTxt">Badge: not earned yet</div>
+  </div>
+
+  <div class="panel">
+    <h2>📜 How to play</h2>
+    <ol>
+      <li>Read each strange statement and choose <strong>History</strong> (it really happened) or <strong>Fiction</strong> (made up).</li>
+      <li>The card flips to reveal the truth with a short explanation.</li>
+      <li>Every correct answer earns <strong>10 points</strong> and grows your 🔥 streak.</li>
+      <li>Answer all <strong>5 in a row</strong> correctly to earn the <strong>🏺 History Detective badge</strong>.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalHead">
+  <div class="modal">
+    <button class="close" type="button" id="modalClose" aria-label="Close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<canvas id="confetti"></canvas>
+
+<footer>
+  <strong>Read4All</strong> · Mini Challenge Week · SDG 4: Quality Education<br>
+  ⚙️ Any technical issues? Contact us on Instagram:
+  <a href="https://www.instagram.com/read4all__" target="_blank" rel="noopener"><strong>@read4all__</strong></a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+/* ============ HISTORY OR FICTION? — all statements live here ============ */
+var QS=[
+  {s:"Some medieval courts placed animals on trial.", a:"History",
+   why:"True! Pigs, rats and even insects were formally tried in medieval Europe, sometimes with lawyers."},
+  {s:"The Great Wall of China is clearly visible from the Moon.", a:"Fiction",
+   why:"A myth — astronauts confirm it isn't visible from the Moon, and it's barely visible even from low orbit."},
+  {s:"Ancient Romans sometimes used urine when washing clothes.", a:"History",
+   why:"True! The ammonia in urine worked as a cleaning agent, and Rome even taxed its collection."},
+  {s:"Napoleon was extremely short compared with men of his time.", a:"Fiction",
+   why:"He was about 1.69 m — average for his era. The 'tiny Napoleon' image was British propaganda plus confusing French units."},
+  {s:"Vikings commonly wore horned helmets in battle.", a:"Fiction",
+   why:"No battle-ready horned helmet has ever been found. The image comes from 19th-century opera costumes."},
+  {s:"Oxford University is older than the Aztec Empire.", a:"History",
+   why:"True! Teaching at Oxford began around 1096; the Aztec Empire was founded in 1428."},
+  {s:"Albert Einstein failed mathematics at school.", a:"Fiction",
+   why:"A myth — Einstein excelled at maths and had mastered calculus by age 15."},
+  {s:"Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid.", a:"History",
+   why:"True! The pyramid was ~2,500 years old before Cleopatra was born; the Moon landing was only ~2,000 years after her."},
+  {s:"In 1518, a 'dancing plague' made people in Strasbourg dance for days without stopping.", a:"History",
+   why:"True! Dozens of people danced uncontrollably for days; historians still debate the cause."},
+  {s:"Most educated people in the Middle Ages believed the Earth was flat.", a:"Fiction",
+   why:"Educated medieval people knew the Earth was round — the 'flat Earth belief' story was invented in the 1800s."}
+];
+var KEY="r4a_hist", COUNT=5, PER_Q=10;
+
+var state={best:0,badge:false};
+try{state=Object.assign(state,JSON.parse(localStorage.getItem(KEY)||"{}"));}catch(e){}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+
+/* ---- Challenge Week: unlock date + shared leaderboard ---- */
+var DAYCOL="fri", UNLOCK_DATE="2026-07-31", UNLOCK_LABEL="Friday 31 July";
+var WK_URL="https://dmtpwyvdddkocvrvmsrd.supabase.co";
+var WK_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtdHB3eXZkZGRrb2N2cnZtc3JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5MjA5ODYsImV4cCI6MjA5OTQ5Njk4Nn0.3Ku9GY_QqRCAMNzDBaBHchrBRLl-MsYolYl6PCB9vIc";
+var sbw=(typeof supabase!=="undefined")?supabase.createClient(WK_URL,WK_KEY):null;
+function isLocked(){return new Date()<new Date(UNLOCK_DATE+"T00:00:00");}
+function pushWeek(){
+  var wk={}; try{wk=JSON.parse(localStorage.getItem("r4a_week")||"{}");}catch(e){}
+  if(!sbw||!wk.name||!wk.pin||!state.best)return;
+  sbw.rpc("week_submit",{p_name:wk.name,p_pin:wk.pin,p_day:DAYCOL,p_score:state.best}).then(function(){});
+}
+
+function $(id){return document.getElementById(id);}
+function esc(s){var d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML;}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function renderStatus(){
+  $("best").textContent=state.best;
+  $("badgeTxt").textContent=state.badge?"🏺 History Detective badge earned!":"Badge: not earned yet";
+}
+
+var lastFocus=null;
+function openModal(html){lastFocus=document.activeElement;$("modalContent").innerHTML=html;$("overlay").classList.add("show");document.body.style.overflow="hidden";$("modalClose").focus();}
+function closeModal(){$("overlay").classList.remove("show");document.body.style.overflow="";if(lastFocus)lastFocus.focus();}
+$("modalClose").addEventListener("click",closeModal);
+$("overlay").addEventListener("click",function(ev){if(ev.target===this)closeModal();});
+document.addEventListener("keydown",function(ev){if(ev.key==="Escape"&&$("overlay").classList.contains("show"))closeModal();});
+
+function showReady(){
+  openModal('<div class="ready"><div class="icon">🏺</div>'
+    +'<h2 id="modalHead">Are you ready for the challenge?</h2>'
+    +'<p>Five unusual statements — decide: did it really happen, or is it made up?</p>'
+    +'<div class="meta"><span class="pill">⏱ 4 min</span><span class="pill pts">🪙 up to 50 pts + badge</span></div>'
+    +'<div class="row"><button class="btn yellow" id="startNow" type="button">Start Now</button>'
+    +'<button class="btn grey" id="cancelBtn" type="button">Cancel</button></div></div>');
+  $("cancelBtn").addEventListener("click",closeModal);
+  $("startNow").addEventListener("click",startChallenge);
+  $("startNow").focus();
+}
+$("heroStart").addEventListener("click",function(){
+  if(isLocked()){
+    openModal('<div class="ready"><div class="icon">🔒</div>'
+      +'<h2 id="modalHead">Challenge locked</h2>'
+      +'<p>This challenge unlocks on <strong>'+UNLOCK_LABEL+'</strong>. Come back then!</p>'
+      +'<div class="row"><a class="btn grey" href="challenge-week.html" style="text-decoration:none">Back to Menu</a></div></div>');
+    return;
+  }
+  var wkp={}; try{wkp=JSON.parse(localStorage.getItem("r4a_week")||"{}");}catch(e){}
+  if(!wkp.name||!wkp.pin){
+    openModal('<div class="ready"><div class="icon">🧭</div>'
+      +'<h2 id="modalHead">Join Challenge Week first</h2>'
+      +'<p>Before playing, join on the menu page with your Instagram account name and a short password — that is how your points are recorded.</p>'
+      +'<div class="row"><a class="btn yellow" href="challenge-week.html" style="text-decoration:none">Go to Menu &amp; Join</a></div></div>');
+    return;
+  }
+  showReady();
+});
+
+function startChallenge(){
+  var picked=shuffle(QS).slice(0,COUNT);
+  var idx=0, earned=0, streak=0, best=0;
+  function step(){
+    var q=picked[idx];
+    $("modalContent").innerHTML='<div class="m-pad">'
+      +'<div class="q-top"><span class="qnum">Statement '+(idx+1)+' of '+COUNT+'</span><span class="qpts">+'+PER_Q+' pts</span></div>'
+      +'<div class="streak">🔥 Current streak: <b>'+streak+'</b></div>'
+      +'<div class="flip" id="flip"><div class="flip-inner">'
+      +'<div class="flip-face flip-front"><p class="stmt" id="modalHead">'+esc(q.s)+'</p></div>'
+      +'<div class="flip-face flip-back" id="flipBack"></div>'
+      +'</div></div>'
+      +'<div class="opts2">'
+      +'<button class="opt" id="pickH" type="button">🏺 History</button>'
+      +'<button class="opt" id="pickF" type="button">🪄 Fiction</button>'
+      +'</div>'
+      +'<div class="q-actions" id="acts"></div></div>';
+    function answer(pick){
+      $("pickH").disabled=true;$("pickF").disabled=true;
+      var ok=pick===q.a;
+      if(ok){streak++; best=Math.max(best,streak); earned+=PER_Q;}
+      else streak=0;
+      $("flipBack").innerHTML="<b>"+(ok?"✅ Correct — ":"❌ It's ")+esc(q.a)+"!</b><p style='font-size:.88rem;margin-top:6px'>"+esc(q.why)+"</p>";
+      $("flip").classList.add("revealed");
+      $("acts").innerHTML='<button class="btn blue" id="nextBtn" type="button">'+(idx<COUNT-1?"Next Statement →":"See Result")+'</button>';
+      $("nextBtn").addEventListener("click",function(){
+        idx++;
+        if(idx<COUNT)step();
+        else finish(earned,best>=COUNT);
+      });
+      $("nextBtn").focus();
+    }
+    $("pickH").addEventListener("click",function(){answer("History");});
+    $("pickF").addEventListener("click",function(){answer("Fiction");});
+    $("pickH").focus();
+  }
+  step();
+}
+
+function finish(earned,gotBadge){
+  var isBest=earned>state.best;
+  state.best=Math.max(state.best,earned);
+  if(gotBadge)state.badge=true;
+  save(); renderStatus(); pushWeek();
+  $("modalContent").innerHTML='<div class="result">'
+    +'<div class="big">'+(gotBadge?"🎉":"🏅")+'</div>'
+    +'<h2 id="modalHead">'+(gotBadge?"Perfect streak!":"Challenge complete!")+'</h2>'
+    +'<p>You earned <b>'+earned+' points</b>'+(isBest?" — a new personal best!":" · Best: "+state.best)+'</p>'
+    +(gotBadge?'<span class="bdg">🏺 History Detective badge earned!</span>':'')
+    +'<div class="q-actions" style="justify-content:center;margin-top:18px">'
+    +'<button class="btn blue" id="againBtn" type="button">Try Again</button>'
+    +'<button class="btn grey" id="doneBtn" type="button">Close</button>'
+    +'</div></div>';
+  $("againBtn").addEventListener("click",startChallenge);
+  $("doneBtn").addEventListener("click",closeModal);
+  if(gotBadge)setTimeout(confettiFx,300);
+}
+
+function confettiFx(){
+  var cv=$("confetti"),ctx=cv.getContext("2d");
+  cv.width=innerWidth;cv.height=innerHeight;
+  var colors=["#f5b70a","#3d6fa8","#10243f","#7fb3e8","#ffffff"];
+  var parts=[];for(var i=0;i<180;i++)parts.push({x:Math.random()*cv.width,y:-20-Math.random()*cv.height*.5,w:6+Math.random()*6,h:8+Math.random()*8,c:colors[i%colors.length],v:2+Math.random()*3.5,r:Math.random()*Math.PI,vr:(Math.random()-.5)*.2});
+  var t0=Date.now();
+  (function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    parts.forEach(function(p){p.y+=p.v;p.r+=p.vr;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});
+    if(Date.now()-t0<4200)requestAnimationFrame(tick);else ctx.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+
+renderStatus();
+</script>
+</body>
+</html>
