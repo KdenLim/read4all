@@ -89,6 +89,25 @@
   .dscore.got span{color:#8a6d0b}
   .lb .total-cell{font-size:1.05rem;color:var(--navy)}
 
+  @media (max-width:640px){
+    .lb{min-width:0}
+    .lb table,.lb tbody,.lb tr,.lb td{display:block;width:100%}
+    .lb table{border:0;background:transparent;border-radius:0;overflow:visible;box-shadow:none}
+    .lb thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .lb tbody{display:grid;gap:12px}
+    .lb tr{min-width:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .lb th,.lb td{padding:10px 14px;font-size:.84rem}
+    .lb td{min-width:0;overflow-wrap:anywhere}
+    .lb td::before{display:block;margin-bottom:3px;color:var(--muted);font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .lb td:nth-child(1)::before{content:"Rank"}
+    .lb td:nth-child(2)::before{content:"Instagram"}
+    .lb td:nth-child(3)::before{content:"Daily scores"}
+    .lb td:nth-child(4)::before{content:"Total"}
+    .lb td[colspan]::before{content:none}
+    .lb .days{white-space:normal}
+    .dscore{margin:3px 3px 3px 0}
+  }
+
 </style>
 </head>
 <body class="challenge-week-page">
@@ -224,16 +243,16 @@ var CHALLENGES=[
    href:"challenge-week/emoji-detective.html", localKey:"r4a_emoji", localField:"best"},
   {col:"tue", day:"Tue 28 Jul", unlock:"2026-07-28", icon:"🧭", title:"Guess the Place",
    teaser:"Read mystery destination articles and guess where in the world they are.", time:"10 min", pts:85,
-   href:"guess-the-place.html", localKey:"r4a_gtp", localField:"score"},
+   href:"challenge-week/guess-the-place.html", localKey:"r4a_gtp", localField:"score"},
   {col:"wed", day:"Wed 29 Jul", unlock:"2026-07-29", icon:"🔎", title:"Who Is Suspicious?",
    teaser:"Read the statements, compare the evidence, and solve the case.", time:"5 min", pts:40,
-   href:"who-is-suspicious.html", localKey:"r4a_case", localField:"best"},
+   href:"challenge-week/who-is-suspicious.html", localKey:"r4a_case", localField:"best"},
   {col:"thu", day:"Thu 30 Jul", unlock:"2026-07-30", icon:"📰", title:"Fact or Fake Online?",
    teaser:"Identify misleading headlines and online warning signs.", time:"4 min", pts:40,
-   href:"fact-or-fake.html", localKey:"r4a_fact", localField:"best"},
+   href:"challenge-week/fact-or-fake.html", localKey:"r4a_fact", localField:"best"},
   {col:"fri", day:"Fri 31 Jul", unlock:"2026-07-31", icon:"🏺", title:"History or Fiction?",
    teaser:"Decide whether unusual historical statements are real or made up.", time:"4 min", pts:50,
-   href:"history-or-fiction.html", localKey:"r4a_hist", localField:"best"}
+   href:"challenge-week/history-or-fiction.html", localKey:"r4a_hist", localField:"best"}
 ];
 
 var wk={name:""};

@@ -218,7 +218,7 @@ $("heroStart").addEventListener("click",function(){
     openModal('<div class="ready"><div class="icon">🔒</div>'
       +'<h2 id="modalHead">Challenge locked</h2>'
       +'<p>This challenge unlocks on <strong>'+UNLOCK_LABEL+'</strong>. Come back then!</p>'
-      +'<div class="row"><a class="btn grey" href="challenge-week.html" style="text-decoration:none">Back to Menu</a></div></div>');
+      +'<div class="row"><a class="btn grey" href="../challenge-week.html" style="text-decoration:none">Back to Menu</a></div></div>');
     return;
   }
   var wkp={}; try{wkp=JSON.parse(localStorage.getItem("r4a_week")||"{}");}catch(e){}
