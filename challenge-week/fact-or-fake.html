@@ -92,7 +92,7 @@
 </head>
 <body>
 
-<a class="backhome" href="challenge-week.html" aria-label="Back to Challenge Week menu" title="Back to menu">←</a>
+<a class="backhome" href="../challenge-week.html" aria-label="Back to Challenge Week menu" title="Back to menu">←</a>
 
 <header class="hero">
   <span class="kicker">Thursday Mini Challenge</span>
@@ -208,7 +208,7 @@ $("heroStart").addEventListener("click",function(){
     openModal('<div class="ready"><div class="icon">🔒</div>'
       +'<h2 id="modalHead">Challenge locked</h2>'
       +'<p>This challenge unlocks on <strong>'+UNLOCK_LABEL+'</strong>. Come back then!</p>'
-      +'<div class="row"><a class="btn grey" href="challenge-week.html" style="text-decoration:none">Back to Menu</a></div></div>');
+      +'<div class="row"><a class="btn grey" href="../challenge-week.html" style="text-decoration:none">Back to Menu</a></div></div>');
     return;
   }
   var wkp={}; try{wkp=JSON.parse(localStorage.getItem("r4a_week")||"{}");}catch(e){}
@@ -216,7 +216,7 @@ $("heroStart").addEventListener("click",function(){
     openModal('<div class="ready"><div class="icon">🧭</div>'
       +'<h2 id="modalHead">Join Challenge Week first</h2>'
       +'<p>Before playing, join on the menu page with your Instagram account name and a short password - that is how your points are recorded.</p>'
-      +'<div class="row"><a class="btn yellow" href="challenge-week.html" style="text-decoration:none">Go to Menu &amp; Join</a></div></div>');
+      +'<div class="row"><a class="btn yellow" href="../challenge-week.html" style="text-decoration:none">Go to Menu &amp; Join</a></div></div>');
     return;
   }
   showReady();

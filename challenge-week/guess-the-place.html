@@ -177,7 +177,7 @@
 </head>
 <body>
 
-<a class="backhome" href="challenge-week.html" aria-label="Back to Challenge Week menu" title="Back to menu">←</a>
+<a class="backhome" href="../challenge-week.html" aria-label="Back to Challenge Week menu" title="Back to menu">←</a>
 
 <header class="hero">
   <span class="kicker">Guess the Place</span>
@@ -192,7 +192,7 @@
   <section class="rules" aria-label="Game rules">
     <h2>📜 How to play</h2>
     <ol>
-      <li><strong>Join once on the <a href="challenge-week.html">Challenge Week menu page</a></strong> with your Instagram account name - your points here accumulate under it automatically.</li>
+      <li><strong>Join once on the <a href="../challenge-week.html">Challenge Week menu page</a></strong> with your Instagram account name - your points here accumulate under it automatically.</li>
       <li>Open a mystery article and <strong>read the clues carefully</strong>.</li>
       <li>Tap <strong>"Are You Ready for the Challenge?"</strong> and answer the question - every correct answer wins points (a retry costs half).</li>
       <li>Solve all <strong>six mysteries</strong> to complete the game! 🎊</li>
@@ -521,7 +521,7 @@ $("cards").addEventListener("click",function(ev){
   if(isLocked()){alert("🔒 This challenge unlocks on "+UNLOCK_LABEL+". Come back then!");return;}
   var wkp=weekPlayer();
   if(!wkp.name||!wkp.pin){
-    if(confirm("Please join Challenge Week first with your Instagram account name - that is how your points are recorded.\n\nGo to the menu page to join now?"))location.href="challenge-week.html";
+    if(confirm("Please join Challenge Week first with your Instagram account name - that is how your points are recorded.\n\nGo to the menu page to join now?"))location.href="../challenge-week.html";
     return;
   }
   openArticle(a);
@@ -682,7 +682,7 @@ function renderName(){
   if(wk.name){
     $("playerBox").innerHTML='<span class="who">🧭 '+esc(wk.name)+'</span>';
   }else{
-    $("playerBox").innerHTML='<a class="btn small" style="text-decoration:none" href="challenge-week.html">Join on the Menu page</a>';
+    $("playerBox").innerHTML='<a class="btn small" style="text-decoration:none" href="../challenge-week.html">Join on the Menu page</a>';
   }
 }
 function pushWeek(){
