@@ -53,11 +53,149 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Reading Spacing Mode */
-        .spacing-wide {
+        /* Accessible reading modes */
+        #article-body.spacing-wide,
+        #article-body.spacing-wide :where(p, li) {
             letter-spacing: 0.05em !important;
             word-spacing: 0.15em !important;
             line-height: 2.1 !important;
+        }
+
+        #article-body.dyslexia-font,
+        #article-body.dyslexia-font :where(h1, h2, h3, h4, p, li, a, button, span, strong, em) {
+            font-family: 'Lexend', Arial, sans-serif !important;
+        }
+
+        .reader-tools {
+            margin-bottom: 2.5rem;
+            padding: 1rem;
+            border: 1px solid rgba(194, 159, 93, 0.48);
+            border-radius: 1rem;
+            background: #F2EFE9;
+            box-shadow: 0 12px 30px rgba(61, 37, 22, 0.08);
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        .reader-tools-heading {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.875rem;
+        }
+
+        .reader-tools-heading-icon {
+            display: inline-flex;
+            width: 2.5rem;
+            height: 2.5rem;
+            flex: 0 0 auto;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            background: #0F1E36;
+            color: #D3A243;
+        }
+
+        .reader-tools-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.625rem;
+        }
+
+        .reader-tool-button,
+        .reader-size-control {
+            min-height: 2.75rem;
+            border: 1px solid rgba(194, 159, 93, 0.6);
+            border-radius: 0.75rem;
+            background: #FAF6F0;
+            color: #0F1E36;
+        }
+
+        .reader-tool-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.625rem 0.875rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .reader-tool-button:hover:not(:disabled) {
+            border-color: #C29F5D;
+            background: #FFFFFF;
+        }
+
+        .reader-tool-button:active:not(:disabled),
+        .reader-size-button:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+        .reader-tool-button[aria-pressed="true"] {
+            border-color: #0F1E36;
+            background: #0F1E36;
+            color: #FAF6F0;
+        }
+
+        .reader-tool-button:focus-visible,
+        .reader-size-button:focus-visible {
+            outline: 3px solid rgba(211, 162, 67, 0.55);
+            outline-offset: 2px;
+        }
+
+        .reader-tool-button:disabled,
+        .reader-size-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.48;
+        }
+
+        .reader-size-control {
+            display: inline-grid;
+            grid-template-columns: 2.75rem 3.75rem 2.75rem;
+            align-items: stretch;
+            overflow: hidden;
+        }
+
+        .reader-size-button {
+            border: 0;
+            background: transparent;
+            color: #0F1E36;
+            font: inherit;
+            font-size: 0.8rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .reader-size-button:hover:not(:disabled) {
+            background: #FFFFFF;
+        }
+
+        #font-size-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-inline: 1px solid rgba(194, 159, 93, 0.45);
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        @media (max-width: 640px) {
+            .reader-tools-controls {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .reader-tool-button,
+            .reader-size-control {
+                width: 100%;
+            }
+
+            .reader-size-control {
+                grid-template-columns: 1fr 1.25fr 1fr;
+            }
         }
 
         /* Perspective Flip Cards for Myths vs Facts */
@@ -201,6 +339,54 @@
 
     <!-- Main Content Container (Single-Column Editorial Width) -->
     <main id="main" class="max-w-4xl mx-auto px-4 sm:px-8 py-10 sm:py-16 flex-grow w-full">
+        <section class="reader-tools" aria-labelledby="reader-tools-title" aria-describedby="reader-tools-description">
+            <div class="reader-tools-heading">
+                <span class="reader-tools-heading-icon" aria-hidden="true">
+                    <i class="fa-solid fa-universal-access"></i>
+                </span>
+                <div>
+                    <h2 id="reader-tools-title" class="font-bold text-navy text-base">Reading tools</h2>
+                    <p id="reader-tools-description" class="mt-1 text-xs leading-relaxed text-chocolate/80">
+                        Adjust how this article looks and sounds. Your changes apply only to this page.
+                    </p>
+                </div>
+            </div>
+
+            <div class="reader-tools-controls">
+                <button id="tts-button" class="reader-tool-button" type="button" onclick="toggleAudio()" aria-pressed="false" aria-controls="article-body">
+                    <i id="tts-icon" class="fa-solid fa-volume-high text-gold" aria-hidden="true"></i>
+                    <span id="tts-label">Listen</span>
+                </button>
+
+                <button id="tts-stop-button" class="reader-tool-button" type="button" onclick="stopAudio()" disabled>
+                    <i class="fa-solid fa-stop text-gold" aria-hidden="true"></i>
+                    <span>Stop</span>
+                </button>
+
+                <button id="toggle-ruler-btn" class="reader-tool-button" type="button" onclick="toggleReadingRuler()" aria-pressed="false" aria-controls="reading-ruler">
+                    <i class="fa-solid fa-ruler-horizontal text-gold" aria-hidden="true"></i>
+                    <span id="ruler-btn-text">Ruler: Off</span>
+                </button>
+
+                <button id="toggle-font-btn" class="reader-tool-button" type="button" onclick="toggleDyslexiaFont()" aria-pressed="false" aria-controls="article-body">
+                    <i class="fa-solid fa-font text-gold" aria-hidden="true"></i>
+                    <span id="font-label">Font: Original</span>
+                </button>
+
+                <div class="reader-size-control" role="group" aria-label="Article text size">
+                    <button id="decrease-font-btn" class="reader-size-button" type="button" onclick="changeFontSize(-1)" aria-label="Decrease article text size">A-</button>
+                    <output id="font-size-indicator" aria-live="polite">100%</output>
+                    <button id="increase-font-btn" class="reader-size-button" type="button" onclick="changeFontSize(1)" aria-label="Increase article text size">A+</button>
+                </div>
+
+                <button id="toggle-spacing-btn" class="reader-tool-button" type="button" onclick="toggleSpacing()" aria-pressed="false" aria-controls="article-body">
+                    <i class="fa-solid fa-text-width text-gold" aria-hidden="true"></i>
+                    <span id="spacing-label">Spacing: Default</span>
+                </button>
+            </div>
+
+            <p id="reader-tools-status" class="sr-only" aria-live="polite">Reading tools ready.</p>
+        </section>
         
         <article id="article-body" class="space-y-12">
             
@@ -1082,27 +1268,51 @@
         let rulerEnabled = false;
         let synth = window.speechSynthesis;
         let isSpeaking = false;
+        let currentUtterance = null;
+        let readerTextElements = [];
 
         window.addEventListener('DOMContentLoaded', () => {
             initPeopleVisual();
             initScrollProgress();
             setupRulerTracking();
+            initReaderTools();
         });
+
+        function announceReaderToolStatus(message) {
+            document.getElementById('reader-tools-status').innerText = message;
+        }
+
+        function initReaderTools() {
+            const article = document.getElementById('article-body');
+            readerTextElements = Array.from(article.querySelectorAll('h1, h2, h3, h4, p, li, button, a, span, strong, em'));
+
+            readerTextElements.forEach((element) => {
+                element.dataset.readerBaseFontSize = parseFloat(window.getComputedStyle(element).fontSize);
+            });
+
+            if (!synth || typeof SpeechSynthesisUtterance === 'undefined') {
+                document.getElementById('tts-button').disabled = true;
+                document.getElementById('tts-stop-button').disabled = true;
+                document.getElementById('tts-label').innerText = 'Speech unavailable';
+            }
+        }
 
         // Reading Ruler Cursor Tracker Logic
         function setupRulerTracking() {
             const ruler = document.getElementById('reading-ruler');
             window.addEventListener('mousemove', (e) => {
                 if (rulerEnabled) {
-                    ruler.style.transform = `translateY(${e.clientY - 24}px)`;
+                    const rulerPosition = Math.max(0, Math.min(window.innerHeight - 48, e.clientY - 24));
+                    ruler.style.transform = `translateY(${rulerPosition}px)`;
                 }
             });
 
             window.addEventListener('touchmove', (e) => {
                 if (rulerEnabled && e.touches.length > 0) {
-                    ruler.style.transform = `translateY(${e.touches[0].clientY - 24}px)`;
+                    const rulerPosition = Math.max(0, Math.min(window.innerHeight - 48, e.touches[0].clientY - 24));
+                    ruler.style.transform = `translateY(${rulerPosition}px)`;
                 }
-            });
+            }, { passive: true });
         }
 
         function toggleReadingRuler() {
@@ -1113,12 +1323,15 @@
 
             if (rulerEnabled) {
                 ruler.classList.remove('hidden');
-                btnText.innerText = 'Guide: ON';
-                btn.classList.add('bg-gold', 'text-navy');
+                ruler.style.transform = `translateY(${Math.max(0, (window.innerHeight / 2) - 24)}px)`;
+                btnText.innerText = 'Ruler: On';
+                btn.setAttribute('aria-pressed', 'true');
+                announceReaderToolStatus('Reading ruler turned on. Move your pointer or finger to guide the ruler.');
             } else {
                 ruler.classList.add('hidden');
-                btnText.innerText = 'Guide: OFF';
-                btn.classList.remove('bg-gold', 'text-navy');
+                btnText.innerText = 'Ruler: Off';
+                btn.setAttribute('aria-pressed', 'false');
+                announceReaderToolStatus('Reading ruler turned off.');
             }
         }
 
@@ -1178,7 +1391,7 @@
         // Text-To-Speech Reader
         function toggleAudio() {
             if (!synth) {
-                alert("Text-to-speech is not supported in this browser.");
+                announceReaderToolStatus('Text-to-speech is not supported in this browser.');
                 return;
             }
 
@@ -1197,59 +1410,83 @@
 
         function startAudioReading() {
             const articleText = document.getElementById('article-body').innerText;
-            const utterance = new SpeechSynthesisUtterance(articleText);
-            utterance.rate = 0.9;
+            currentUtterance = new SpeechSynthesisUtterance(articleText);
+            currentUtterance.rate = 0.9;
+            currentUtterance.lang = 'en-US';
 
-            utterance.onstart = () => {
+            currentUtterance.onstart = () => {
                 isSpeaking = true;
                 updateTTSState(true, "Pause");
             };
 
-            utterance.onend = () => {
-                stopAudio();
+            currentUtterance.onend = () => {
+                stopAudio('Reading finished.');
             };
 
-            synth.speak(utterance);
+            currentUtterance.onerror = (event) => {
+                if (event.error !== 'canceled') {
+                    stopAudio('The article could not be read aloud.');
+                }
+            };
+
+            synth.cancel();
+            synth.speak(currentUtterance);
         }
 
-        function stopAudio() {
+        function stopAudio(statusMessage = 'Reading stopped.') {
+            if (currentUtterance) {
+                currentUtterance.onend = null;
+                currentUtterance.onerror = null;
+            }
             if (synth) {
                 synth.cancel();
             }
+            currentUtterance = null;
             isSpeaking = false;
             updateTTSState(false, "Listen");
+            announceReaderToolStatus(statusMessage);
         }
 
         function updateTTSState(active, labelText) {
             const icon = document.getElementById('tts-icon');
             const label = document.getElementById('tts-label');
+            const button = document.getElementById('tts-button');
+            const stopButton = document.getElementById('tts-stop-button');
 
             if (active && labelText === "Pause") {
                 icon.className = "fa-solid fa-pause text-gold";
                 label.innerText = "Pause";
+                announceReaderToolStatus('Reading the article aloud.');
             } else if (active && labelText === "Resume") {
                 icon.className = "fa-solid fa-play text-gold";
                 label.innerText = "Resume";
+                announceReaderToolStatus('Reading paused.');
             } else {
                 icon.className = "fa-solid fa-volume-high text-gold";
                 label.innerText = "Listen";
             }
+
+            button.setAttribute('aria-pressed', active ? 'true' : 'false');
+            stopButton.disabled = !active;
         }
 
         // Accessible Font Switcher
         function toggleDyslexiaFont() {
             isDyslexiaFont = !isDyslexiaFont;
-            const body = document.getElementById('app-body');
+            const article = document.getElementById('article-body');
             const label = document.getElementById('font-label');
+            const button = document.getElementById('toggle-font-btn');
 
             if (isDyslexiaFont) {
-                body.classList.remove('font-lora');
-                body.classList.add('font-lexend');
-                label.innerText = 'Font: Accessible Sans';
+                article.classList.add('dyslexia-font');
+                label.innerText = 'Font: Lexend';
+                button.setAttribute('aria-pressed', 'true');
+                announceReaderToolStatus('Accessible Lexend font turned on.');
             } else {
-                body.classList.remove('font-lexend');
-                body.classList.add('font-lora');
-                label.innerText = 'Font: Vintage Serif';
+                article.classList.remove('dyslexia-font');
+                label.innerText = 'Font: Original';
+                button.setAttribute('aria-pressed', 'false');
+                announceReaderToolStatus('Original article fonts restored.');
             }
         }
 
@@ -1258,17 +1495,37 @@
             if (currentFontScale < 80) currentFontScale = 80;
             if (currentFontScale > 150) currentFontScale = 150;
 
-            document.getElementById('article-body').style.fontSize = `${currentFontScale}%`;
+            const scale = currentFontScale / 100;
+            readerTextElements.forEach((element) => {
+                if (currentFontScale === 100) {
+                    element.style.removeProperty('font-size');
+                } else {
+                    const baseFontSize = parseFloat(element.dataset.readerBaseFontSize);
+                    element.style.fontSize = `${baseFontSize * scale}px`;
+                }
+            });
+
             document.getElementById('font-size-indicator').innerText = `${currentFontScale}%`;
+            document.getElementById('decrease-font-btn').disabled = currentFontScale <= 80;
+            document.getElementById('increase-font-btn').disabled = currentFontScale >= 150;
+            announceReaderToolStatus(`Article text size set to ${currentFontScale} percent.`);
         }
 
         function toggleSpacing() {
             isWideSpacing = !isWideSpacing;
             const body = document.getElementById('article-body');
+            const button = document.getElementById('toggle-spacing-btn');
+            const label = document.getElementById('spacing-label');
             if (isWideSpacing) {
                 body.classList.add('spacing-wide');
+                button.setAttribute('aria-pressed', 'true');
+                label.innerText = 'Spacing: Wide';
+                announceReaderToolStatus('Wide reading spacing turned on.');
             } else {
                 body.classList.remove('spacing-wide');
+                button.setAttribute('aria-pressed', 'false');
+                label.innerText = 'Spacing: Default';
+                announceReaderToolStatus('Default reading spacing restored.');
             }
         }
 
