@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover, Choose, Read: A Malaysian Authors Reading Journey</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream: '#F5EFE1',
+          creamDark: '#EDE3CC',
+          forest: '#28453A',
+          forestDeep: '#16281F',
+          clay: '#6B4226',
+          orange: '#D98940',
+          flagRed: '#C8102E',
+          flagBlue: '#01308A',
+          flagGold: '#FFC72C',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'Georgia', 'serif'],
+          body: ['"Work Sans"', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #F5EFE1; }
+  .paper-texture {
+    position: relative;
+    isolation: isolate;
+    background-image: none;
+  }
+  .paper-texture::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: url('assets/malaysian-flag-wave-bg-v2.png') center / cover no-repeat;
+  }
+  .malaysian-authors-blog {
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .article-shell {
+    width: min(calc(100% - 40px), 1120px);
+    margin: 32px auto 48px;
+    overflow: hidden;
+    border: 2px solid rgba(200,169,106,0.78);
+    border-radius: 24px;
+    background: rgba(245,239,225,0.8);
+    box-shadow: 0 24px 70px rgba(22,40,31,0.38);
+    backdrop-filter: blur(10px);
+  }
+  .article-header h1 {
+    white-space: normal;
+    text-wrap: balance;
+  }
+  @media (max-width: 640px) {
+    .paper-texture::before { background-position: 18% center; }
+    .malaysian-authors-blog .site-header .container,
+    .malaysian-authors-blog .footer .container {
+      width: 100%;
+      padding-inline: 24px;
+    }
+    .article-shell {
+      width: calc(100% - 20px);
+      margin: 12px auto 24px;
+      border-width: 1px;
+      border-radius: 16px;
+    }
+    .article-header > div:first-child { gap: 0.45rem; }
+    .article-header > div:first-child span:last-child {
+      margin-left: 0.25rem;
+      font-size: 0.625rem;
+      letter-spacing: 0.12em;
+    }
+  }
+  .dashed-path { border-top: 3px dashed #C8A96A; }
+  .spine-tilt:nth-child(odd) { transform: rotate(-0.6deg); }
+  .spine-tilt:nth-child(even) { transform: rotate(0.6deg); }
+  .spine-tilt:hover { transform: rotate(0deg) translateY(-4px); }
+  .pin-shadow { filter: drop-shadow(0 6px 6px rgba(22,40,31,0.25)); }
+  .cover-panel { position: relative; overflow: hidden; }
+  .cover-panel::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 14px);
+  }
+  .portrait-ring {
+    background: conic-gradient(from 180deg, var(--ring-a), var(--ring-b), var(--ring-a));
+  }
+  .quiz-btn { transition: all .25s ease; }
+  .quiz-btn:hover { transform: translateY(-2px); }
+  .quiz-panel { display: none; }
+  .quiz-panel.active { display: block; }
+  .quiz-step { display: none; }
+  .quiz-step.active { display: block; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #F5EFE1; }
+  ::-webkit-scrollbar-thumb { background: #D98940; border-radius: 4px; }
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="malaysian-authors-blog text-forestDeep paper-texture min-h-screen flex flex-col">
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" data-header>
+    <nav class="nav container" aria-label="Primary navigation">
+      <a class="brand" href="index.html" aria-label="Read4All home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Read4All</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-menu"
+        data-nav-toggle
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="primary-menu" data-nav-menu>
+        <li><a href="activities.html">Activities</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="books.html">Explore</a></li>
+        <li><a href="sdg.html">SDG 4</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a class="nav-cta" href="https://chat.whatsapp.com/B4fVOzj5Cl79RF5j7zE6Ma" target="_blank" rel="noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Join Community!</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="article-shell">
+  <!-- HERO -->
+  <header class="article-header font-body w-full max-w-5xl mx-auto px-6 pt-16 pb-10 text-center">
+    <div class="flex justify-center items-center gap-2 mb-5">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg" alt="Malaysian flag" width="48" height="24" class="w-12 h-6 object-cover rounded-sm shadow-sm ring-1 ring-forest/15">
+      <span class="font-body text-xs font-semibold tracking-[0.2em] uppercase text-clay ml-2">This Week &middot; Malaysian Authors</span>
+    </div>
+    <h1 class="font-display font-normal text-4xl md:text-6xl text-forest leading-[1.05] mb-6">
+      Discover, Choose,<br><em class="italic text-orange">Read.</em>
+    </h1>
+    <p class="max-w-2xl mx-auto text-base md:text-lg text-clay/90 leading-relaxed font-body">
+      This week we're following a Malaysian reading journey in three parts: meet the authors, find the one who's actually right for you, and know exactly where to go borrow their books. Consider this your extended, un-swipeable version of the carousels.
+    </p>
+
+    <div class="flex items-center justify-center gap-3 md:gap-6 mt-12 mb-2">
+      <a href="#discover" class="flex flex-col items-center group">
+        <span class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-forest text-cream flex items-center justify-center text-xl shadow-md group-hover:bg-orange transition-colors"><i class="fa-solid fa-compass"></i></span>
+        <span class="mt-2 font-display font-semibold text-forest text-sm tracking-wide">Discover</span>
+      </a>
+      <div class="dashed-path w-8 md:w-16 mt-[-20px]"></div>
+      <a href="#choose" class="flex flex-col items-center group">
+        <span class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-clay text-cream flex items-center justify-center text-xl shadow-md group-hover:bg-orange transition-colors"><i class="fa-solid fa-route"></i></span>
+        <span class="mt-2 font-display font-semibold text-forest text-sm tracking-wide">Choose</span>
+      </a>
+      <div class="dashed-path w-8 md:w-16 mt-[-20px]"></div>
+      <a href="#read" class="flex flex-col items-center group">
+        <span class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-orange text-cream flex items-center justify-center text-xl shadow-md group-hover:bg-forest transition-colors"><i class="fa-solid fa-book-open"></i></span>
+        <span class="mt-2 font-display font-semibold text-forest text-sm tracking-wide">Read</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main" class="font-body max-w-5xl mx-auto px-6 space-y-24 pb-20 w-full flex-grow">
+
+    <!-- ================= SECTION 1: DISCOVER ================= -->
+    <section id="discover" class="pt-6">
+      <div class="text-center max-w-2xl mx-auto mb-4">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-orange">Part One &middot; Discover</span>
+        <h2 class="font-display text-3xl md:text-4xl text-forest mt-2 mb-4">5 Malaysian Authors You Should Know</h2>
+        <p class="text-clay/90 leading-relaxed">
+          Malaysia has produced remarkable storytellers whose books have won some of the world's biggest literary prizes. Author photos and book covers below are sourced from official author sites, publisher pages, and Goodreads - credited beneath each image.
+        </p>
+      </div>
+
+      <!-- AUTHOR + BOOK PAIRS -->
+      <div class="space-y-10 mt-10">
+
+        <!-- Hanna Alkaf -->
+        <article class="rounded-2xl shadow-lg overflow-hidden">
+          <div class="bg-forest text-cream p-6 flex items-center gap-5">
+            <img src="https://hannaalkaf.com/wp-content/uploads/2020/05/dsc_0368.jpg?w=297&amp;h=446" alt="Portrait of Hanna Alkaf" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white/40 shadow-md shrink-0">
+            <div>
+              <h3 class="font-display text-2xl sm:text-3xl">Hanna Alkaf</h3>
+              <span class="inline-block mt-1 text-[10px] uppercase tracking-widest bg-white/20 font-bold px-3 py-1 rounded-full">Fantasy &middot; YA &middot; Mystery</span>
+            </div>
+          </div>
+          <div class="bg-white p-6">
+            <p class="text-sm text-clay/90 leading-relaxed mb-3">
+              A Kuala Lumpur-based novelist with a journalism degree from Northwestern University, Alkaf writes unapologetically Malaysian young adult and middle-grade fiction (Alkaf, n.d.).
+            </p>
+            <p class="text-xs text-clay/70 italic mb-3">Also known for: Queen of the Tiles &middot; The Hysterical Girls of St. Bernadette's &middot; The Girl and the Ghost</p>
+            <p class="text-sm text-forest/90 leading-relaxed pt-3 border-t border-forest/10">
+              <span class="font-semibold text-clay">Why start here:</span> The Weight of Our Sky follows an OCD teenager, Melati, trying to survive the real 13 May 1969 riots in Kuala Lumpur while searching for her missing mother. It's a rare book that treats a national trauma and a mental health condition with equal seriousness - tense, moving, and unmistakably Malaysian. It won the Freeman Award for YA/High School Literature (Tatler Asia, n.d.).
+            </p>
+            <p class="text-[10px] text-clay/50 pt-3 mt-3 border-t border-clay/10">Photo: hannaalkaf.com</p>
+          </div>
+        </article>
+
+        <!-- Tash Aw -->
+        <article class="rounded-2xl shadow-lg overflow-hidden">
+          <div class="bg-clay text-cream p-6 flex items-center gap-5">
+            <img src="https://images.gr-assets.com/authors/1243908136p5/140377.jpg" alt="Portrait of Tash Aw" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white/40 shadow-md shrink-0">
+            <div>
+              <h3 class="font-display text-2xl sm:text-3xl">Tash Aw</h3>
+              <span class="inline-block mt-1 text-[10px] uppercase tracking-widest bg-white/20 font-bold px-3 py-1 rounded-full">Literary Fiction</span>
+            </div>
+          </div>
+          <div class="bg-white p-6">
+            <p class="text-sm text-clay/90 leading-relaxed mb-3">
+              Born in Taipei and raised in Kuala Lumpur, Aw is now based in London. His fiction has been translated into 23 languages and has won the Whitbread and Commonwealth Prizes and an O. Henry Award (BookBrowse, n.d.).
+            </p>
+            <p class="text-xs text-clay/70 italic mb-3">Also known for: The Harmony Silk Factory &middot; Five Star Billionaire</p>
+            <p class="text-sm text-forest/90 leading-relaxed pt-3 border-t border-forest/10">
+              <span class="font-semibold text-clay">Why start here:</span> We, the Survivors is narrated by Ah Hock, a Malaysian man recounting to a journalist how he ended up serving prison time for killing a migrant worker. Told as a long confession, it quietly unpacks class, race, and the gap between the "Malaysian Dream" and the reality of low-wage labour (CBC Radio, 2019).
+            </p>
+            <p class="text-[10px] text-clay/50 pt-3 mt-3 border-t border-clay/10">Photo: Goodreads</p>
+          </div>
+        </article>
+
+        <!-- Tan Twan Eng -->
+        <article class="rounded-2xl shadow-lg overflow-hidden">
+          <div class="bg-orange text-forestDeep p-6 flex items-center gap-5">
+            <img src="https://images.gr-assets.com/authors/1500524463p5/13847588.jpg" alt="Portrait of Tan Twan Eng" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white/50 shadow-md shrink-0">
+            <div>
+              <h3 class="font-display text-2xl sm:text-3xl">Tan Twan Eng</h3>
+              <span class="inline-block mt-1 text-[10px] uppercase tracking-widest bg-forestDeep/15 font-bold px-3 py-1 rounded-full">Historical Fiction</span>
+            </div>
+          </div>
+          <div class="bg-white p-6">
+            <p class="text-sm text-clay/90 leading-relaxed mb-3">
+              Born in Penang and once a lawyer in Kuala Lumpur, Tan became the first Malaysian writer recognised by the Man Asian Literary Prize, the Walter Scott Prize, and a Booker Prize shortlisting (Wikipedia, n.d.-b).
+            </p>
+            <p class="text-xs text-clay/70 italic mb-3">Also known for: The Gift of Rain &middot; The House of Doors</p>
+            <p class="text-sm text-forest/90 leading-relaxed pt-3 border-t border-forest/10">
+              <span class="font-semibold text-clay">Why start here:</span> Set in 1949 Malaya, it follows Yun Ling Teoh, a survivor of a Japanese wartime camp, as she apprentices under a mysterious former royal gardener to build a memorial garden for her sister. Lyrical and slow-burning, it won the 2012 Man Asian Literary Prize and 2013 Walter Scott Prize and was shortlisted for the Booker (The Booker Prizes, n.d.).
+            </p>
+            <p class="text-[10px] text-clay/50 pt-3 mt-3 border-t border-clay/10">Photo: Goodreads</p>
+          </div>
+        </article>
+
+        <!-- Zen Cho -->
+        <article class="rounded-2xl shadow-lg overflow-hidden">
+          <div class="bg-flagBlue text-cream p-6 flex items-center gap-5">
+            <img src="https://images3.penguinrandomhouse.com/author/307829" alt="Portrait of Zen Cho" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white/40 shadow-md shrink-0">
+            <div>
+              <h3 class="font-display text-2xl sm:text-3xl">Zen Cho</h3>
+              <span class="inline-block mt-1 text-[10px] uppercase tracking-widest bg-white/20 font-bold px-3 py-1 rounded-full">Fantasy Lovers</span>
+            </div>
+          </div>
+          <div class="bg-white p-6">
+            <p class="text-sm text-clay/90 leading-relaxed mb-3">
+              Born in Subang Jaya, Selangor and now based in the UK, Cho holds a law degree from Cambridge and has won the Crawford, British Fantasy, and Hugo Awards (Wikipedia, n.d.-c).
+            </p>
+            <p class="text-xs text-clay/70 italic mb-3">Also known for: Black Water Sister &middot; Spirits Abroad</p>
+            <p class="text-sm text-forest/90 leading-relaxed pt-3 border-t border-forest/10">
+              <span class="font-semibold text-clay">Why start here:</span> Described by Cho herself as "Jane Austen with dragons and people of colour," Sorcerer to the Crown drops a freed slave turned magician into Regency London's magical establishment. It's witty, socially sharp, and won the British Fantasy Award for Best Newcomer (Herrick District Library, n.d.; Options, The Edge, 2023).
+            </p>
+            <p class="text-[10px] text-clay/50 pt-3 mt-3 border-t border-clay/10">Photo: &copy; Darren Johnson / PRH</p>
+          </div>
+        </article>
+
+        <!-- Preeta Samarasan -->
+        <article class="rounded-2xl shadow-lg overflow-hidden">
+          <div class="bg-flagRed text-cream p-6 flex items-center gap-5">
+            <img src="https://www.eksentrika.com/wp-content/uploads/2023/08/preeta-samarasan.jpg" alt="Portrait of Preeta Samarasan" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white/40 shadow-md shrink-0">
+            <div>
+              <h3 class="font-display text-2xl sm:text-3xl">Preeta Samarasan</h3>
+              <span class="inline-block mt-1 text-[10px] uppercase tracking-widest bg-white/20 font-bold px-3 py-1 rounded-full">Family Drama</span>
+            </div>
+          </div>
+          <div class="bg-white p-6">
+            <p class="text-sm text-clay/90 leading-relaxed mb-3">
+              Born and raised in Ipoh, Samarasan earned her MFA at the University of Michigan and now lives in France, where she remains a frequent commentator on Malaysian race relations (AGNI, n.d.).
+            </p>
+            <p class="text-xs text-clay/70 italic mb-3">Debut novel, an early version of which won the Hopwood Award</p>
+            <p class="text-sm text-forest/90 leading-relaxed pt-3 border-t border-forest/10">
+              <span class="font-semibold text-clay">Why start here:</span> Told out of chronological order, Evening Is the Whole Day peels back the secrets of one wealthy Malaysian Indian family across three generations, circling the 1969 riots. The New York Times Book Review compared Samarasan's prose to Eudora Welty's for how it handles family, race, and class (BookBrowse, 2008).
+            </p>
+            <p class="text-[10px] text-clay/50 pt-3 mt-3 border-t border-clay/10">Photo: eksentrika.com, sourced from Preeta Samarasan's Facebook page</p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="mt-10 rounded-2xl border-2 border-dashed border-clay/40 p-6 flex flex-col items-center justify-center text-center">
+        <i class="fa-solid fa-bookmark text-3xl text-orange mb-3"></i>
+        <p class="font-display text-lg text-forest mb-1">Which will you try first?</p>
+        <p class="text-clay/80 text-sm">Save this section for your next library visit - and keep scrolling, because Part Two helps you decide.</p>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: CHOOSE (INTERACTIVE) ================= -->
+    <section id="choose" class="pt-6">
+      <div class="text-center max-w-2xl mx-auto mb-4">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-orange">Part Two &middot; Choose</span>
+        <h2 class="font-display text-3xl md:text-4xl text-forest mt-2 mb-4">Which Malaysian Author Should You Start With?</h2>
+        <p class="text-clay/90 leading-relaxed">Tap your way through the questions below to get a real recommendation.</p>
+      </div>
+
+      <div class="bg-white/70 rounded-3xl p-6 md:p-10 shadow-sm border border-clay/10">
+
+        <!-- STEP 1 -->
+        <div id="step-1" class="quiz-step active text-center">
+          <span class="inline-block bg-forest text-cream font-display px-6 py-3 rounded-full text-lg shadow mb-8">Do you enjoy&hellip;</span>
+          <div class="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            <button onclick="showStep('step-2a')" class="quiz-btn bg-flagBlue/10 hover:bg-flagBlue/20 border-2 border-flagBlue/30 rounded-2xl p-8 text-left">
+              <span class="w-12 h-12 rounded-full bg-flagBlue text-cream flex items-center justify-center mb-4"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+              <p class="font-display text-xl text-forest">Fantasy &amp; Magic</p>
+              <p class="text-xs text-clay/70 mt-2">Sorcery, folklore, and the supernatural</p>
+            </button>
+            <button onclick="showStep('step-2b')" class="quiz-btn bg-orange/10 hover:bg-orange/20 border-2 border-orange/30 rounded-2xl p-8 text-left">
+              <span class="w-12 h-12 rounded-full bg-orange text-forestDeep flex items-center justify-center mb-4"><i class="fa-solid fa-people-roof"></i></span>
+              <p class="font-display text-xl text-forest">Real-Life Stories</p>
+              <p class="text-xs text-clay/70 mt-2">Family, history, and society</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2A: Fantasy branch -->
+        <div id="step-2a" class="quiz-step text-center">
+          <button onclick="showStep('step-1')" class="text-xs text-clay/60 hover:text-orange mb-6 font-semibold"><i class="fa-solid fa-arrow-left mr-1"></i> Back</button>
+          <p class="font-display text-lg text-forest mb-8">Pick your flavour of magic&hellip;</p>
+          <div class="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            <button onclick="showResult('zencho')" class="quiz-btn bg-flagBlue/10 hover:bg-flagBlue/20 border-2 border-flagBlue/30 rounded-2xl p-6 text-left">
+              <i class="fa-solid fa-moon text-flagBlue mb-2"></i>
+              <p class="font-display text-lg text-forest">Witty, Regency-style fantasy</p>
+              <p class="text-xs text-clay/70 mt-1">Try Zen Cho</p>
+            </button>
+            <button onclick="showResult('alkaf')" class="quiz-btn bg-flagBlue/10 hover:bg-flagBlue/20 border-2 border-flagBlue/30 rounded-2xl p-6 text-left">
+              <i class="fa-solid fa-star text-flagBlue mb-2"></i>
+              <p class="font-display text-lg text-forest">Fast-paced YA with folklore &amp; history</p>
+              <p class="text-xs text-clay/70 mt-1">Try Hanna Alkaf</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2B: Real-life branch -->
+        <div id="step-2b" class="quiz-step text-center">
+          <button onclick="showStep('step-1')" class="text-xs text-clay/60 hover:text-orange mb-6 font-semibold"><i class="fa-solid fa-arrow-left mr-1"></i> Back</button>
+          <p class="font-display text-lg text-forest mb-8">Which lens interests you most?</p>
+          <div class="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <button onclick="showResult('samarasan')" class="quiz-btn bg-orange/10 hover:bg-orange/20 border-2 border-orange/30 rounded-2xl p-6 text-left">
+              <i class="fa-solid fa-heart text-flagRed mb-2"></i>
+              <p class="font-display text-lg text-forest">Family drama &amp; secrets</p>
+              <p class="text-xs text-clay/70 mt-1">Try Preeta Samarasan</p>
+            </button>
+            <button onclick="showResult('tantwaneng')" class="quiz-btn bg-orange/10 hover:bg-orange/20 border-2 border-orange/30 rounded-2xl p-6 text-left">
+              <i class="fa-solid fa-landmark text-clay mb-2"></i>
+              <p class="font-display text-lg text-forest">War &amp; history</p>
+              <p class="text-xs text-clay/70 mt-1">Try Tan Twan Eng</p>
+            </button>
+            <button onclick="showResult('tashaw')" class="quiz-btn bg-orange/10 hover:bg-orange/20 border-2 border-orange/30 rounded-2xl p-6 text-left">
+              <i class="fa-solid fa-globe-asia text-forest mb-2"></i>
+              <p class="font-display text-lg text-forest">Society &amp; identity</p>
+              <p class="text-xs text-clay/70 mt-1">Try Tash Aw</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- RESULT PANELS -->
+        <div id="result-zencho" class="quiz-panel">
+          <button onclick="showStep('step-2a')" class="text-xs text-clay/60 hover:text-orange mb-6 font-semibold"><i class="fa-solid fa-arrow-left mr-1"></i> Choose again</button>
+          <div class="bg-flagBlue/10 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-start text-left">
+            <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1430239646i/23943137.jpg" alt="Sorcerer to the Crown book cover" class="rounded-lg w-24 sm:w-28 shadow-lg border border-forest/10 mx-auto sm:mx-0 shrink-0">
+            <div>
+              <p class="text-xs uppercase tracking-widest text-flagBlue font-bold mb-2">Your match</p>
+              <h3 class="font-display text-2xl text-forest mb-3">Zen Cho - start with Sorcerer to the Crown</h3>
+              <p class="text-sm text-clay/90 leading-relaxed">Cho blends period English fantasy with Malaysian folklore and a sharp sense of humour about who gets to belong in polite society. If you finish it and want something set closer to home, follow up with Black Water Sister, her contemporary Penang-set novel about a young woman haunted by her medium grandmother's ghost (Herrick District Library, n.d.).</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="result-alkaf" class="quiz-panel">
+          <button onclick="showStep('step-2a')" class="text-xs text-clay/60 hover:text-orange mb-6 font-semibold"><i class="fa-solid fa-arrow-left mr-1"></i> Choose again</button>
+          <div class="bg-flagBlue/10 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-start text-left">
+            <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1531930744i/35614314._SY75_.jpg" alt="The Weight of Our Sky book cover" class="rounded-lg w-24 sm:w-28 shadow-lg border border-forest/10 mx-auto sm:mx-0 shrink-0">
+            <div>
+              <p class="text-xs uppercase tracking-widest text-flagBlue font-bold mb-2">Your match</p>
+              <h3 class="font-display text-2xl text-forest mb-3">Hanna Alkaf - start with The Weight of Our Sky</h3>
+              <p class="text-sm text-clay/90 leading-relaxed">A teenage girl with OCD gets separated from her mother during the real 13 May 1969 riots and has to survive the chaos while managing her own mind. It's tense, emotional, and grounded in actual Malaysian history - and it won the Freeman Award for YA/High School Literature (Tatler Asia, n.d.).</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="result-samarasan" class="quiz-panel">
+          <button onclick="showStep('step-2b')" class="text-xs text-clay/60 hover:text-orange mb-6 font-semibold"><i class="fa-solid fa-arrow-left mr-1"></i> Choose again</button>
+          <div class="bg-orange/10 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-start text-left">
+            <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1333346494i/2154433._SY75_.jpg" alt="Evening Is the Whole Day book cover" class="rounded-lg w-24 sm:w-28 shadow-lg border border-forest/10 mx-auto sm:mx-0 shrink-0">
+            <div>
+              <p class="text-xs uppercase tracking-widest text-orange font-bold mb-2">Your match</p>
+              <h3 class="font-display text-2xl text-forest mb-3">Preeta Samarasan - start with Evening Is the Whole Day</h3>
+              <p class="text-sm text-clay/90 leading-relaxed">Told in reverse chronology, this novel unpacks one Malaysian Indian family's secrets across three generations - a dismissed servant girl, a runaway daughter, and a patriarch's broken dreams for his country. Critics have compared the prose to Eudora Welty's for its handling of family, race, and class (BookBrowse, 2008).</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="result-tantwaneng" class="quiz-panel">
+          <button onclick="showStep('step-2b')" class="text-xs text-clay/60 hover:text-orange mb-6 font-semibold"><i class="fa-solid fa-arrow-left mr-1"></i> Choose again</button>
+          <div class="bg-orange/10 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-start text-left">
+            <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1333033941i/12031532._SX50_.jpg" alt="The Garden of Evening Mists book cover" class="rounded-lg w-24 sm:w-28 shadow-lg border border-forest/10 mx-auto sm:mx-0 shrink-0">
+            <div>
+              <p class="text-xs uppercase tracking-widest text-orange font-bold mb-2">Your match</p>
+              <h3 class="font-display text-2xl text-forest mb-3">Tan Twan Eng - start with The Garden of Evening Mists</h3>
+              <p class="text-sm text-clay/90 leading-relaxed">A Japanese-camp survivor and former judge apprentices under a mysterious ex-royal gardener to build a memorial garden for her sister in post-war Malaya. Slow, lyrical, and steeped in memory and war - it won the Man Asian Literary Prize and Walter Scott Prize and was Booker-shortlisted (The Booker Prizes, n.d.).</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="result-tashaw" class="quiz-panel">
+          <button onclick="showStep('step-2b')" class="text-xs text-clay/60 hover:text-orange mb-6 font-semibold"><i class="fa-solid fa-arrow-left mr-1"></i> Choose again</button>
+          <div class="bg-orange/10 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-start text-left">
+            <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1546223754i/40872707._SY75_.jpg" alt="We, the Survivors book cover" class="rounded-lg w-24 sm:w-28 shadow-lg border border-forest/10 mx-auto sm:mx-0 shrink-0">
+            <div>
+              <p class="text-xs uppercase tracking-widest text-orange font-bold mb-2">Your match</p>
+              <h3 class="font-display text-2xl text-forest mb-3">Tash Aw - start with We, the Survivors</h3>
+              <p class="text-sm text-clay/90 leading-relaxed">Ah Hock recounts to a journalist how a life of hard, low-wage work led to him killing a migrant labourer. It's a quiet, devastating look at class and the limits of the "Malaysian Dream" in a rapidly modernising country (CBC Radio, 2019).</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- QUICK GUIDE TABLE -->
+      <div class="mt-10">
+        <h3 class="font-display text-xl text-forest mb-4 text-center">Quick Guide: If You Like&hellip;</h3>
+        <div class="overflow-x-auto rounded-2xl shadow-sm border border-clay/10">
+          <table class="w-full text-sm bg-white">
+            <thead>
+              <tr class="bg-forest text-cream font-display text-left">
+                <th class="py-3 px-5">If you like&hellip;</th>
+                <th class="py-3 px-5">Try&hellip;</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-clay/10">
+              <tr><td class="py-3 px-5">Harry Potter</td><td class="py-3 px-5 font-semibold text-forest">Zen Cho</td></tr>
+              <tr><td class="py-3 px-5">Percy Jackson</td><td class="py-3 px-5 font-semibold text-forest">Hanna Alkaf</td></tr>
+              <tr><td class="py-3 px-5">Historical novels</td><td class="py-3 px-5 font-semibold text-forest">Tan Twan Eng</td></tr>
+              <tr><td class="py-3 px-5">Character-driven fiction</td><td class="py-3 px-5 font-semibold text-forest">Tash Aw</td></tr>
+              <tr><td class="py-3 px-5">Family sagas</td><td class="py-3 px-5 font-semibold text-forest">Preeta Samarasan</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-center text-clay/70 text-sm italic mt-6">There's no wrong place to start. The best book is simply the one you'll finish. Happy reading!</p>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: READ / LIBRARIES ================= -->
+    <section id="read" class="pt-6">
+      <div class="text-center max-w-2xl mx-auto mb-4">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-orange">Part Three &middot; Read</span>
+        <h2 class="font-display text-3xl md:text-4xl text-forest mt-2 mb-4">Local Library Recommendations</h2>
+        <p class="text-clay/90 leading-relaxed">
+          Now that you've found an author to try, here's where to actually borrow their books - four Malaysian libraries worth the trip, with directions ready to go.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mt-10">
+
+        <!-- Perpustakaan Kuala Lumpur -->
+        <article class="bg-white rounded-2xl shadow-sm border border-forest/10 overflow-hidden">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Perpustakaan%20Kuala%20Lumpur%20(220512).jpg" alt="Exterior of Perpustakaan Kuala Lumpur" class="w-full h-52 object-cover">
+          <div class="bg-forest text-cream px-6 py-4 flex items-center gap-3">
+            <i class="fa-solid fa-location-dot text-flagGold text-xl pin-shadow"></i>
+            <h3 class="font-display text-xl">Perpustakaan Kuala Lumpur</h3>
+          </div>
+          <div class="p-6 space-y-3 text-sm text-clay/90 leading-relaxed">
+            <p>Housed in a refurbished 1898 building near Dataran Merdeka and Masjid Jamek, this is Kuala Lumpur's main public library - admission and membership are both free, with 16 branches spread across the city (Wikipedia, n.d.-a; DBKL, n.d.).</p>
+            <ul class="space-y-1.5">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>Large, varied collection across genres and languages</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>Quiet study spaces and discussion rooms</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>Free Wi-Fi, lockers, and a small pantry area</li>
+            </ul>
+            <a href="https://www.google.com/maps/search/?api=1&query=Perpustakaan+Kuala+Lumpur" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-forest text-cream text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-orange transition-colors mt-2">
+              <i class="fa-solid fa-diamond-turn-right"></i> Get Directions
+            </a>
+            <p class="text-[10px] text-clay/50 pt-2 border-t border-clay/10">Photo via Wikimedia Commons, CC BY-SA 4.0</p>
+          </div>
+        </article>
+
+        <!-- Raja Tun Uda -->
+        <article class="bg-white rounded-2xl shadow-sm border border-forest/10 overflow-hidden">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Raja%20Tun%20Uda%20Library%20(240602)%2001.jpg" alt="Raja Tun Uda Library, Shah Alam" class="w-full h-52 object-cover">
+          <div class="bg-clay text-cream px-6 py-4 flex items-center gap-3">
+            <i class="fa-solid fa-location-dot text-flagGold text-xl pin-shadow"></i>
+            <h3 class="font-display text-xl">Raja Tun Uda Library, Shah Alam</h3>
+          </div>
+          <div class="p-6 space-y-3 text-sm text-clay/90 leading-relaxed">
+            <p>Built as a gift from the Sultan of Selangor rather than a monument, this RM70 million "library in a park" sits beside a golf club and Shah Alam's lake gardens across six storeys (Wikipedia, n.d.-d; Visit Selangor, n.d.).</p>
+            <ul class="space-y-1.5">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>Modern glass architecture and lakeside views</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>Vibrant children's zone and reading lounges</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>An 8-seat 6D theatre - a rare feature for a public library</li>
+            </ul>
+            <a href="https://www.google.com/maps/search/?api=1&query=Raja+Tun+Uda+Library+Shah+Alam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-clay text-cream text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-orange transition-colors mt-2">
+              <i class="fa-solid fa-diamond-turn-right"></i> Get Directions
+            </a>
+            <p class="text-[10px] text-clay/50 pt-2 border-t border-clay/10">Photo via Wikimedia Commons, CC BY-SA 4.0</p>
+          </div>
+        </article>
+
+        <!-- Penang Digital Library -->
+        <article class="bg-white rounded-2xl shadow-sm border border-forest/10 overflow-hidden">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Penang%20Digital%20Library%2C%20George%20Town%2C%20Penang.jpg" alt="Penang Digital Library building" class="w-full h-52 object-cover">
+          <div class="bg-flagBlue text-cream px-6 py-4 flex items-center gap-3">
+            <i class="fa-solid fa-location-dot text-flagGold text-xl pin-shadow"></i>
+            <h3 class="font-display text-xl">Penang Digital Library</h3>
+          </div>
+          <div class="p-6 space-y-3 text-sm text-clay/90 leading-relaxed">
+            <p>Opened in 2016 in a heritage bungalow on the grounds of Penang Free School, this is a largely bookless, 24-hour space built around thousands of e-books, e-magazines, and journals (Tye, n.d.; The Star, 2025).</p>
+            <ul class="space-y-1.5">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>Open around the clock, every day</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>Fast, reliable Wi-Fi and co-working-style desks</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>An on-site caf&eacute; for when you need a break</li>
+            </ul>
+            <a href="https://www.google.com/maps/search/?api=1&query=Penang+Digital+Library+George+Town" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-flagBlue text-cream text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-orange transition-colors mt-2">
+              <i class="fa-solid fa-diamond-turn-right"></i> Get Directions
+            </a>
+            <p class="text-[10px] text-clay/50 pt-2 border-t border-clay/10">Photo via Wikimedia Commons</p>
+          </div>
+        </article>
+
+        <!-- Sarawak State Library -->
+        <article class="bg-white rounded-2xl shadow-sm border border-forest/10 overflow-hidden">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pustaka%20Negeri%20Sarawak%20(State%20Library%2C%20Sarawak%2C%20Malaysia).JPG" alt="Sarawak State Library, Kuching" class="w-full h-52 object-cover">
+          <div class="bg-orange text-forestDeep px-6 py-4 flex items-center gap-3">
+            <i class="fa-solid fa-location-dot text-forestDeep text-xl pin-shadow"></i>
+            <h3 class="font-display text-xl">Sarawak State Library, Kuching</h3>
+          </div>
+          <div class="p-6 space-y-3 text-sm text-clay/90 leading-relaxed">
+            <p>One of Malaysia's most spacious public libraries, set in park-like grounds around a small lake, with a treehouse and playground for younger visitors right outside (Wikipedia, n.d.-e; Malaysia-Traveller, n.d.).</p>
+            <ul class="space-y-1.5">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>Free entry, with members able to borrow up to 10 items</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>A dedicated Sarawakiana collection of local history</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-forest mt-1 text-xs"></i>Regular storytelling sessions and community events</li>
+            </ul>
+            <a href="https://www.google.com/maps/search/?api=1&query=Pustaka+Negeri+Sarawak+Kuching" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-orange text-forestDeep text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-forest hover:text-cream transition-colors mt-2">
+              <i class="fa-solid fa-diamond-turn-right"></i> Get Directions
+            </a>
+            <p class="text-[10px] text-clay/50 pt-2 border-t border-clay/10">Photo via Wikimedia Commons, CC BY-SA 4.0</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- BONUS TIP -->
+      <div class="mt-8 bg-forest text-cream rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-5">
+        <span class="w-12 h-12 rounded-full bg-flagGold text-forestDeep flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-lightbulb"></i></span>
+        <div>
+          <p class="font-display text-lg text-flagGold mb-1">Bonus Tip</p>
+          <p class="text-cream/90 text-sm leading-relaxed">
+            Many Malaysian libraries now go beyond physical shelves - think e-books, audiobooks, and online learning platforms you can access from home. Sarawak's state library system, for instance, runs its own PANDei e-learning platform alongside its physical branches (Sarawak State Library, n.d.). Check your local library's website to see what's available before you go.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ENGAGEMENT / CTA BAND ================= -->
+    <section class="text-center bg-creamDark rounded-3xl p-10 border border-clay/10">
+      <p class="font-display text-2xl text-forest mb-3">Libraries aren't just for studying.</p>
+      <p class="text-clay/90 max-w-xl mx-auto mb-6">They're places to discover new stories, learn something new, and connect with your community - the same way a good Malaysian novel can.</p>
+      <div class="flex flex-wrap justify-center gap-4 text-sm font-semibold">
+        <span class="bg-forest text-cream px-5 py-2.5 rounded-full flex items-center gap-2"><i class="fa-solid fa-bookmark"></i> Save this post</span>
+        <span class="bg-orange text-forestDeep px-5 py-2.5 rounded-full flex items-center gap-2"><i class="fa-solid fa-comment"></i> Comment your favourite</span>
+        <span class="bg-flagBlue text-cream px-5 py-2.5 rounded-full flex items-center gap-2"><i class="fa-solid fa-share"></i> Tag a fellow reader</span>
+      </div>
+    </section>
+
+    <!-- ================= REFERENCES ================= -->
+    <section id="references">
+      <h2 class="font-display text-2xl md:text-3xl text-forest mb-6 border-b border-clay/20 pb-4">References</h2>
+      <ol class="space-y-4 text-sm text-clay/90 leading-relaxed list-decimal list-inside">
+        <li>AGNI. (n.d.). Preeta Samarasan. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://agnionline.bu.edu/about/our-people/authors/preeta-samarasan" target="_blank" rel="noopener noreferrer">agnionline.bu.edu/about/our-people/authors/preeta-samarasan</a></li>
+        <li>Alkaf, H. (n.d.). About. Hanna Alkaf. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://hannaalkaf.com/about/" target="_blank" rel="noopener noreferrer">hannaalkaf.com/about</a></li>
+        <li>Ferrarese, M. (2023, August 9). Malaysia's past and present in Tale of the Dreamer's Son by Preeta Samarasan. Eksentrika. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://www.eksentrika.com/tale-of-the-dreamers-son-by-preeta-samarasan/" target="_blank" rel="noopener noreferrer">eksentrika.com/tale-of-the-dreamers-son-by-preeta-samarasan</a></li>
+        <li>BookBrowse. (n.d.). Tash Aw biography. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://www.bookbrowse.com/biographies/index.cfm/author_number/1789/tash-aw" target="_blank" rel="noopener noreferrer">bookbrowse.com/biographies/tash-aw</a></li>
+        <li>BookBrowse. (2008). Summary and reviews of Evening Is the Whole Day by Preeta Samarasan. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://www.bookbrowse.com/bb_briefs/detail/index.cfm/ezine_preview_number/2556/evening-is-the-whole-day" target="_blank" rel="noopener noreferrer">bookbrowse.com/evening-is-the-whole-day</a></li>
+        <li>CBC Radio. (2019, October). Tash Aw on the dark side of the modern Asian dream [Interview by E. Wachtel]. <a class="text-forest underline hover:text-orange" href="https://www.cbc.ca/1.5344349" target="_blank" rel="noopener noreferrer">cbc.ca/1.5344349</a></li>
+        <li>DBKL. (n.d.). Perpustakaan Kuala Lumpur. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://perpustakaankualalumpur.dbkl.gov.my/en/" target="_blank" rel="noopener noreferrer">perpustakaankualalumpur.dbkl.gov.my</a></li>
+        <li>Herrick District Library. (n.d.). Featured author: Zen Cho. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://herrickdl.org/blogs/post/featured-author-zen-cho/" target="_blank" rel="noopener noreferrer">herrickdl.org/blogs/post/featured-author-zen-cho</a></li>
+        <li>Malaysia-Traveller. (n.d.). Sarawak State Library. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://www.malaysia-traveller.com/Sarawak-State-Library.html" target="_blank" rel="noopener noreferrer">malaysia-traveller.com/Sarawak-State-Library</a></li>
+        <li>Options, The Edge. (2023, April 20). Malaysian fantasy writer Zen Cho lands multiple awards by breaking frontiers. <a class="text-forest underline hover:text-orange" href="https://www.optionstheedge.com/topic/culture/malaysian-fantasy-writer-zen-cho-lands-multiple-awards-breaking-frontiers" target="_blank" rel="noopener noreferrer">optionstheedge.com</a></li>
+        <li>Sarawak State Library. (n.d.). Global Network for Early Years member profile. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://globalnetwork.euread.com/member/sarawak-state-library/sarawak-state-library/" target="_blank" rel="noopener noreferrer">globalnetwork.euread.com</a></li>
+        <li>Tatler Asia. (n.d.). Hanna Alkaf. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://www.tatlerasia.com/people/hanna-alkaf" target="_blank" rel="noopener noreferrer">tatlerasia.com/people/hanna-alkaf</a></li>
+        <li>The Booker Prizes. (n.d.). The Garden of Evening Mists. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://thebookerprizes.com/the-booker-library/books/the-garden-of-evening-mists" target="_blank" rel="noopener noreferrer">thebookerprizes.com</a></li>
+        <li>The Star. (2025, February 26). Making learning accessible to all. <a class="text-forest underline hover:text-orange" href="https://www.thestar.com.my/metro/metro-news/2025/02/26/making-learning-accessible-to-all" target="_blank" rel="noopener noreferrer">thestar.com.my</a></li>
+        <li>Tye, T. (n.d.). Penang Digital Library. Penang Travel Tips. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://www.penang-traveltips.com/penang-digital-library.htm" target="_blank" rel="noopener noreferrer">penang-traveltips.com</a></li>
+        <li>Visit Selangor. (n.d.). Perpustakaan Raja Tun Uda (Library). Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://www.visitselangor.com/perpustakaan-raja-tun-uda/" target="_blank" rel="noopener noreferrer">visitselangor.com</a></li>
+        <li>Wikipedia. (n.d.-a). Kuala Lumpur Library. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://en.wikipedia.org/wiki/Kuala_Lumpur_Library" target="_blank" rel="noopener noreferrer">en.wikipedia.org/wiki/Kuala_Lumpur_Library</a></li>
+        <li>Wikipedia. (n.d.-b). Tan Twan Eng. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://en.wikipedia.org/wiki/Tan_Twan_Eng" target="_blank" rel="noopener noreferrer">en.wikipedia.org/wiki/Tan_Twan_Eng</a></li>
+        <li>Wikipedia. (n.d.-c). Zen Cho. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://en.wikipedia.org/wiki/Zen_Cho" target="_blank" rel="noopener noreferrer">en.wikipedia.org/wiki/Zen_Cho</a></li>
+        <li>Wikipedia. (n.d.-d). Raja Tun Uda Library. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://en.wikipedia.org/wiki/Raja_Tun_Uda_Library" target="_blank" rel="noopener noreferrer">en.wikipedia.org/wiki/Raja_Tun_Uda_Library</a></li>
+        <li>Wikipedia. (n.d.-e). Sarawak State Library. Retrieved July 22, 2026, from <a class="text-forest underline hover:text-orange" href="https://en.wikipedia.org/wiki/Sarawak_State_Library" target="_blank" rel="noopener noreferrer">en.wikipedia.org/wiki/Sarawak_State_Library</a></li>
+      </ol>
+      <p class="text-xs text-clay/60 mt-6 border-t border-clay/10 pt-4">Library photographs sourced from Wikimedia Commons, licensed under Creative Commons Attribution-ShareAlike (CC BY-SA); credited on each image above.</p>
+    </section>
+
+  </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="index.html" aria-label="Read4All home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Read4All</span>
+        </a>
+        <p>Aligned with SDG 4: Quality Education.</p>
+        <p class="legal-note">
+          Read4All does not host copyrighted books or pirated PDFs. All shared materials are legal, publicly
+          available, or authorized resources.
+        </p>
+      </div>
+
+      <div class="footer-links" aria-label="Footer links">
+        <a href="https://www.instagram.com/read4all__" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="resources.html">Reading resources</a>
+        <a href="guidelines.html">Guidelines</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function showStep(id) {
+      document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.quiz-panel').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    function showResult(key) {
+      document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.quiz-panel').forEach(el => el.classList.remove('active'));
+      document.getElementById('result-' + key).classList.add('active');
+    }
+  </script>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>
